@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
-import { Bounce, Slide, ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 export const metadata: Metadata = {
   title: "Hominex",
   description: "find your dream house with just a click",

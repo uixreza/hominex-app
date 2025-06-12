@@ -15,8 +15,10 @@ export default function DropdownContainer({
   children: React.ReactNode;
   title: string;
   panel: string;
-  handleChange: Function;
-  expanded: any;
+  handleChange: (
+    panel: string
+  ) => (event: React.SyntheticEvent, isExpanded: boolean) => void;
+  expanded: string | false;
 }) {
   return (
     <div className="rounded-[15px] overflow-hidden">

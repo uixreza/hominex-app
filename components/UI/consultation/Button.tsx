@@ -3,7 +3,7 @@ import { MdArrowDropDown } from "react-icons/md";
 
 interface IButton {
   title: string;
-  handleFunc: Function;
+  handleFunc: (id: number) => void;
   keyId: number;
 }
 

@@ -1,13 +1,11 @@
 "use client";
-import React from "react";
-import DropdownContainer from "@/components/UI/DropdownContainer";
+import React, { useState } from "react";
 import {
   Residential,
   Commercial,
   Office,
   Land,
 } from "@/components/UI/consultation/Forms";
-import { useState } from "react";
 import Button from "@/components/UI/consultation/Button";
 
 enum forms {
@@ -17,7 +15,7 @@ enum forms {
   Land = 4,
 }
 
-const page = () => {
+const Page = () => {
   const [selectedTab, setSelectedTab] = useState<forms | null>(null);
 
   const handleClick = (number: number) => {
@@ -83,4 +81,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
