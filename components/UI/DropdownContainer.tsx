@@ -19,16 +19,36 @@ export default function DropdownContainer({
   expanded: any;
 }) {
   return (
-    <div>
-      <Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
+    <div className="rounded-[15px] overflow-hidden">
+      <Accordion
+        expanded={expanded === panel}
+        onChange={handleChange(panel)}
+        sx={{
+          borderRadius: "32px",
+          overflow: "hidden",
+          boxShadow: "none",
+          backgroundColor: "var(--box)",
+          color: "white",
+        }}>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls={panel + "-content"}
           id={panel + "-header"}
-          sx={{ flexDirection: "row-reverse", gap: "10px" }}>
+          sx={{
+            flexDirection: "row-reverse",
+            gap: "10px",
+            borderRadius: "32px",
+            backgroundColor: "var(--box)",
+          }}>
           <Typography component="span">{title}</Typography>
         </AccordionSummary>
-        <AccordionDetails>{children}</AccordionDetails>
+        <AccordionDetails
+          sx={{
+            borderRadius: "32px",
+            backgroundColor: "var(--box)",
+          }}>
+          {children}
+        </AccordionDetails>
       </Accordion>
     </div>
   );
