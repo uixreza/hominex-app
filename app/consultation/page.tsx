@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Residential,
   Commercial,
@@ -16,11 +16,33 @@ enum forms {
 }
 
 const Page = () => {
+  // switch between tabs
   const [selectedTab, setSelectedTab] = useState<forms | null>(null);
-
   const handleClick = (number: number) => {
     setSelectedTab(number);
   };
+
+  // form values - Form.tsx
+  const [price, setPrice] = useState();
+  const [length, setLength] = useState();
+  const [requestType, setRequestType] = useState();
+  const [rooms, setRooms] = useState();
+  let propValues = [
+    price,
+    setPrice,
+    length,
+    setLength,
+    requestType,
+    setRequestType,
+    rooms,
+    setRooms,
+  ];
+
+  // reset values after switching the form
+  useEffect(() => {
+    setPrice(undefined);
+    setLength(undefined);
+  }, [selectedTab]);
 
   return (
     <div className="mt-5 mb-5">
@@ -61,7 +83,9 @@ const Page = () => {
           />
         </div>
         <div className="mainBox bg-[var(--box)]/40 backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl w-full h-auto mt-2 bottom-[-16rem] overflow-hidden p-10">
-          {selectedTab === forms.Residential && <Residential />}
+          {selectedTab === forms.Residential && (
+            <Residential vals={[...propValues]} />
+          )}
           {selectedTab === forms.Commercial && <Commercial />}
           {selectedTab === forms.Office && <Office />}
           {selectedTab === forms.Land && <Land />}
@@ -69,8 +93,8 @@ const Page = () => {
             <>
               <p>خانه ای که میخواهید اینجاست !</p>
               <p>
-                لطفاً اطلاعات زیر را تکمیل کنید تا مناسب‌ترین ملک را برای شما
-                پیدا کنیم.
+                لطفاً آیتمی را انتخاب کنید تا مناسب‌ترین ملک را برای شما پیدا
+                کنیم.
               </p>
               <p className="mt-10"> گذینه ای انتخاب نشده است🍃</p>
             </>
