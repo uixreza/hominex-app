@@ -4,13 +4,12 @@ import L from "leaflet";
 import React, { useEffect, useState } from "react";
 
 // Fix default icon issue in Next.js (TypeScript safe)
-if (typeof window !== "undefined") {
-  L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-    iconUrl: require("leaflet/dist/images/marker-icon.png"),
-    shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-  });
-}
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+});
 
 const position: [number, number] = [35.6892, 51.389]; // Example: Tehran
 
