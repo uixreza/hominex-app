@@ -22,11 +22,33 @@ const Page = () => {
     setSelectedTab(number);
   };
 
+  // handle array values
+  const handleVitalsArr = (
+    value: any,
+    arr: any[],
+    setArr: (a: any[]) => void
+  ) => {
+    if (arr.includes(value)) {
+      setArr(arr.filter((item) => item !== value));
+    } else {
+      setArr([...arr, value]);
+    }
+  };
+
   // form values - Form.tsx
   const [price, setPrice] = useState();
   const [length, setLength] = useState();
   const [requestType, setRequestType] = useState();
   const [rooms, setRooms] = useState();
+  const [vitals, setVitals] = useState([]);
+  const [clientPrefer, setClientPrefer] = useState();
+  const [floorPrefer, setFloorPrefer] = useState();
+  const [deadline, setDeadline] = useState();
+  const [visitMethod, setVisitMethod] = useState();
+  const [description, setDescription] = useState();
+  const [rent, setRent] = useState();
+  const [mortgage, setMortgage] = useState();
+
   let propValues = [
     price,
     setPrice,
@@ -36,12 +58,40 @@ const Page = () => {
     setRequestType,
     rooms,
     setRooms,
+    vitals,
+    setVitals,
+    handleVitalsArr,
+    clientPrefer,
+    setClientPrefer,
+    floorPrefer,
+    setFloorPrefer,
+    deadline,
+    setDeadline,
+    visitMethod,
+    setVisitMethod,
+    description,
+    setDescription,
+    rent,
+    setRent,
+    mortgage,
+    setMortgage,
   ];
 
   // reset values after switching the form
   useEffect(() => {
     setPrice(undefined);
     setLength(undefined);
+    setRequestType(undefined);
+    setRooms(undefined);
+    setVitals([]);
+    setClientPrefer(undefined);
+    setFloorPrefer(undefined);
+    setDeadline(undefined);
+    setDeadline(undefined);
+    setVisitMethod(undefined);
+    setDescription(undefined);
+    setRent(undefined);
+    setMortgage(undefined);
   }, [selectedTab]);
 
   return (

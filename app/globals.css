@@ -98,3 +98,9 @@ body {
   font-family: "Modam", Arial, Helvetica, sans-serif;
   background: transparent;
 }
+
+label,
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+}

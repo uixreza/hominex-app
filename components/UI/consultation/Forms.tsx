@@ -18,6 +18,23 @@ export function Residential({ vals }: IForm) {
     setRequestType,
     rooms,
     setRooms,
+    vitals,
+    setVitals,
+    handleVitalsArr,
+    clientPrefer,
+    setClientPrefer,
+    floorPrefer,
+    setFloorPrefer,
+    deadline,
+    setDeadline,
+    visitMethod,
+    setVisitMethod,
+    description,
+    setDescription,
+    rent,
+    setRent,
+    mortgage,
+    setMortgage,
   ] = vals;
   return (
     <>
@@ -116,18 +133,47 @@ export function Residential({ vals }: IForm) {
       </div>
 
       {/* budget seciton */}
-      <div className="flex flex-col gap-2 mt-4">
-        <span>بودجه مورد نظر ( تومان ) : </span>
-        <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
-          type="text"
-          name="budget"
-          id="budget"
-          onChange={(e) => setPrice(addCommasToNumber(e.target.value))}
-          value={price}
-          placeholder="مثلا : 800 میلیون"
-        />
-      </div>
+      {requestType === "rent" ? (
+        <div className="w-full  gap-3">
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>اجاره ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="rent"
+              id="rent"
+              onChange={(e) => setRent(addCommasToNumber(e.target.value))}
+              value={rent}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>رهن ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="mortgage"
+              id="mortgage"
+              onChange={(e) => setMortgage(addCommasToNumber(e.target.value))}
+              value={mortgage}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 mt-4">
+          <span>بودجه مورد نظر ( تومان ) : </span>
+          <input
+            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            type="text"
+            name="budget"
+            id="budget"
+            onChange={(e) => setPrice(addCommasToNumber(e.target.value))}
+            value={price}
+            placeholder="مثلا : 800 میلیون"
+          />
+        </div>
+      )}
 
       {/* phone number seciton
       <div className="relative flex flex-col gap-2 mt-4">
@@ -159,6 +205,8 @@ export function Residential({ vals }: IForm) {
               className="ml-2"
               type="checkbox"
               name="parking"
+              checked={vitals.includes("parking")}
+              onChange={() => handleVitalsArr("parking", vitals, setVitals)}
               id="parking"
             />
             پارکینگ
@@ -168,6 +216,8 @@ export function Residential({ vals }: IForm) {
               className="ml-2"
               type="checkbox"
               name="elevator"
+              checked={vitals.includes("elevator")}
+              onChange={() => handleVitalsArr("elevator", vitals, setVitals)}
               id="elevator"
             />
             آسانسور
@@ -177,13 +227,44 @@ export function Residential({ vals }: IForm) {
               className="ml-2"
               type="checkbox"
               name="warehouse"
+              checked={vitals.includes("warehouse")}
+              onChange={() => handleVitalsArr("warehouse", vitals, setVitals)}
               id="warehouse"
             />
             انباری
           </label>
           <label htmlFor="yard">
-            <input className="ml-2" type="checkbox" name="yard" id="yard" />
+            <input
+              className="ml-2"
+              type="checkbox"
+              name="yard"
+              checked={vitals.includes("yard")}
+              onChange={() => handleVitalsArr("yard", vitals, setVitals)}
+              id="yard"
+            />
             حیاط / بالکن
+          </label>
+          <label htmlFor="master">
+            <input
+              className="ml-2"
+              type="checkbox"
+              name="master"
+              checked={vitals.includes("master")}
+              onChange={() => handleVitalsArr("master", vitals, setVitals)}
+              id="master"
+            />
+            اتاق مستر
+          </label>
+          <label htmlFor="garden">
+            <input
+              className="ml-2"
+              type="checkbox"
+              name="yard"
+              checked={vitals.includes("garden")}
+              onChange={() => handleVitalsArr("garden", vitals, setVitals)}
+              id="garden"
+            />
+            روف گاردن
           </label>
         </div>
       </div>
@@ -191,15 +272,14 @@ export function Residential({ vals }: IForm) {
       {/* clients prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه ملکی را ترجیح میدهید</span>
-        <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
-          *
-        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               name="propertyType"
               value="villa"
+              checked={clientPrefer === "villa"}
+              onChange={(e) => setClientPrefer(e.target.value)}
               className="accent-green-600"
             />
             <span>ویلایی</span>
@@ -209,6 +289,8 @@ export function Residential({ vals }: IForm) {
               type="radio"
               name="propertyType"
               value="apartment"
+              checked={clientPrefer === "apartment"}
+              onChange={(e) => setClientPrefer(e.target.value)}
               className="accent-green-600"
             />
             <span>آپارتمان</span>
@@ -218,6 +300,8 @@ export function Residential({ vals }: IForm) {
               type="radio"
               name="propertyType"
               value="complex"
+              checked={clientPrefer === "complex"}
+              onChange={(e) => setClientPrefer(e.target.value)}
               className="accent-green-600"
             />
             <span>مجتمع مسکونی</span>
@@ -228,15 +312,14 @@ export function Residential({ vals }: IForm) {
       {/* floor prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
-        <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
-          *
-        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               name="floor"
-              value="floor"
+              value="down"
+              checked={floorPrefer === "down"}
+              onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
             <span>طبقه پایینی</span>
@@ -245,7 +328,9 @@ export function Residential({ vals }: IForm) {
             <input
               type="radio"
               name="floor"
-              value="floor"
+              value="up"
+              checked={floorPrefer === "up"}
+              onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
             <span>طبقه بالایی</span>
@@ -257,41 +342,49 @@ export function Residential({ vals }: IForm) {
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
         <div className="flex flex-row gap-5">
-          <label htmlFor="emergency">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="emergency"
-              id="emergency"
+              type="radio"
+              name="deadline"
+              value="asap"
+              checked={deadline === "asap"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            فوری
+            <span>فوری</span>
           </label>
-          <label htmlFor="twoWeeks">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="twoWeeks"
-              id="twoWeeks"
+              type="radio"
+              name="deadline"
+              value="twoWeeks"
+              checked={deadline === "twoWeeks"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            دو هفته
+            <span>دو هفته</span>
           </label>
-          <label htmlFor="oneMonth">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="oneMonth"
-              id="oneMonth"
+              type="radio"
+              name="deadline"
+              value="oneMonth"
+              checked={deadline === "oneMonth"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            یک ماه
+            <span>یک ماه</span>
           </label>
-          <label htmlFor="longTerm">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="longTerm"
-              id="longTerm"
+              type="radio"
+              name="deadline"
+              value="longTerm"
+              checked={deadline === "longTerm"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            بلند مدت و سرمایه گذاری
+            <span>بلند مدت / سرمایه گذاری</span>
           </label>
         </div>
       </div>
@@ -300,9 +393,7 @@ export function Residential({ vals }: IForm) {
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
           <span>محله مورد نظر : </span>
-          <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
-            *
-          </span>
+          {/* map will render from map.tsx component */}
           <Map />
         </div>
       </div>
@@ -314,8 +405,11 @@ export function Residential({ vals }: IForm) {
           <label htmlFor="instagram">
             <input
               className="ml-2"
-              type="checkbox"
+              type="radio"
               name="instagram"
+              value="instagram"
+              checked={visitMethod === "instagram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
               id="instagram"
             />
             اینستاگرام
@@ -323,8 +417,11 @@ export function Residential({ vals }: IForm) {
           <label htmlFor="telegram">
             <input
               className="ml-2"
-              type="checkbox"
+              type="radio"
               name="telegram"
+              value="telegram"
+              checked={visitMethod === "telegram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
               id="telegram"
             />
             تلگرام
@@ -332,14 +429,25 @@ export function Residential({ vals }: IForm) {
           <label htmlFor="friends">
             <input
               className="ml-2"
-              type="checkbox"
+              type="radio"
               name="friends"
+              value="friends"
+              checked={visitMethod === "friends"}
+              onChange={(e) => setVisitMethod(e.target.value)}
               id="friends"
             />
             معرفی دوستان
           </label>
           <label htmlFor="other">
-            <input className="ml-2" type="checkbox" name="other" id="other" />
+            <input
+              className="ml-2"
+              type="radio"
+              name="other"
+              value="other"
+              checked={visitMethod === "other"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="other"
+            />
             سایر
           </label>
         </div>
@@ -351,6 +459,8 @@ export function Residential({ vals }: IForm) {
         <textarea
           name="explanation"
           id="explanation"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
       </div>
 
