@@ -1,0 +1,20 @@
+{
+    "routes":[
+        {
+            "title":"بازار املاک",
+            "route":"/"
+        },
+        {
+            "title":"مشاوره خرید",
+            "route":"/consultation"
+        },
+        {
+            "title":"معرفی محله",
+            "route":"/mahallat"
+        },
+        {
+            "title":"ویژگی خانه من",
+            "route":"/myHome"
+        }
+    ]
+}

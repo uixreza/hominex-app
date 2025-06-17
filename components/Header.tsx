@@ -5,12 +5,13 @@ import { FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { toast } from "react-toastify";
+import { routes } from "@/config/routes.json";
 
 const Header = () => {
   const pathname = usePathname();
   const notify = () => toast("درحال انتقال به صفحه ورود 🔒");
   return (
-    <div className="text-white z-10 flex justify-between items-center py-2 pr-4 pl-9 mt-3 h-auto rounded-2xl bg-[var(--box)]/40  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
+    <div className="fixed top-5 text-white z-10 flex justify-between items-center py-2 pr-4 pl-9 mt-3 h-auto rounded-2xl bg-[var(--box)]/40  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
       {/* logo */}
       <div className="flex gap-2 items-center">
         <Link href={"/"}>
@@ -22,51 +23,26 @@ const Header = () => {
             height={60}
           />
         </Link>
-        <div className="flex flex-col">
+        <div className="lg:flex flex-col hidden ">
           <span className="font-bold">هومینکس</span>
         </div>
       </div>
 
       {/* menu */}
       <div className="">
-        <ul className="flex gap-10 mr-[-90px] justify-center [&>li]:cursor-pointer [&>li]:relative">
-          <li className="group flex flex-col items-center">
-            <Link
-              href={"/"}
-              className="relative z-10 transition-colors duration-300 group-hover:text-white/70">
-              بازار املاک
-            </Link>
-            {pathname === "/" && (
-              <span className="absolute bottom-[-15px] w-1.5 h-1.5 rounded-full bg-white mt-2 block"></span>
-            )}
-          </li>
-          <li className="group flex flex-col items-center">
-            <Link
-              href="/consultation"
-              className="relative z-10 transition-colors duration-300 group-hover:text-white/70">
-              مشاوره خرید
-            </Link>
-            {pathname === "/consultation" && (
-              <span className="absolute bottom-[-15px] w-1.5 h-1.5 rounded-full bg-white mt-2 block"></span>
-            )}
-          </li>
-          <li className="group flex flex-col items-center">
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-white/70">
-              معرفی محله
-            </span>
-            {pathname === "" && (
-              <span className="absolute bottom-[-15px] w-1.5 h-1.5 rounded-full bg-white mt-2 block"></span>
-            )}
-          </li>
-          <li className="group flex flex-col items-center">
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-white/70">
-              ویژگی خانه من
-            </span>
-            {pathname === "" && (
-              <span className="absolute bottom-[-15px] w-1.5 h-1.5 rounded-full bg-white mt-2 block"></span>
-            )}
-          </li>
-          <li></li>
+        <ul className="flex gap-10 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
+          {routes.map((item, i) => (
+            <li className="group flex flex-col items-center">
+              <Link
+                href={item.route}
+                className="relative z-10 transition-colors duration-300 group-hover:text-white/70">
+                {item.title}
+              </Link>
+              {pathname === item.route && (
+                <span className="absolute bottom-[-15px] w-1.5 h-1.5 rounded-full bg-white mt-2 block"></span>
+              )}
+            </li>
+          ))}
         </ul>
       </div>
 

@@ -16,7 +16,7 @@ const Button = ({ title, handleFunc, keyId, isActive }: IButton) => {
         isActive ? "border-4" : "border"
       } border-white/30 transition-all duration-200 hover:shadow-2xl`}>
       {title}
-      <MdArrowDropDown />
+      <MdArrowDropDown className="text-2xl" />
     </div>
   );
 };

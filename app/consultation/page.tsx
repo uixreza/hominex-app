@@ -130,25 +130,25 @@ const Page = () => {
       <div className="mt-10 flex flex-col gap-2 relative ">
         <div className="flex flex-row w-full gap-2 justify-stretch">
           <Button
-            title="مشاوره واحد های مسکونی"
+            title="واحد های مسکونی"
             handleFunc={handleClick}
             keyId={forms.Residential}
             isActive={selectedTab === forms.Residential && true}
           />
           <Button
-            title="مشاوره واحد تجاری"
+            title="واحد تجاری"
             handleFunc={handleClick}
             keyId={forms.Commercial}
             isActive={selectedTab === forms.Commercial && true}
           />
           <Button
-            title="مشاوره واحد اداری"
+            title="واحد اداری"
             handleFunc={handleClick}
             keyId={forms.Office}
             isActive={selectedTab === forms.Office && true}
           />
           <Button
-            title="مشاوره زمین"
+            title="زمین"
             handleFunc={handleClick}
             keyId={forms.Land}
             isActive={selectedTab === forms.Land && true}

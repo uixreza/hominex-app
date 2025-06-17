@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body
-        className={`w-full overflow-scroll box-border flex items-center flex-col`}>
+        className={`w-full overflow-scroll box-border flex items-center flex-col pt-30`}>
         <NewsBar />
         <Header />
         <div className="container flex flex-col items-center pt-10">

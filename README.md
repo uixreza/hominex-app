@@ -133,5 +133,5 @@ This project is for demonstration and educational purposes.
 ## Tasks
 
 1. add multiple choice option for the map
-2. combine forms into a single one
-3. add 404 page
+2. add 404 page
+3. make it responsive
