@@ -48,6 +48,7 @@ const Page = () => {
   const [description, setDescription] = useState();
   const [rent, setRent] = useState();
   const [mortgage, setMortgage] = useState();
+  const [mapSelection, setMapSelection] = useState<any>(null);
 
   let propValues = [
     price,
@@ -75,6 +76,8 @@ const Page = () => {
     setRent,
     mortgage,
     setMortgage,
+    mapSelection,
+    setMapSelection,
   ];
 
   // reset values after switching the form
@@ -92,6 +95,7 @@ const Page = () => {
     setDescription(undefined);
     setRent(undefined);
     setMortgage(undefined);
+    setMapSelection(null);
   }, [selectedTab]);
 
   return (
@@ -136,9 +140,9 @@ const Page = () => {
           {selectedTab === forms.Residential && (
             <Residential vals={[...propValues]} />
           )}
-          {selectedTab === forms.Commercial && <Commercial />}
-          {selectedTab === forms.Office && <Office />}
-          {selectedTab === forms.Land && <Land />}
+          {selectedTab === forms.Commercial && <Commercial vals={[...propValues]} />}
+          {selectedTab === forms.Office && <Office vals={[...propValues]} />}
+          {selectedTab === forms.Land && <Land vals={[...propValues]} />}
           {!selectedTab && (
             <>
               <p>خانه ای که میخواهید اینجاست !</p>

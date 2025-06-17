@@ -38,6 +38,8 @@ export function Residential({ vals }: IForm) {
     setRent,
     mortgage,
     setMortgage,
+    mapSelection,
+    setMapSelection,
   ] = vals;
   return (
     <>
@@ -397,7 +399,7 @@ export function Residential({ vals }: IForm) {
         <div className="relative flex flex-col gap-2 mt-4">
           <span>محله مورد نظر : </span>
           {/* map will render from map.tsx component */}
-          <Map />
+          <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
 
@@ -473,7 +475,36 @@ export function Residential({ vals }: IForm) {
   );
 }
 
-export function Commercial() {
+export function Commercial({ vals }: IForm) {
+  const [
+    price,
+    setPrice,
+    length,
+    setLength,
+    requestType,
+    setRequestType,
+    rooms,
+    setRooms,
+    vitals,
+    setVitals,
+    handleVitalsArr,
+    clientPrefer,
+    setClientPrefer,
+    floorPrefer,
+    setFloorPrefer,
+    deadline,
+    setDeadline,
+    visitMethod,
+    setVisitMethod,
+    description,
+    setDescription,
+    rent,
+    setRent,
+    mortgage,
+    setMortgage,
+    mapSelection,
+    setMapSelection,
+  ] = vals;
   return (
     <>
       {/* type of request section */}
@@ -614,7 +645,7 @@ export function Commercial() {
           <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
             *
           </span>
-          <Map />
+          <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
 
@@ -670,14 +701,72 @@ export function Commercial() {
     </>
   );
 }
-export function Office() {
+export function Office({ vals }: IForm) {
+  const [
+    price,
+    setPrice,
+    length,
+    setLength,
+    requestType,
+    setRequestType,
+    rooms,
+    setRooms,
+    vitals,
+    setVitals,
+    handleVitalsArr,
+    clientPrefer,
+    setClientPrefer,
+    floorPrefer,
+    setFloorPrefer,
+    deadline,
+    setDeadline,
+    visitMethod,
+    setVisitMethod,
+    description,
+    setDescription,
+    rent,
+    setRent,
+    mortgage,
+    setMortgage,
+    mapSelection,
+    setMapSelection,
+  ] = vals;
   return (
     <>
       <p>Form3</p>
     </>
   );
 }
-export function Land() {
+export function Land({ vals }: IForm) {
+  const [
+    price,
+    setPrice,
+    length,
+    setLength,
+    requestType,
+    setRequestType,
+    rooms,
+    setRooms,
+    vitals,
+    setVitals,
+    handleVitalsArr,
+    clientPrefer,
+    setClientPrefer,
+    floorPrefer,
+    setFloorPrefer,
+    deadline,
+    setDeadline,
+    visitMethod,
+    setVisitMethod,
+    description,
+    setDescription,
+    rent,
+    setRent,
+    mortgage,
+    setMortgage,
+    mapSelection,
+    setMapSelection,
+  ] = vals;
   return (
     <>
       <p>Form4</p>

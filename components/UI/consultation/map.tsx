@@ -3,6 +3,11 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import React, { useEffect, useState, useRef } from "react";
 
+interface IMap {
+  mapSelection: {};
+  setMapSelection: any;
+}
+
 // Fix default icon issue in Next.js (TypeScript safe)
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -28,11 +33,11 @@ const FitBounds: React.FC<FitBoundsProps> = ({ geoData }) => {
   return null;
 };
 
-const MapComponent = () => {
+const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
   const [geoData, setGeoData] = useState<any>(null);
   const [clickedFeature, setClickedFeature] = useState<any>(null);
   const [mapInstance, setMapInstance] = useState<any>(null);
-
+  const geoJsonLayerRef = useRef<L.GeoJSON>(null);
   useEffect(() => {
     fetch("/assets/mahalle_21kh_M_FeaturesToJSO.geojson")
       .then((res) => res.json())
@@ -69,6 +74,22 @@ const MapComponent = () => {
         });
       },
     });
+    layer.on({
+      click: () => {
+        // Reset previous selections' styles
+        if (geoJsonLayerRef.current) {
+          geoJsonLayerRef.current.eachLayer((l: any) => {
+            l.setStyle({ color: "#3388ff", weight: 2 }); // Default style
+          });
+        }
+
+        // Highlight clicked feature
+        layer.setStyle({ color: "#ff0000", weight: 3 }); // Selected style
+
+        // Store selection
+        setMapSelection(feature.properties);
+      },
+    });
   };
 
   return (
@@ -81,12 +102,20 @@ const MapComponent = () => {
       keyboard={false}
       boxZoom={false}
       zoomControl={false}
-      whenReady={({ target }: { target: string }) => setMapInstance(target)}>
+      whenReady={({ target }: { target: any }) => setMapInstance(target)}>
       <TileLayer
         attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
       />
-      {geoData && <GeoJSON data={geoData} onEachFeature={onEachFeature} />}
+      {geoData && (
+        <GeoJSON
+          data={geoData}
+          onEachFeature={onEachFeature}
+          ref={(ref) => {
+            if (ref) geoJsonLayerRef.current = ref;
+          }}
+        />
+      )}
       {geoData && <FitBounds geoData={geoData} />}
       {clickedFeature && (
         <Popup
@@ -107,5 +136,4 @@ const MapComponent = () => {
     </MapContainer>
   );
 };
-
 export default MapComponent;
