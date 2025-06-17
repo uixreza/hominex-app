@@ -32,7 +32,7 @@ const Header = () => {
       <div className="">
         <ul className="flex gap-10 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
           {routes.map((item, i) => (
-            <li className="group flex flex-col items-center">
+            <li key={i} className="group flex flex-col items-center">
               <Link
                 href={item.route}
                 className="relative z-10 transition-colors duration-300 group-hover:text-white/70">
