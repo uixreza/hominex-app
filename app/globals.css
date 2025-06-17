@@ -50,6 +50,29 @@
   font-style: normal;
 }
 
+/* font for leaflet lib */
+
+/* Leaflet Popup Text */
+.leaflet-popup-content {
+  font-family: "Modam", Arial, Helvetica, sans-serif !important;
+}
+
+/* Leaflet Controls (Zoom buttons, etc.) */
+.leaflet-control {
+  font-family: "Modam", Arial, Helvetica, sans-serif !important;
+}
+
+/* Tooltips (if using Leaflet tooltips) */
+.leaflet-tooltip {
+  font-family: "Modam", Arial, Helvetica, sans-serif !important;
+}
+
+/* Attribution text at bottom-right */
+.leaflet-container .leaflet-control-attribution {
+  font-family: "Modam", Arial, Helvetica, sans-serif !important;
+}
+
+/* roots */
 :root {
   --background: #4c4b4b;
   --foreground: white;

@@ -36,8 +36,8 @@ const Page = () => {
   };
 
   // form values - Form.tsx
-  const [price, setPrice] = useState();
-  const [length, setLength] = useState();
+  const [price, setPrice] = useState("");
+  const [length, setLength] = useState("");
   const [requestType, setRequestType] = useState();
   const [rooms, setRooms] = useState();
   const [vitals, setVitals] = useState([]);
@@ -79,8 +79,8 @@ const Page = () => {
 
   // reset values after switching the form
   useEffect(() => {
-    setPrice(undefined);
-    setLength(undefined);
+    setPrice("");
+    setLength("");
     setRequestType(undefined);
     setRooms(undefined);
     setVitals([]);

@@ -1,6 +1,9 @@
 "use client";
 import React from "react";
-import Map from "../consultation/map";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("@/components/UI/consultation/map"), {
+  ssr: false,
+});
 import SubmitButton from "./SubmitButton";
 import { addCommasToNumber } from "@/utils/digits";
 
