@@ -24,7 +24,6 @@ const Header = () => {
         </Link>
         <div className="flex flex-col">
           <span className="font-bold">هومینکس</span>
-          <span>مسیری برای رسیدن به خانه های آینده</span>
         </div>
       </div>
 

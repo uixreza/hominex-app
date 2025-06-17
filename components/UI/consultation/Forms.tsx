@@ -63,8 +63,8 @@ export function Residential({ vals }: IForm) {
               type="radio"
               name="requestType"
               value="rent"
-              checked={requestType === "rent"}
               onChange={(e) => setRequestType(e.target.value)}
+              checked={requestType === "rent"}
               className="accent-blue-600"
             />
             <span>اجاره</span>
@@ -504,6 +504,10 @@ export function Commercial({ vals }: IForm) {
     setMortgage,
     mapSelection,
     setMapSelection,
+    typeOfFunctionality,
+    setTypeOfFunctionality,
+    envTypePrefer,
+    setEnvTypePrefer,
   ] = vals;
   return (
     <>
@@ -516,6 +520,8 @@ export function Commercial({ vals }: IForm) {
               type="radio"
               name="requestType"
               value="buy"
+              checked={requestType === "buy"}
+              onChange={(e) => setRequestType(e.target.value)}
               className="accent-green-600"
             />
             <span>خرید</span>
@@ -525,6 +531,8 @@ export function Commercial({ vals }: IForm) {
               type="radio"
               name="requestType"
               value="rent"
+              checked={requestType === "rent"}
+              onChange={(e) => setRequestType(e.target.value)}
               className="accent-blue-600"
             />
             <span>اجاره</span>
@@ -540,22 +548,55 @@ export function Commercial({ vals }: IForm) {
           type="text"
           name="length"
           id="length"
+          onChange={(e) => setLength(addCommasToNumber(e.target.value))}
+          value={length}
           placeholder="مثلا : 150 متر"
         />
       </div>
 
       {/* budget seciton */}
-      <div className="flex flex-col gap-2 mt-4">
-        <span>بودجه مورد نظر ( تومان ) : </span>
-        <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
-          type="text"
-          name="budget"
-          id="budget"
-          placeholder="مثلا : 800 میلیون"
-        />
-      </div>
-      {/* Type of functionality seciton */}
+      {requestType === "rent" ? (
+        <div className="w-full  gap-3">
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>اجاره ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="rent"
+              id="rent"
+              onChange={(e) => setRent(addCommasToNumber(e.target.value))}
+              value={rent}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>رهن ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="mortgage"
+              id="mortgage"
+              onChange={(e) => setMortgage(addCommasToNumber(e.target.value))}
+              value={mortgage}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 mt-4">
+          <span>بودجه مورد نظر ( تومان ) : </span>
+          <input
+            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            type="text"
+            name="budget"
+            id="budget"
+            onChange={(e) => setPrice(addCommasToNumber(e.target.value))}
+            value={price}
+            placeholder="مثلا : 800 میلیون"
+          />
+        </div>
+      )}
+      {/* Type of functionality section */}
       <div className="flex flex-col gap-2 mt-4">
         <span>نوع کاربری : </span>
         <input
@@ -563,22 +604,44 @@ export function Commercial({ vals }: IForm) {
           type="text"
           name="typeOfFunctionality"
           id="typeOfFunctionality"
+          value={typeOfFunctionality}
+          onChange={(e) => setTypeOfFunctionality(e.target.value)}
           placeholder="رستوران ، فروشگاه ، رستوران ، بیمه ..."
         />
       </div>
 
+      {/* env type prefer */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>چه نوع فضای کاری را ترجیح میدهید:</span>
+        <div className="flex flex-row gap-5">
+          <select
+            name="env"
+            id="env"
+            onChange={(e) => setEnvTypePrefer(e.target.value)}
+            className="bg-[var(--box)]/40  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 w-[40%] px-4 py-3 rounded-xl cursor-pointer border border-white/30 transition-all duration-200 hover:shadow-2xl ">
+            <option className="text-black font-bold" value="main">
+              خیابان اصلی
+            </option>
+            <option className="text-black font-bold" value="peripheral">
+              خیابان فرعی
+            </option>
+            <option className="text-black font-bold" value="passage">
+              پاساژ و مجتمع تجاری
+            </option>
+          </select>
+        </div>
+      </div>
       {/* floor prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
-        <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
-          *
-        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               name="floor"
-              value="floor"
+              value="down"
+              checked={floorPrefer === "down"}
+              onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
             <span>طبقه پایینی</span>
@@ -587,7 +650,9 @@ export function Commercial({ vals }: IForm) {
             <input
               type="radio"
               name="floor"
-              value="floor"
+              value="up"
+              checked={floorPrefer === "up"}
+              onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
             <span>طبقه بالایی</span>
@@ -599,41 +664,49 @@ export function Commercial({ vals }: IForm) {
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
         <div className="flex flex-row gap-5">
-          <label htmlFor="emergency">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="emergency"
-              id="emergency"
+              type="radio"
+              name="deadline"
+              value="asap"
+              checked={deadline === "asap"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            فوری
+            <span>فوری</span>
           </label>
-          <label htmlFor="twoWeeks">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="twoWeeks"
-              id="twoWeeks"
+              type="radio"
+              name="deadline"
+              value="twoWeeks"
+              checked={deadline === "twoWeeks"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            دو هفته
+            <span>دو هفته</span>
           </label>
-          <label htmlFor="oneMonth">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="oneMonth"
-              id="oneMonth"
+              type="radio"
+              name="deadline"
+              value="oneMonth"
+              checked={deadline === "oneMonth"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            یک ماه
+            <span>یک ماه</span>
           </label>
-          <label htmlFor="longTerm">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
-              className="ml-2"
-              type="checkbox"
-              name="longTerm"
-              id="longTerm"
+              type="radio"
+              name="deadline"
+              value="longTerm"
+              checked={deadline === "longTerm"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
             />
-            بلند مدت و سرمایه گذاری
+            <span>بلند مدت / سرمایه گذاری</span>
           </label>
         </div>
       </div>
@@ -642,9 +715,7 @@ export function Commercial({ vals }: IForm) {
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
           <span>محله مورد نظر : </span>
-          <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
-            *
-          </span>
+
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
@@ -656,8 +727,11 @@ export function Commercial({ vals }: IForm) {
           <label htmlFor="instagram">
             <input
               className="ml-2"
-              type="checkbox"
+              type="radio"
               name="instagram"
+              value="instagram"
+              checked={visitMethod === "instagram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
               id="instagram"
             />
             اینستاگرام
@@ -665,8 +739,11 @@ export function Commercial({ vals }: IForm) {
           <label htmlFor="telegram">
             <input
               className="ml-2"
-              type="checkbox"
+              type="radio"
               name="telegram"
+              value="telegram"
+              checked={visitMethod === "telegram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
               id="telegram"
             />
             تلگرام
@@ -674,14 +751,25 @@ export function Commercial({ vals }: IForm) {
           <label htmlFor="friends">
             <input
               className="ml-2"
-              type="checkbox"
+              type="radio"
               name="friends"
+              value="friends"
+              checked={visitMethod === "friends"}
+              onChange={(e) => setVisitMethod(e.target.value)}
               id="friends"
             />
             معرفی دوستان
           </label>
           <label htmlFor="other">
-            <input className="ml-2" type="checkbox" name="other" id="other" />
+            <input
+              className="ml-2"
+              type="radio"
+              name="other"
+              value="other"
+              checked={visitMethod === "other"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="other"
+            />
             سایر
           </label>
         </div>
@@ -693,6 +781,8 @@ export function Commercial({ vals }: IForm) {
         <textarea
           name="explanation"
           id="explanation"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
       </div>
 
@@ -730,10 +820,267 @@ export function Office({ vals }: IForm) {
     setMortgage,
     mapSelection,
     setMapSelection,
+    typeOfFunctionality,
+    setTypeOfFunctionality,
   ] = vals;
   return (
     <>
-      <p>Form3</p>
+      {/* type of request section */}
+      <div className="flex flex-col gap-2 mt-4">
+        <span className="mb-2">نوع درخواست : </span>
+        <div className="flex flex-row gap-5">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="requestType"
+              value="buy"
+              checked={requestType === "buy"}
+              onChange={(e) => setRequestType(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>خرید</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="requestType"
+              value="rent"
+              checked={requestType === "rent"}
+              onChange={(e) => setRequestType(e.target.value)}
+              className="accent-blue-600"
+            />
+            <span>اجاره</span>
+          </label>
+        </div>
+      </div>
+
+      {/* lendth seciton */}
+      <div className="flex flex-col gap-2 mt-4">
+        <span>متراژ مورد نظر ( متر ) : </span>
+        <input
+          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          type="text"
+          name="length"
+          id="length"
+          onChange={(e) => setLength(addCommasToNumber(e.target.value))}
+          value={length}
+          placeholder="مثلا : 150 متر"
+        />
+      </div>
+
+      {/* budget seciton */}
+      {requestType === "rent" ? (
+        <div className="w-full  gap-3">
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>اجاره ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="rent"
+              id="rent"
+              onChange={(e) => setRent(addCommasToNumber(e.target.value))}
+              value={rent}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>رهن ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="mortgage"
+              id="mortgage"
+              onChange={(e) => setMortgage(addCommasToNumber(e.target.value))}
+              value={mortgage}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 mt-4">
+          <span>بودجه مورد نظر ( تومان ) : </span>
+          <input
+            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            type="text"
+            name="budget"
+            id="budget"
+            onChange={(e) => setPrice(addCommasToNumber(e.target.value))}
+            value={price}
+            placeholder="مثلا : 800 میلیون"
+          />
+        </div>
+      )}
+      {/* Type of functionality section */}
+      <div className="flex flex-col gap-2 mt-4">
+        <span>نوع کاربری : </span>
+        <input
+          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          type="text"
+          name="typeOfFunctionality"
+          id="typeOfFunctionality"
+          value={typeOfFunctionality}
+          onChange={(e) => setTypeOfFunctionality(e.target.value)}
+          placeholder="رستوران ، فروشگاه ، رستوران ، بیمه ..."
+        />
+      </div>
+
+      {/* floor prefer */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
+        <div className="flex flex-row gap-5">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="floor"
+              value="down"
+              checked={floorPrefer === "down"}
+              onChange={(e) => setFloorPrefer(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>طبقه پایینی</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="floor"
+              value="up"
+              checked={floorPrefer === "up"}
+              onChange={(e) => setFloorPrefer(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>طبقه بالایی</span>
+          </label>
+        </div>
+      </div>
+
+      {/* deadline */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
+        <div className="flex flex-row gap-5">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="asap"
+              checked={deadline === "asap"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>فوری</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="twoWeeks"
+              checked={deadline === "twoWeeks"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>دو هفته</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="oneMonth"
+              checked={deadline === "oneMonth"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>یک ماه</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="longTerm"
+              checked={deadline === "longTerm"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>بلند مدت / سرمایه گذاری</span>
+          </label>
+        </div>
+      </div>
+
+      {/* Map */}
+      <div>
+        <div className="relative flex flex-col gap-2 mt-4">
+          <span>محله مورد نظر : </span>
+
+          <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
+        </div>
+      </div>
+
+      {/* how section */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>طریقه آشنایی با هومینکس : </span>
+        <div className="flex flex-row gap-5">
+          <label htmlFor="instagram">
+            <input
+              className="ml-2"
+              type="radio"
+              name="instagram"
+              value="instagram"
+              checked={visitMethod === "instagram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="instagram"
+            />
+            اینستاگرام
+          </label>
+          <label htmlFor="telegram">
+            <input
+              className="ml-2"
+              type="radio"
+              name="telegram"
+              value="telegram"
+              checked={visitMethod === "telegram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="telegram"
+            />
+            تلگرام
+          </label>
+          <label htmlFor="friends">
+            <input
+              className="ml-2"
+              type="radio"
+              name="friends"
+              value="friends"
+              checked={visitMethod === "friends"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="friends"
+            />
+            معرفی دوستان
+          </label>
+          <label htmlFor="other">
+            <input
+              className="ml-2"
+              type="radio"
+              name="other"
+              value="other"
+              checked={visitMethod === "other"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="other"
+            />
+            سایر
+          </label>
+        </div>
+      </div>
+
+      {/* explanation section */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>توضیحات تکمیلی : </span>
+        <textarea
+          name="explanation"
+          id="explanation"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
+      </div>
+
+      {/* submit button */}
+      <SubmitButton title="ثبت درخواست مشاوره واحد تجاری" />
     </>
   );
 }
@@ -766,10 +1113,299 @@ export function Land({ vals }: IForm) {
     setMortgage,
     mapSelection,
     setMapSelection,
+    typeOfFunctionality,
+    setTypeOfFunctionality,
+    envTypePrefer,
+    setEnvTypePrefer,
+    landLocation,
+    setLandLocation,
+    landFunctionality,
+    setLandFunctionality,
   ] = vals;
   return (
     <>
-      <p>Form4</p>
+      {/* type of request section */}
+      <div className="flex flex-col gap-2 mt-4">
+        <span className="mb-2">نوع درخواست : </span>
+        <div className="flex flex-row gap-5">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="requestType"
+              value="buy"
+              checked={requestType === "buy"}
+              onChange={(e) => setRequestType(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>خرید</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="requestType"
+              value="rent"
+              checked={requestType === "rent"}
+              onChange={(e) => setRequestType(e.target.value)}
+              className="accent-blue-600"
+            />
+            <span>اجاره</span>
+          </label>
+        </div>
+      </div>
+
+      {/* lendth seciton */}
+      <div className="flex flex-col gap-2 mt-4">
+        <span>متراژ مورد نظر ( متر ) : </span>
+        <input
+          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          type="text"
+          name="length"
+          id="length"
+          onChange={(e) => setLength(addCommasToNumber(e.target.value))}
+          value={length}
+          placeholder="مثلا : 150 متر"
+        />
+      </div>
+
+      {/* budget seciton */}
+      {requestType === "rent" ? (
+        <div className="w-full  gap-3">
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>اجاره ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="rent"
+              id="rent"
+              onChange={(e) => setRent(addCommasToNumber(e.target.value))}
+              value={rent}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+          <div className="flex w-full flex-col gap-2 mt-4">
+            <span>رهن ( تومان ) : </span>
+            <input
+              className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+              type="text"
+              name="mortgage"
+              id="mortgage"
+              onChange={(e) => setMortgage(addCommasToNumber(e.target.value))}
+              value={mortgage}
+              placeholder="مثلا : 800 میلیون"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 mt-4">
+          <span>بودجه مورد نظر ( تومان ) : </span>
+          <input
+            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            type="text"
+            name="budget"
+            id="budget"
+            onChange={(e) => setPrice(addCommasToNumber(e.target.value))}
+            value={price}
+            placeholder="مثلا : 800 میلیون"
+          />
+        </div>
+      )}
+      {/* land functionality section */}
+      <div className="flex flex-col gap-2 mt-4">
+        <span>کاربری زمین : </span>
+        <div className="flex flex-row gap-5">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="Land"
+              value="Bayer"
+              checked={landFunctionality === "Bayer"}
+              onChange={(e) => setLandFunctionality(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>بایر</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="Land"
+              value="Garden&Farm"
+              checked={landFunctionality === "Garden&Farm"}
+              onChange={(e) => setLandFunctionality(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>باغ و کشاورزی</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="Land"
+              value="other"
+              checked={landFunctionality === "other"}
+              onChange={(e) => setLandFunctionality(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>سایر</span>
+          </label>
+        </div>
+      </div>
+
+      {/* land location */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>موقعیت مکانی زمین : </span>
+        <div className="flex flex-row gap-5">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="landLocation"
+              value="outOfTown"
+              checked={landLocation === "outOfTown"}
+              onChange={(e) => setLandLocation(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>داخل شهر</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="landLocation"
+              value="inTown"
+              checked={landLocation === "inTown"}
+              onChange={(e) => setLandLocation(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>بیرون شهر</span>
+          </label>
+        </div>
+      </div>
+
+      {/* deadline */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
+        <div className="flex flex-row gap-5">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="asap"
+              checked={deadline === "asap"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>فوری</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="twoWeeks"
+              checked={deadline === "twoWeeks"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>دو هفته</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="oneMonth"
+              checked={deadline === "oneMonth"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>یک ماه</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="deadline"
+              value="longTerm"
+              checked={deadline === "longTerm"}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="accent-green-600"
+            />
+            <span>بلند مدت / سرمایه گذاری</span>
+          </label>
+        </div>
+      </div>
+
+      {/* Map */}
+      <div>
+        <div className="relative flex flex-col gap-2 mt-4">
+          <span>محله مورد نظر : </span>
+
+          <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
+        </div>
+      </div>
+
+      {/* how section */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>طریقه آشنایی با هومینکس : </span>
+        <div className="flex flex-row gap-5">
+          <label htmlFor="instagram">
+            <input
+              className="ml-2"
+              type="radio"
+              name="instagram"
+              value="instagram"
+              checked={visitMethod === "instagram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="instagram"
+            />
+            اینستاگرام
+          </label>
+          <label htmlFor="telegram">
+            <input
+              className="ml-2"
+              type="radio"
+              name="telegram"
+              value="telegram"
+              checked={visitMethod === "telegram"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="telegram"
+            />
+            تلگرام
+          </label>
+          <label htmlFor="friends">
+            <input
+              className="ml-2"
+              type="radio"
+              name="friends"
+              value="friends"
+              checked={visitMethod === "friends"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="friends"
+            />
+            معرفی دوستان
+          </label>
+          <label htmlFor="other">
+            <input
+              className="ml-2"
+              type="radio"
+              name="other"
+              value="other"
+              checked={visitMethod === "other"}
+              onChange={(e) => setVisitMethod(e.target.value)}
+              id="other"
+            />
+            سایر
+          </label>
+        </div>
+      </div>
+
+      {/* explanation section */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span>توضیحات تکمیلی : </span>
+        <textarea
+          name="explanation"
+          id="explanation"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
+      </div>
+
+      {/* submit button */}
+      <SubmitButton title="ثبت درخواست مشاوره واحد تجاری" />
     </>
   );
 }

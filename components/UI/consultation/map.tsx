@@ -7,6 +7,13 @@ interface IMap {
   mapSelection: {};
   setMapSelection: any;
 }
+const defaultStyle = {
+  color: "#b4b4b4", // Default blue border color
+  weight: 2, // Border thickness
+  opacity: 1, // Border opacity
+  fillColor: "#7b7b7b", // Fill color
+  fillOpacity: 0.2, // Fill transparency
+};
 
 // Fix default icon issue in Next.js (TypeScript safe)
 L.Icon.Default.mergeOptions({
@@ -79,12 +86,12 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
         // Reset previous selections' styles
         if (geoJsonLayerRef.current) {
           geoJsonLayerRef.current.eachLayer((l: any) => {
-            l.setStyle({ color: "#3388ff", weight: 2 }); // Default style
+            l.setStyle({ color: "#b4b4b4", weight: 2 }); // Default style
           });
         }
 
         // Highlight clicked feature
-        layer.setStyle({ color: "#ff0000", weight: 3 }); // Selected style
+        layer.setStyle({ color: "#ff0000", weight: 2 }); // Selected style
 
         // Store selection
         setMapSelection(feature.properties);
@@ -103,14 +110,12 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
       boxZoom={false}
       zoomControl={false}
       whenReady={({ target }: { target: any }) => setMapInstance(target)}>
-      <TileLayer
-        attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-      />
+      <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
       {geoData && (
         <GeoJSON
           data={geoData}
           onEachFeature={onEachFeature}
+          style={defaultStyle} // Add this line
           ref={(ref) => {
             if (ref) geoJsonLayerRef.current = ref;
           }}
@@ -125,7 +130,6 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
           }}>
           {/* Only show the section name. Adjust the property key as needed. */}
           <div>
-            <strong>نام بخش:</strong>{" "}
             {clickedFeature.properties.name ||
               clickedFeature.properties.Name ||
               clickedFeature.properties.NAM ||

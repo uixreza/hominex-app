@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Landing - Underconstructoin ☢️</div>;
+  return <div>صفحه خانه - درحال توسعه ☢️</div>;
 }
