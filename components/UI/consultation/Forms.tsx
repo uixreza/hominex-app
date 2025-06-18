@@ -7,11 +7,13 @@ const Map = dynamic(() => import("@/components/UI/consultation/map"), {
 import SubmitButton from "./SubmitButton";
 import { addCommasToNumber } from "@/utils/digits";
 
-interface IForm {
+/* eslint-disable */
+type Form = {
   vals: any[];
-}
+};
+/* eslint-enable */
 
-export function Residential({ vals }: IForm) {
+export function Residential({ vals }: Form) {
   const [
     price,
     setPrice,
@@ -475,7 +477,7 @@ export function Residential({ vals }: IForm) {
   );
 }
 
-export function Commercial({ vals }: IForm) {
+export function Commercial({ vals }: Form) {
   const [
     price,
     setPrice,
@@ -483,13 +485,6 @@ export function Commercial({ vals }: IForm) {
     setLength,
     requestType,
     setRequestType,
-    rooms,
-    setRooms,
-    vitals,
-    setVitals,
-    handleVitalsArr,
-    clientPrefer,
-    setClientPrefer,
     floorPrefer,
     setFloorPrefer,
     deadline,
@@ -506,7 +501,6 @@ export function Commercial({ vals }: IForm) {
     setMapSelection,
     typeOfFunctionality,
     setTypeOfFunctionality,
-    envTypePrefer,
     setEnvTypePrefer,
   ] = vals;
   return (
@@ -791,7 +785,7 @@ export function Commercial({ vals }: IForm) {
     </>
   );
 }
-export function Office({ vals }: IForm) {
+export function Office({ vals }: Form) {
   const [
     price,
     setPrice,
@@ -799,13 +793,6 @@ export function Office({ vals }: IForm) {
     setLength,
     requestType,
     setRequestType,
-    rooms,
-    setRooms,
-    vitals,
-    setVitals,
-    handleVitalsArr,
-    clientPrefer,
-    setClientPrefer,
     floorPrefer,
     setFloorPrefer,
     deadline,
@@ -1084,7 +1071,7 @@ export function Office({ vals }: IForm) {
     </>
   );
 }
-export function Land({ vals }: IForm) {
+export function Land({ vals }: Form) {
   const [
     price,
     setPrice,
@@ -1092,15 +1079,6 @@ export function Land({ vals }: IForm) {
     setLength,
     requestType,
     setRequestType,
-    rooms,
-    setRooms,
-    vitals,
-    setVitals,
-    handleVitalsArr,
-    clientPrefer,
-    setClientPrefer,
-    floorPrefer,
-    setFloorPrefer,
     deadline,
     setDeadline,
     visitMethod,
@@ -1113,10 +1091,6 @@ export function Land({ vals }: IForm) {
     setMortgage,
     mapSelection,
     setMapSelection,
-    typeOfFunctionality,
-    setTypeOfFunctionality,
-    envTypePrefer,
-    setEnvTypePrefer,
     landLocation,
     setLandLocation,
     landFunctionality,

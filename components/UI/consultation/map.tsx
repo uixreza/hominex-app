@@ -1,11 +1,18 @@
+/* eslint-disable */
 import { MapContainer, TileLayer, GeoJSON, useMap, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import React, { useEffect, useState, useRef } from "react";
 
+interface FeatureProperties {
+  id: number;
+  name: string;
+  // Add other properties you expect
+  [key: string]: any; // For any additional dynamic properties
+}
 interface IMap {
-  mapSelection: {};
-  setMapSelection: any;
+  mapSelection: FeatureProperties | null;
+  setMapSelection: (value: FeatureProperties) => void;
 }
 const defaultStyle = {
   color: "#b4b4b4", // Default blue border color
@@ -45,6 +52,7 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
   const [clickedFeature, setClickedFeature] = useState<any>(null);
   const [mapInstance, setMapInstance] = useState<any>(null);
   const geoJsonLayerRef = useRef<L.GeoJSON>(null);
+  const mapRef = useRef<L.Map | null>(null);
   useEffect(() => {
     fetch("/assets/mahalle_21kh_M_FeaturesToJSO.geojson")
       .then((res) => res.json())
@@ -109,7 +117,11 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
       keyboard={false}
       boxZoom={false}
       zoomControl={false}
-      whenReady={({ target }: { target: any }) => setMapInstance(target)}>
+      whenReady={() => {
+        if (mapRef.current) {
+          setMapInstance(mapRef.current);
+        }
+      }}>
       <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
       {geoData && (
         <GeoJSON

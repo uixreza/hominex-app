@@ -24,9 +24,14 @@ const Page = () => {
 
   // handle array values
   const handleVitalsArr = (
-    value: any,
-    arr: any[],
-    setArr: (a: any[]) => void
+    /**
+     * The value to be added or removed from an array of items.
+     * Used in array manipulation functions to toggle item presence.
+     * @type {any} Can be of any type, typically a primitive or object to be tracked in an array.
+     */
+    value: string,
+    arr: string[],
+    setArr: (a: string[]) => void
   ) => {
     if (arr.includes(value)) {
       setArr(arr.filter((item) => item !== value));
@@ -48,12 +53,13 @@ const Page = () => {
   const [description, setDescription] = useState("");
   const [rent, setRent] = useState("");
   const [mortgage, setMortgage] = useState("");
-  const [mapSelection, setMapSelection] = useState<any>(null);
+  // eslint-disable-next-line
+  const [mapSelection, setMapSelection] = useState<any>();
   const [typeOfFunctionality, setTypeOfFunctionality] = useState("");
   const [envTypePrefer, setEnvTypePrefer] = useState("main");
   const [landLocation, setLandLocation] = useState("");
   const [landFunctionality, setLandFunctionality] = useState("");
-  let propValues = [
+  const propValues = [
     price,
     setPrice,
     length,
@@ -106,7 +112,7 @@ const Page = () => {
     setDescription("");
     setRent("");
     setMortgage("");
-    setMapSelection(null);
+    setMapSelection({});
     setEnvTypePrefer("main");
     setLandLocation("");
     setLandFunctionality("");
