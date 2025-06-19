@@ -5,33 +5,32 @@ import L from "leaflet";
 import React, { useEffect, useState, useRef } from "react";
 
 interface FeatureProperties {
-  id: number;
+  id: number | string;
   name: string;
-  // Add other properties you expect
-  [key: string]: any; // For any additional dynamic properties
+  [key: string]: string | number | boolean | undefined;
 }
+
 interface IMap {
-  mapSelection: FeatureProperties | null;
-  setMapSelection: (value: FeatureProperties) => void;
+  mapSelection: FeatureProperties[] | null;
+  setMapSelection: (value: FeatureProperties[] | null) => void;
 }
+
 const defaultStyle = {
-  color: "#b4b4b4", // Default blue border color
-  weight: 2, // Border thickness
-  opacity: 1, // Border opacity
-  fillColor: "#7b7b7b", // Fill color
-  fillOpacity: 0.2, // Fill transparency
+  color: "#b4b4b4",
+  weight: 2,
+  opacity: 1,
+  fillColor: "#7b7b7b",
+  fillOpacity: 0.2,
 };
 
-// Fix default icon issue in Next.js (TypeScript safe)
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
   iconUrl: require("leaflet/dist/images/marker-icon.png"),
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const position: [number, number] = [37.493, 57.32]; // Bojnurd coordinates
+const position: [number, number] = [37.493, 57.32];
 
-// Helper component to fit map to GeoJSON bounds
 type FitBoundsProps = { geoData: any };
 const FitBounds: React.FC<FitBoundsProps> = ({ geoData }) => {
   const map = useMap();
@@ -53,66 +52,95 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
   const [mapInstance, setMapInstance] = useState<any>(null);
   const geoJsonLayerRef = useRef<L.GeoJSON>(null);
   const mapRef = useRef<L.Map | null>(null);
+
   useEffect(() => {
     fetch("/assets/mahalle_21kh_M_FeaturesToJSO.geojson")
       .then((res) => res.json())
       .then((data) => setGeoData(data));
   }, []);
 
-  // Bouncy effect: return to center after drag or zoom
-  useEffect(() => {
-    if (mapInstance) {
-      const handleMoveOrZoomEnd = () => {
-        mapInstance.flyTo(position, 12, { animate: true, duration: 1 });
-      };
-      mapInstance.on("moveend", handleMoveOrZoomEnd);
-      mapInstance.on("zoomend", handleMoveOrZoomEnd);
-      return () => {
-        mapInstance.off("moveend", handleMoveOrZoomEnd);
-        mapInstance.off("zoomend", handleMoveOrZoomEnd);
-      };
-    }
-  }, [mapInstance]);
-
-  // leaflet font change function
   const onEachFeature = (feature: any, layer: any) => {
     layer.bindPopup(`
     <div style="font-family: 'Modam', sans-serif; font-weight: 500;">
       ${feature.properties.name || "Unnamed Feature"}
     </div>
   `);
+
     layer.on({
       click: (e: any) => {
+        // For popup
         setClickedFeature({
           latlng: e.latlng,
           properties: feature.properties,
         });
-      },
-    });
-    layer.on({
-      click: () => {
-        // Reset previous selections' styles
-        if (geoJsonLayerRef.current) {
-          geoJsonLayerRef.current.eachLayer((l: any) => {
-            l.setStyle({ color: "#b4b4b4", weight: 2 }); // Default style
+
+        const isMultiSelect =
+          e.originalEvent.ctrlKey || e.originalEvent.metaKey;
+
+        setMapSelection((prev: FeatureProperties[] | null) => {
+          const currentSelection = Array.isArray(prev) ? [...prev] : [];
+
+          const featureIndex = currentSelection.findIndex(
+            (f) => f.id === feature.properties.id
+          );
+
+          if (featureIndex >= 0) {
+            // Already selected → remove it
+            currentSelection.splice(featureIndex, 1);
+          } else {
+            // Not selected → add it
+            currentSelection.push(feature.properties);
+          }
+
+          const newSelection =
+            currentSelection.length > 0 ? currentSelection : null;
+
+          // Update styles immediately
+          geoJsonLayerRef.current?.eachLayer((l: any) => {
+            if (l.feature) {
+              l.setStyle(getFeatureStyle(l.feature, newSelection));
+            }
           });
-        }
 
-        // Highlight clicked feature
-        layer.setStyle({ color: "#ff0000", weight: 2 }); // Selected style
-
-        // Store selection
-        setMapSelection(feature.properties);
+          return newSelection;
+        });
       },
     });
   };
+
+  // Update the style function to properly check selection
+  const getFeatureStyle = (
+    feature: any,
+    selectionOverride?: FeatureProperties[] | null
+  ) => {
+    const selection = selectionOverride ?? mapSelection;
+    const isSelected = selection?.some((f) => f.id === feature.properties.id);
+    return isSelected
+      ? { ...defaultStyle, color: "#ff0000", weight: 3, fillOpacity: 0.5 }
+      : defaultStyle;
+  };
+
+  // Update styles when selection changes
+  useEffect(() => {
+    if (geoJsonLayerRef.current) {
+      geoJsonLayerRef.current.eachLayer((layer: any) => {
+        if (layer.feature) {
+          layer.setStyle(getFeatureStyle(layer.feature));
+        }
+      });
+    }
+  }, [mapSelection]);
+
+  // Rest of your existing code remains the same...
+  // Bouncy effect, return statement, etc.
 
   return (
     <MapContainer
       center={position}
       zoom={28}
       minZoom={12}
-      style={{ height: "400px", width: "100%" }}
+      style={{ height: "400px", width: "100%", borderRadius: "5px" }}
+      className="shadow-lg rounded-xl shadow-black/20 border border-white/20"
       touchZoom={false}
       keyboard={false}
       boxZoom={false}
@@ -127,7 +155,7 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
         <GeoJSON
           data={geoData}
           onEachFeature={onEachFeature}
-          style={defaultStyle} // Add this line
+          style={getFeatureStyle}
           ref={(ref) => {
             if (ref) geoJsonLayerRef.current = ref;
           }}
@@ -140,7 +168,6 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
           eventHandlers={{
             remove: () => setClickedFeature(null),
           }}>
-          {/* Only show the section name. Adjust the property key as needed. */}
           <div>
             {clickedFeature.properties.name ||
               clickedFeature.properties.Name ||
@@ -152,4 +179,5 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
     </MapContainer>
   );
 };
+
 export default MapComponent;

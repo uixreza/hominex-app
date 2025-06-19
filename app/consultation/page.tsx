@@ -54,7 +54,8 @@ const Page = () => {
   const [rent, setRent] = useState("");
   const [mortgage, setMortgage] = useState("");
   // eslint-disable-next-line
-  const [mapSelection, setMapSelection] = useState<any>();
+  // const [mapSelection, setMapSelection] = useState<any>();
+  const [mapSelection, setMapSelection] = useState<any[]>([]);
   const [typeOfFunctionality, setTypeOfFunctionality] = useState("");
   const [envTypePrefer, setEnvTypePrefer] = useState("main");
   const [landLocation, setLandLocation] = useState("");
@@ -112,7 +113,7 @@ const Page = () => {
     setDescription("");
     setRent("");
     setMortgage("");
-    setMapSelection({});
+    setMapSelection([]);
     setEnvTypePrefer("main");
     setLandLocation("");
     setLandFunctionality("");
@@ -122,7 +123,7 @@ const Page = () => {
     <div className="mt-5 mb-5">
       <div className="context">
         <h2 className="font-bold text-2xl mb-5">
-          ثبت رایگان مشاوره تخصصی املاک با تحلیل هوشمند
+          مشاوره تخصصی املاک با تحلیل هوشمند
         </h2>
         <p>
           خرید، فروش یا سرمایه ‌گذاری در املاک یکی از مهم‌ترین تصمیم‌های مالی هر
