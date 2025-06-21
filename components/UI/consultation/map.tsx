@@ -4,15 +4,9 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import React, { useEffect, useState, useRef } from "react";
 
-interface FeatureProperties {
-  id: number | string;
-  name: string;
-  [key: string]: string | number | boolean | undefined;
-}
-
 interface IMap {
-  mapSelection: FeatureProperties[] | null;
-  setMapSelection: (value: FeatureProperties[] | null) => void;
+  mapSelection: string[];
+  setMapSelection: (value: string[]) => void;
 }
 
 const defaultStyle = {
@@ -49,7 +43,6 @@ const FitBounds: React.FC<FitBoundsProps> = ({ geoData }) => {
 const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
   const [geoData, setGeoData] = useState<any>(null);
   const [clickedFeature, setClickedFeature] = useState<any>(null);
-  const [mapInstance, setMapInstance] = useState<any>(null);
   const geoJsonLayerRef = useRef<L.GeoJSON>(null);
   const mapRef = useRef<L.Map | null>(null);
 
@@ -60,67 +53,79 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
   }, []);
 
   const onEachFeature = (feature: any, layer: any) => {
+    const name = feature.properties.Name;
+
     layer.bindPopup(`
-    <div style="font-family: 'Modam', sans-serif; font-weight: 500;">
-      ${feature.properties.name || "Unnamed Feature"}
-    </div>
-  `);
+      <div style="font-family: 'Modam', sans-serif; font-weight: 500;">
+        ${name || "Unnamed Feature"}
+      </div>
+    `);
 
     layer.on({
       click: (e: any) => {
-        // For popup
         setClickedFeature({
           latlng: e.latlng,
           properties: feature.properties,
         });
 
-        const isMultiSelect =
-          e.originalEvent.ctrlKey || e.originalEvent.metaKey;
-
-        setMapSelection((prev: FeatureProperties[] | null) => {
+        setMapSelection((prev: string[]) => {
           const currentSelection = Array.isArray(prev) ? [...prev] : [];
+          const index = currentSelection.indexOf(name);
 
-          const featureIndex = currentSelection.findIndex(
-            (f) => f.id === feature.properties.id
-          );
-
-          if (featureIndex >= 0) {
-            // Already selected → remove it
-            currentSelection.splice(featureIndex, 1);
+          if (index >= 0) {
+            currentSelection.splice(index, 1); // remove
           } else {
-            // Not selected → add it
-            currentSelection.push(feature.properties);
+            currentSelection.push(name); // add
           }
-
-          const newSelection =
-            currentSelection.length > 0 ? currentSelection : null;
 
           // Update styles immediately
           geoJsonLayerRef.current?.eachLayer((l: any) => {
-            if (l.feature) {
-              l.setStyle(getFeatureStyle(l.feature, newSelection));
-            }
+            const fname = l.feature?.properties?.name;
+            const isSelected = currentSelection.includes(fname);
+            l.setStyle(
+              isSelected
+                ? {
+                    ...defaultStyle,
+                    color: "#ff0000",
+                    weight: 3,
+                    fillOpacity: 0.5,
+                  }
+                : defaultStyle
+            );
           });
 
-          return newSelection;
+          return currentSelection;
         });
       },
     });
   };
 
-  // Update the style function to properly check selection
-  const getFeatureStyle = (
-    feature: any,
-    selectionOverride?: FeatureProperties[] | null
-  ) => {
-    const selection = selectionOverride ?? mapSelection;
-    const isSelected = selection?.some((f) => f.id === feature.properties.id);
+  const getFeatureStyle = (feature: any, selectionOverride?: string[]) => {
+    const selection = Array.isArray(selectionOverride ?? mapSelection)
+      ? selectionOverride ?? mapSelection
+      : [];
+
+    const name =
+      feature.properties.name ||
+      feature.properties.Name ||
+      feature.properties.NAM;
+
+    const isSelected = selection.includes(name);
+
     return isSelected
-      ? { ...defaultStyle, color: "#ff0000", weight: 3, fillOpacity: 0.5 }
-      : defaultStyle;
+      ? {
+          ...defaultStyle,
+          color: "#ff0000",
+          weight: 4,
+          fillOpacity: 0.4,
+        }
+      : {
+          ...defaultStyle,
+          color: "#b4b4b4",
+          weight: 1,
+        };
   };
 
-  // Update styles when selection changes
   useEffect(() => {
     if (geoJsonLayerRef.current) {
       geoJsonLayerRef.current.eachLayer((layer: any) => {
@@ -130,9 +135,6 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
       });
     }
   }, [mapSelection]);
-
-  // Rest of your existing code remains the same...
-  // Bouncy effect, return statement, etc.
 
   return (
     <MapContainer
@@ -147,15 +149,16 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
       zoomControl={false}
       whenReady={() => {
         if (mapRef.current) {
-          setMapInstance(mapRef.current);
+          // Optional: use if you later need the map instance
         }
-      }}>
+      }}
+      ref={mapRef}>
       <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
       {geoData && (
         <GeoJSON
           data={geoData}
           onEachFeature={onEachFeature}
-          style={getFeatureStyle}
+          style={(feature) => getFeatureStyle(feature)}
           ref={(ref) => {
             if (ref) geoJsonLayerRef.current = ref;
           }}

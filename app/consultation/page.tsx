@@ -55,7 +55,7 @@ const Page = () => {
   const [mortgage, setMortgage] = useState("");
   // eslint-disable-next-line
   // const [mapSelection, setMapSelection] = useState<any>();
-  const [mapSelection, setMapSelection] = useState<any[]>([]);
+  const [mapSelection, setMapSelection] = useState<string[]>([]);
   const [typeOfFunctionality, setTypeOfFunctionality] = useState("");
   const [envTypePrefer, setEnvTypePrefer] = useState("main");
   const [landLocation, setLandLocation] = useState("");
@@ -97,6 +97,11 @@ const Page = () => {
     landFunctionality,
     setLandFunctionality,
   ];
+
+  // test
+  useEffect(() => {
+    console.log(mapSelection);
+  }, [mapSelection]);
 
   // reset values after switching the form
   useEffect(() => {
