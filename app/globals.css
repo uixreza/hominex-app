@@ -108,18 +108,17 @@ body {
 }
 
 html {
-  background: linear-gradient(
-    135deg,
-    var(--background) 30%,
-    var(--BoxColor) 100%
-  );
+  background: url("/assets/img/bg4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
 body {
   color: var(--foreground);
   font-family: "Modam", Arial, Helvetica, sans-serif;
-  background: transparent;
+  /* background: transparent; */
 }
 
 label,

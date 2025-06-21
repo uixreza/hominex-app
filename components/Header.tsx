@@ -11,7 +11,7 @@ const Header = () => {
   const pathname = usePathname();
   const notify = () => toast("درحال انتقال به صفحه ورود 🔒");
   return (
-    <div className="fixed top-5 text-white z-10 flex justify-between items-center py-2 pr-4 pl-9 mt-3 h-auto rounded-2xl bg-[var(--box)]/40  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
+    <div className="fixed top-5 text-white z-10 flex justify-between items-center py-2 pr-4 pl-9 mt-3 h-auto rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
       {/* logo */}
       <div className="flex gap-2 items-center">
         <Link href={"/"}>

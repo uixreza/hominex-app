@@ -166,7 +166,7 @@ const Page = () => {
             isActive={selectedTab === forms.Land && true}
           />
         </div>
-        <div className="mainBox bg-[var(--box)]/40 backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl w-full h-auto mt-2 bottom-[-16rem] overflow-hidden p-10">
+        <div className="mainBox bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl w-full h-auto mt-2 bottom-[-16rem] overflow-hidden p-10">
           {selectedTab === forms.Residential && (
             <Residential vals={[...propValues]} />
           )}
