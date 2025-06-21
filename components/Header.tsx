@@ -1,17 +1,21 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { FaRegUser } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { toast } from "react-toastify";
 import { routes } from "@/config/routes.json";
+import { CgMenuGridO } from "react-icons/cg";
 
 const Header = () => {
   const pathname = usePathname();
   const notify = () => toast("درحال انتقال به صفحه ورود 🔒");
   return (
-    <div className="fixed top-5 text-white z-10 flex justify-between items-center py-2 pr-4 pl-9 mt-3 h-auto rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
+    <div className="fixed top-0 sm:top-5 text-white z-10 flex justify-between items-center py-2 pr-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
+      {/* hamb icon */}
+      <CgMenuGridO className="text-3xl cursor-pointer sm:hidden block" />
+
       {/* logo */}
       <div className="flex gap-2 items-center">
         <Link href={"/"}>
@@ -29,7 +33,7 @@ const Header = () => {
       </div>
 
       {/* menu */}
-      <div className="">
+      <div className="hidden sm:flex">
         <ul className="flex gap-10 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
           {routes.map((item, i) => (
             <li key={i} className="group flex flex-col items-center">
@@ -50,8 +54,8 @@ const Header = () => {
       <a href="https://hominex.ir/account/dashboard/">
         <div
           onClick={notify}
-          className="cursor-pointer transition-all transition-normal hover:bg-white p-3 rounded-sm hover:text-black">
-          <FaRegUser />
+          className="cursor-pointer transition-all transition-normal hover:bg-white sm:p-3 rounded-sm hover:text-black">
+          <FiUser className="text-2xl" />
         </div>
       </a>
     </div>

@@ -125,7 +125,7 @@ const Page = () => {
   }, [selectedTab]);
 
   return (
-    <div className="mt-5 mb-5">
+    <div className="sm:mt-5 mb-5">
       <div className="context">
         <h2 className="font-bold text-2xl mb-5">
           مشاوره تخصصی املاک با تحلیل هوشمند
@@ -142,7 +142,7 @@ const Page = () => {
       <div className="mt-10 flex flex-col gap-2 relative ">
         <div className="flex flex-row w-full gap-2 justify-stretch">
           <Button
-            title="واحد های مسکونی"
+            title="واحد مسکونی"
             handleFunc={handleClick}
             keyId={forms.Residential}
             isActive={selectedTab === forms.Residential && true}
