@@ -43,13 +43,23 @@ export function Residential({ vals }: Form) {
     setMortgage,
     mapSelection,
     setMapSelection,
+    typeOfFunctionality,
+    setTypeOfFunctionality,
+    envTypePrefer,
+    setEnvTypePrefer,
+    landLocation,
+    setLandLocation,
+    landFunctionality,
+    setLandFunctionality,
+    sendReq,
   ] = vals;
+
   return (
     <>
       {/* type of request section */}
-      <div className="flex flex-col gap-2 mt-4">
+      <div className="flex flex-col gap-2 mt-4 ">
         <span className="mb-2">نوع درخواست : </span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 ">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
@@ -130,7 +140,7 @@ export function Residential({ vals }: Form) {
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
         <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
           name="length"
           id="length"
@@ -172,7 +182,7 @@ export function Residential({ vals }: Form) {
         <div className="flex flex-col gap-2 mt-4">
           <span>بودجه مورد نظر ( تومان ) : </span>
           <input
-            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
             name="budget"
             id="budget"
@@ -207,7 +217,7 @@ export function Residential({ vals }: Form) {
       {/* vital requirements */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>امکانات ضوروی : </span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="parking">
             <input
               className="ml-2"
@@ -280,7 +290,7 @@ export function Residential({ vals }: Form) {
       {/* clients prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه ملکی را ترجیح میدهید</span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
@@ -349,7 +359,7 @@ export function Residential({ vals }: Form) {
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
@@ -409,7 +419,7 @@ export function Residential({ vals }: Form) {
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>طریقه آشنایی با هومینکس : </span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
               className="ml-2"
@@ -473,7 +483,10 @@ export function Residential({ vals }: Form) {
       </div>
 
       {/* submit button */}
-      <SubmitButton title="ثبت درخواست مشاوره واحد مسکونی" />
+      <SubmitButton
+        title="ثبت درخواست مشاوره واحد مسکونی"
+        handleFunc={sendReq}
+      />
     </>
   );
 }
@@ -515,6 +528,7 @@ export function Commercial({ vals }: Form) {
     setLandLocation,
     landFunctionality,
     setLandFunctionality,
+    sendReq,
   ] = vals;
   return (
     <>
@@ -551,7 +565,7 @@ export function Commercial({ vals }: Form) {
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
         <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
           name="length"
           id="length"
@@ -593,7 +607,7 @@ export function Commercial({ vals }: Form) {
         <div className="flex flex-col gap-2 mt-4">
           <span>بودجه مورد نظر ( تومان ) : </span>
           <input
-            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
             name="budget"
             id="budget"
@@ -607,7 +621,7 @@ export function Commercial({ vals }: Form) {
       <div className="flex flex-col gap-2 mt-4">
         <span>نوع کاربری : </span>
         <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
           name="typeOfFunctionality"
           id="typeOfFunctionality"
@@ -625,7 +639,7 @@ export function Commercial({ vals }: Form) {
             name="env"
             id="env"
             onChange={(e) => setEnvTypePrefer(e.target.value)}
-            className="bg-[var(--box)]/40  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 w-[40%] px-4 py-3 rounded-xl cursor-pointer border border-white/30 transition-all duration-200 hover:shadow-2xl ">
+            className="bg-[var(--box)]/40  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 sm:w-[40%] w-full px-4 py-3 rounded-xl cursor-pointer border border-white/30 transition-all duration-200 hover:shadow-2xl ">
             <option className="text-black font-bold" value="main">
               خیابان اصلی
             </option>
@@ -670,7 +684,7 @@ export function Commercial({ vals }: Form) {
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
@@ -728,9 +742,9 @@ export function Commercial({ vals }: Form) {
       </div>
 
       {/* how section */}
-      <div className="relative flex flex-col gap-2 mt-4">
+      <div className="relative flex flex-col gap-2 mt-4 flex-wrap">
         <span>طریقه آشنایی با هومینکس : </span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
               className="ml-2"
@@ -794,7 +808,10 @@ export function Commercial({ vals }: Form) {
       </div>
 
       {/* submit button */}
-      <SubmitButton title="ثبت درخواست مشاوره واحد تجاری" />
+      <SubmitButton
+        title="ثبت درخواست مشاوره واحد تجاری"
+        handleFunc={sendReq}
+      />
     </>
   );
 }
@@ -835,6 +852,7 @@ export function Office({ vals }: Form) {
     setLandLocation,
     landFunctionality,
     setLandFunctionality,
+    sendReq,
   ] = vals;
   return (
     <>
@@ -871,7 +889,7 @@ export function Office({ vals }: Form) {
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
         <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
           name="length"
           id="length"
@@ -913,7 +931,7 @@ export function Office({ vals }: Form) {
         <div className="flex flex-col gap-2 mt-4">
           <span>بودجه مورد نظر ( تومان ) : </span>
           <input
-            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
             name="budget"
             id="budget"
@@ -927,7 +945,7 @@ export function Office({ vals }: Form) {
       <div className="flex flex-col gap-2 mt-4">
         <span>نوع کاربری : </span>
         <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
           name="typeOfFunctionality"
           id="typeOfFunctionality"
@@ -969,7 +987,7 @@ export function Office({ vals }: Form) {
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
@@ -1029,7 +1047,7 @@ export function Office({ vals }: Form) {
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>طریقه آشنایی با هومینکس : </span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
               className="ml-2"
@@ -1093,7 +1111,10 @@ export function Office({ vals }: Form) {
       </div>
 
       {/* submit button */}
-      <SubmitButton title="ثبت درخواست مشاوره واحد تجاری" />
+      <SubmitButton
+        title="ثبت درخواست مشاوره واحد تجاری"
+        handleFunc={sendReq}
+      />
     </>
   );
 }
@@ -1134,6 +1155,7 @@ export function Land({ vals }: Form) {
     setLandLocation,
     landFunctionality,
     setLandFunctionality,
+    sendReq,
   ] = vals;
   return (
     <>
@@ -1170,7 +1192,7 @@ export function Land({ vals }: Form) {
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
         <input
-          className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+          className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
           name="length"
           id="length"
@@ -1212,7 +1234,7 @@ export function Land({ vals }: Form) {
         <div className="flex flex-col gap-2 mt-4">
           <span>بودجه مورد نظر ( تومان ) : </span>
           <input
-            className="border-b-2 pb-2 px-1 outline-none w-1/3 sm:w-1/2"
+            className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
             name="budget"
             id="budget"
@@ -1294,7 +1316,7 @@ export function Land({ vals }: Form) {
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
@@ -1354,7 +1376,7 @@ export function Land({ vals }: Form) {
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>طریقه آشنایی با هومینکس : </span>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
               className="ml-2"
@@ -1418,7 +1440,10 @@ export function Land({ vals }: Form) {
       </div>
 
       {/* submit button */}
-      <SubmitButton title="ثبت درخواست مشاوره واحد تجاری" />
+      <SubmitButton
+        title="ثبت درخواست مشاوره واحد تجاری"
+        handleFunc={sendReq}
+      />
     </>
   );
 }

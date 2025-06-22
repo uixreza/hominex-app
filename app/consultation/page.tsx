@@ -7,7 +7,8 @@ import {
   Land,
 } from "@/components/UI/consultation/Forms";
 import Button from "@/components/UI/consultation/Button";
-// import SplitText from "@blocks";
+import SplitText from "../../blocks/TextAnimations/SplitText/SplitText";
+import SpringModal from "@/components/UI/SpringModal";
 
 enum forms {
   Residential = 1,
@@ -61,6 +62,25 @@ const Page = () => {
   const [envTypePrefer, setEnvTypePrefer] = useState("main");
   const [landLocation, setLandLocation] = useState("");
   const [landFunctionality, setLandFunctionality] = useState("");
+
+  // popup states
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  // send request function
+  const sendReq = async () => {
+    // const res = await fetch("/api/consultation", {
+    //   method: "POST",
+    //   body: JSON.stringify(""),
+    // });
+    // const data = await res.json();
+    // if (data.success) {
+    //   handleOpen();
+    // }
+    handleOpen();
+  };
+
   const propValues = [
     price,
     setPrice,
@@ -97,12 +117,8 @@ const Page = () => {
     setLandLocation,
     landFunctionality,
     setLandFunctionality,
+    sendReq,
   ];
-
-  // test
-  useEffect(() => {
-    console.log(mapSelection);
-  }, [mapSelection]);
 
   // reset values after switching the form
   useEffect(() => {
@@ -126,30 +142,27 @@ const Page = () => {
   }, [selectedTab]);
 
   const handleAnimationComplete = () => {
-    console.log("All letters have animated!");
+    // animation complete
   };
 
   return (
     <div className="sm:mt-5 mb-5">
       <div className="context">
         <SplitText
-          text="Hello, GSAP!"
-          className="text-2xl font-semibold text-center"
+          text="مشاوره تخصصی املاک با تحلیل هوشمند"
+          className="text-2xl font-semibold text-right"
           delay={100}
           duration={0.6}
           ease="power3.out"
-          splitType="chars"
+          splitType="words"
           from={{ opacity: 0, y: 40 }}
           to={{ opacity: 1, y: 0 }}
           threshold={0.1}
           rootMargin="-100px"
-          textAlign="center"
+          textAlign="right"
           onLetterAnimationComplete={handleAnimationComplete}
         />
-        <h2 className="font-bold text-2xl mb-5">
-          مشاوره تخصصی املاک با تحلیل هوشمند
-        </h2>
-        <p>
+        <p className="mt-2">
           خرید، فروش یا سرمایه ‌گذاری در املاک یکی از مهم‌ترین تصمیم‌های مالی هر
           فرد است. ما با استفاده از نقشه GIS شهری، تحلیل ‌های هوش مصنوعی و تیم
           مشاورین متخصص، ملک ‌های مختلف را از زوایای گوناگون بررسی می‌کنیم و
@@ -201,11 +214,13 @@ const Page = () => {
                 لطفاً آیتمی را انتخاب کنید تا مناسب‌ترین ملک را برای شما پیدا
                 کنیم.
               </p>
-              <p className="mt-10"> گذینه ای انتخاب نشده است🍃</p>
+              <p className="mt-10"> گزینه ای انتخاب نشده است🍃</p>
             </>
           )}
         </div>
       </div>
+      {/* popup */}
+      <SpringModal open={open} handleClose={handleClose} />
     </div>
   );
 };

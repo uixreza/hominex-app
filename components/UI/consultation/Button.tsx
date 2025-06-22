@@ -12,7 +12,7 @@ const Button = ({ title, handleFunc, keyId, isActive }: IButton) => {
   return (
     <div
       onClick={() => handleFunc(keyId)}
-      className={` sm:text-[14px] text-[10px] bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 w-[40%] flex flex-row items-center sm:justify-between justify-center gap-2 sm:px-4 sm:py-3 px-2 py-1 rounded-xl cursor-pointer ${
+      className={` sm:text-[14px] text-[10px] bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 w-[40%] flex flex-row items-center sm:justify-between justify-center gap-2 sm:px-4 sm:py-3 px-2 py-2 rounded-xl cursor-pointer ${
         isActive ? "border-4" : "border"
       } border-white/30 transition-all duration-200 hover:shadow-2xl`}>
       {title}
