@@ -7,6 +7,7 @@ import {
   Land,
 } from "@/components/UI/consultation/Forms";
 import Button from "@/components/UI/consultation/Button";
+// import SplitText from "@blocks";
 
 enum forms {
   Residential = 1,
@@ -124,9 +125,27 @@ const Page = () => {
     setLandFunctionality("");
   }, [selectedTab]);
 
+  const handleAnimationComplete = () => {
+    console.log("All letters have animated!");
+  };
+
   return (
     <div className="sm:mt-5 mb-5">
       <div className="context">
+        <SplitText
+          text="Hello, GSAP!"
+          className="text-2xl font-semibold text-center"
+          delay={100}
+          duration={0.6}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="center"
+          onLetterAnimationComplete={handleAnimationComplete}
+        />
         <h2 className="font-bold text-2xl mb-5">
           مشاوره تخصصی املاک با تحلیل هوشمند
         </h2>
@@ -166,7 +185,7 @@ const Page = () => {
             isActive={selectedTab === forms.Land && true}
           />
         </div>
-        <div className="mainBox bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl w-full h-auto mt-2 bottom-[-16rem] overflow-hidden p-10">
+        <div className="mainBox bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl w-full h-auto mt-2 bottom-[-16rem] overflow-hidden sm:p-10 py-8 px-5">
           {selectedTab === forms.Residential && (
             <Residential vals={[...propValues]} />
           )}
