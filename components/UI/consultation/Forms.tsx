@@ -64,8 +64,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="buy"
-              checked={requestType === "buy"}
+              value="خرید"
+              checked={requestType === "خرید"}
               onChange={(e) => setRequestType(e.target.value)}
               className="accent-green-600"
             />
@@ -75,9 +75,9 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="rent"
+              value="رهن"
               onChange={(e) => setRequestType(e.target.value)}
-              checked={requestType === "rent"}
+              checked={requestType === "رهن"}
               className="accent-blue-600"
             />
             <span>اجاره</span>

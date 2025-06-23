@@ -9,6 +9,8 @@ import {
 import Button from "@/components/UI/consultation/Button";
 import SplitText from "../../blocks/TextAnimations/SplitText/SplitText";
 import SpringModal from "@/components/UI/SpringModal";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 enum forms {
   Residential = 1,
@@ -18,6 +20,9 @@ enum forms {
 }
 
 const Page = () => {
+  // toast notification for sending error
+  const notify = () => toast("اطلاعات تکمیل نیست ❗");
+
   // switch between tabs
   const [selectedTab, setSelectedTab] = useState<forms | null>(null);
   const handleClick = (number: number) => {
@@ -70,15 +75,44 @@ const Page = () => {
 
   // send request function
   const sendReq = async () => {
-    // const res = await fetch("/api/consultation", {
-    //   method: "POST",
-    //   body: JSON.stringify(""),
-    // });
-    // const data = await res.json();
-    // if (data.success) {
-    //   handleOpen();
-    // }
-    handleOpen();
+    const entry = {
+      data: {
+        price,
+        length,
+        requestType,
+        rooms,
+        vitals,
+        clientPrefer,
+        floorPrefer,
+        deadline,
+        visitMethod,
+        description,
+        rent,
+        mortgage,
+        mapSelection,
+        typeOfFunctionality,
+        envTypePrefer,
+        landLocation,
+        landFunctionality,
+      },
+      credentials: {
+        phoneNumber: "0915",
+      },
+    };
+
+    try {
+      await axios.post("/api/entries", entry);
+      // console.log("Saved entry:", response.data);
+      handleOpen();
+
+      // close alrt box in 3 seconds
+      setTimeout(() => {
+        handleClose();
+      }, 3000);
+    } catch (error) {
+      // console.error("Error saving entry:", error);
+      notify();
+    }
   };
 
   const propValues = [
