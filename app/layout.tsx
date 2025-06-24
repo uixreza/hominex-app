@@ -3,6 +3,9 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { Slide, ToastContainer } from "react-toastify";
 import NewsBar from "@/components/UI/NewsBar";
+import Footer from "@/components/Footer";
+import Socials from "@/components/Socials";
+
 export const metadata: Metadata = {
   title: "Hominex",
   description: "find your dream house with just a click",
@@ -18,10 +21,15 @@ export default function RootLayout({
       <body
         className={`w-full overflow-y-scroll overflow-x-hidden box-border flex items-center flex-col pt-30 px-3 sm:px-0`}>
         <NewsBar />
+        {/* header */}
         <Header />
+        {/* body */}
         <div className="container flex flex-col items-center pt-10">
           <div className="content max-w-4xl w-full">{children}</div>
         </div>
+        {/* footer */}
+        <Footer />
+        <Socials />
         <ToastContainer
           position="bottom-right"
           autoClose={5000}
