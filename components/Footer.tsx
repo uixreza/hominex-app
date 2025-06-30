@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import React from "react";
 import { LuArrowBigUpDash } from "react-icons/lu";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
@@ -13,9 +11,9 @@ export default function Footer() {
   };
 
   return (
-    <div className="w-full text-white z-10 flex justify-between items-center p-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
+    <div className="w-full text-white z-10 flex flex-col lg:flex-row justify-between items-center p-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
       {/* about content */}
-      <div className="flex flex-col items-end">
+      <div className="flex flex-col items-start">
         <ul>
           <li className="mt-5 max-w-sm">
             <span className="font-bold pr-3 | relative before:absolute before:content-[''] before:rounded-full before:bg-white/60 before:right-[-0.2rem] before:top-[0.5rem] before:w-2 before:h-2 | after:content-[''] after:w-[0.1rem] after:h-full after:absolute after:right-0 after:top-5 after:bg-white/60 after:rounded-2xl">
@@ -44,15 +42,15 @@ export default function Footer() {
       </div>
 
       {/* middle content */}
-      <div className="bg-white/60 w-[0.1rem] rounded-2xl h-1/2 relative flex justify-center">
+      <div className="bg-white/60 lg:w-[0.1rem] lg:h-[10rem] w-[10rem] h-[0.1rem] my-20 lg:my-0 rounded-2xl relative flex justify-center">
         <LuArrowBigUpDash
           onClick={() => scrollTop()}
-          className="absolute bottom-[-2.5rem] p-1  bg-white/60 hover:bg-whitetransition-colors shadow-black/20 text-black text-3xl rounded-xl cursor-pointer"
+          className="absolute lg:bottom-[-2.5rem] bottom-[-1rem] p-1  bg-white/60 hover:bg-white transition-colors shadow-black/20 text-black text-3xl rounded-xl cursor-pointer"
         />
       </div>
 
       {/* address container */}
-      <div className="w-1/3">
+      <div className="lg:w-1/3 sm:w-1/2 w-full lg:h-[16rem] flex items-start flex-col">
         <div className="">
           <span className="font-bold pr-3 | relative before:absolute before:content-[''] before:rounded-full before:bg-white/60 before:right-[-0.2rem] before:top-[0.5rem] before:w-2 before:h-2 | after:content-[''] after:w-[0.1rem] after:h-full after:absolute after:right-0 after:top-5 after:bg-white/60 after:rounded-2xl">
             آدرس ما
@@ -66,28 +64,16 @@ export default function Footer() {
           <span className="font-bold pr-3 | relative before:absolute before:content-[''] before:rounded-full before:bg-white/60 before:right-[-0.2rem] before:top-[0.5rem] before:w-2 before:h-2 | after:content-[''] after:w-[0.1rem] after:h-full after:absolute after:right-0 after:top-5 after:bg-white/60 after:rounded-2xl">
             مجوز ها
           </span>
-          <div className="flex flex-row gap-3 mr-4 mt-3">
-            <Image
-              src={"/assets/img/enamad.png"}
-              alt="enamad logo"
-              width={50}
-              height={50}
-              className="cursor-pointer"
-            />
-            <Image
-              src={"/assets/img/enamad.png"}
-              alt="enamad logo"
-              width={50}
-              height={50}
-              className="cursor-pointer"
-            />
-            <Image
-              src={"/assets/img/enamad.png"}
-              alt="enamad logo"
-              width={50}
-              height={50}
-              className="cursor-pointer"
-            />
+          <div className="flex flex-row gap-5 mr-4 mt-3">
+            <a href="https://trustseal.enamad.ir/?id=578965&Code=RBGUFTHNcR5l3JS6UtEQL9CzV5tLM97p">
+              <img
+                src={"assets/img/enamad.png"}
+                alt="enamad logo"
+                width={50}
+                height={50}
+                className="cursor-pointer"
+              />
+            </a>
           </div>
         </div>
       </div>

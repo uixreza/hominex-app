@@ -37,7 +37,7 @@ const Header = () => {
           />
         </Link>
         <div className="lg:flex flex-col hidden ">
-          <span className="font-bold">هومینکس</span>
+          {/* <span className="font-bold">هومینکس</span> */}
         </div>
       </div>
       {/* menu */}

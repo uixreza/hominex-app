@@ -133,8 +133,7 @@ const SplitText: React.FC<SplitTextProps> = ({
       style={{
         textAlign,
         wordWrap: "break-word",
-      }}
-    >
+      }}>
       {text}
     </p>
   );
