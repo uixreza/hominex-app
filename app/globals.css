@@ -208,7 +208,7 @@ input[type="radio"] {
 .scene {
   width: 260px;
   height: 200px;
-  perspective: 500px;
+  /* perspective: 500px; */
   position: relative;
 }
 .scene .carousel.keen-slider {

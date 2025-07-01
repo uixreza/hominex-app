@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode:true,
+  // basePath: "",
+  reactStrictMode: true,
 };
 
 export default nextConfig;

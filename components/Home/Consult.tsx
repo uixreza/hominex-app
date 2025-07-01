@@ -1,6 +1,6 @@
 export default function Consult() {
   return (
-    <div className="flex flex-row [&>div]:w-1/2 justify-between gap-4 mt-5">
+    <div className="flex lg:flex-row flex-col lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-4 mt-5">
       <div className="flex flex-col">
         <span className="font-bold text-3xl mb-5">مشاوره خرید</span>
         <span>

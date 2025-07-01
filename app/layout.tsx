@@ -5,6 +5,7 @@ import { Slide, ToastContainer } from "react-toastify";
 import NewsBar from "@/components/UI/NewsBar";
 import Footer from "@/components/Footer";
 import Socials from "@/components/Socials";
+import Waitlist from "@/components/UI/Waitlist";
 
 export const metadata: Metadata = {
   title: "Hominex",
@@ -25,7 +26,10 @@ export default function RootLayout({
         <Header />
         {/* body */}
         <div className="container flex flex-col items-center pt-10">
-          <div className="content max-w-4xl w-full">{children}</div>
+          <div className="content max-w-4xl w-full">
+            {children}
+            {/* <Waitlist /> */}
+          </div>
         </div>
         {/* footer */}
         <Footer />

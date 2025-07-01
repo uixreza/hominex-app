@@ -32,7 +32,7 @@ export default function Mag() {
   );
 
   return (
-    <div className="flex flex-row [&>div]:w-1/2 justify-between gap-4 my-5">
+    <div className="flex lg:flex-row flex-col lg:[&>div]:w-1/2 [&>div]:w-full lg:justify-between justify-center  lg:gap-4 gap-10 my-5">
       <div className="flex flex-col">
         <span className="font-bold text-3xl mb-5">هومینکس مگ</span>
         <span>
@@ -43,7 +43,7 @@ export default function Mag() {
       </div>
       <div className="flex justify-center items-center">
         <div className="wrapper">
-          <div className="scene">
+          <div className="scene sm:perspective-[500px] perspective-[200px]">
             <div className="carousel keen-slider" ref={sliderRef}>
               <div className="group cursor-pointer carousel__cell number-slide1 relative w-full h-40 overflow-hidden rounded-xl">
                 <Image
@@ -53,7 +53,7 @@ export default function Mag() {
                   style={{ objectFit: "cover" }}
                   className="w-full h-full object-cover"
                 />
-                <div className="transition-all absolute lg:bottom-[-5rem] group-hover:bottom-0 right-0 p-5 texthere w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
+                <div className="transition-all absolute lg:bottom-[-5rem] bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
                   <p className="text-[20px]">خرید ملک آسان تر از همیشه!!؟</p>
                 </div>
               </div>
@@ -65,7 +65,7 @@ export default function Mag() {
                   style={{ objectFit: "cover" }}
                   className="w-full h-full object-cover"
                 />
-                <div className="transition-all absolute lg:bottom-[-5rem] group-hover:bottom-0 right-0 p-5 texthere w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
+                <div className="transition-all absolute lg:bottom-[-5rem] bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
                   <p className="text-[20px]">خرید ملک آسان تر از همیشه!!؟</p>
                 </div>
               </div>
@@ -77,7 +77,7 @@ export default function Mag() {
                   style={{ objectFit: "cover" }}
                   className="w-full h-full object-cover"
                 />
-                <div className="transition-all absolute lg:bottom-[-5rem] group-hover:bottom-0 right-0 p-5 texthere w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
+                <div className="transition-all absolute lg:bottom-[-5rem] bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
                   <p className="text-[20px]">خرید ملک آسان تر از همیشه!!؟</p>
                 </div>
               </div>
@@ -89,7 +89,7 @@ export default function Mag() {
                   style={{ objectFit: "cover" }}
                   className="w-full h-full object-cover"
                 />
-                <div className="transition-all absolute lg:bottom-[-5rem] group-hover:bottom-0 right-0 p-5 texthere w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
+                <div className="transition-all absolute lg:bottom-[-5rem] bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
                   <p className="text-[20px]">خرید ملک آسان تر از همیشه!!؟</p>
                 </div>
               </div>
@@ -101,7 +101,7 @@ export default function Mag() {
                   style={{ objectFit: "cover" }}
                   className="w-full h-full object-cover"
                 />
-                <div className="transition-all absolute lg:bottom-[-5rem] group-hover:bottom-0 right-0 p-5 texthere w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
+                <div className="transition-all absolute lg:bottom-[-5rem] bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
                   <p className="text-[20px]">خرید ملک آسان تر از همیشه!!؟</p>
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function Mag() {
                   style={{ objectFit: "cover" }}
                   className="w-full h-full object-cover"
                 />
-                <div className="transition-all absolute lg:bottom-[-5rem] group-hover:bottom-0 right-0 p-5 texthere w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
+                <div className="transition-all absolute lg:bottom-[-5rem] bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
                   <p className="text-[20px]">خرید ملک آسان تر از همیشه!!؟</p>
                 </div>
               </div>

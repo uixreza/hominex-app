@@ -1,6 +1,6 @@
 export default function Market() {
   return (
-    <div className="flex flex-row-reverse [&>div]:w-1/2 justify-between gap-4 mt-20">
+    <div className="flex  flex-col lg:flex-row-reverse lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-4 mt-20">
       <div className="flex flex-col">
         <span className="font-bold text-3xl mb-5">بازار املاک</span>
         <span>
