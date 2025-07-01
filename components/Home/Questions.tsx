@@ -10,9 +10,18 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 
-const Accordion = styled((props: AccordionProps) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
+const Accordion = styled((props: AccordionProps) => {
+  const { className, ...other } = props;
+  return (
+    <MuiAccordion
+      disableGutters
+      elevation={0}
+      square
+      className={className}
+      {...other}
+    />
+  );
+})(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   "&:not(:last-child)": {
     borderBottom: 0,
@@ -51,7 +60,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function Questions() {
-  const [expanded, setExpanded] = React.useState<string | false>("panel1");
+  const [expanded, setExpanded] = React.useState<string | false>("");
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
@@ -60,22 +69,24 @@ export default function Questions() {
 
   return (
     <div>
+      {/* shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 */}
       <p className="text-3xl font-bold mb-5">سوالات متداول</p>
       <Accordion
         sx={{ fontFamily: "Modam", marginBottom: "5px" }}
+        className="shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography sx={{ fontFamily: "Modam" }} component="span">
-            سوال پر تکرار اول
+            چگونه می توانم استعلام مدارک مربوط به املاک و مستغلات را انجام دهم؟
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{ fontFamily: "Modam" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            برای استعلام مدارک ملکی، به بخش “استعلام مدارک” در سایت هومینکس
+            مراجعه کنید. در این بخش می توانید اصالت سند، کد رهگیری قرارداد،
+            وضعیت شهرداری و سایر موارد مربوط به ملک خود را استعلام کنید. کافی
+            است اطلاعات مورد نظر را وارد کرده و نتایج را دریافت کنید
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -85,15 +96,15 @@ export default function Questions() {
         onChange={handleChange("panel2")}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
           <Typography sx={{ fontFamily: "Modam" }} component="span">
-            سوال پر تکرار دوم
+            آیا امکان مراجعه حضوری برای استفاده از امکانات هومینکس وجود دارد؟
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{ fontFamily: "Modam" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            خدمات هومینکس از طریق پلتفرم آنلاین ارائه می شود تا شما سریعتر و
+            مؤثرتر از مشاوره ها بهره مند شوید. با این حال، اگر ترجیح می دهید به
+            صورت حضوری مشاوره دریافت کنید، می توانید با مراجعه به دفتر هومینکس،
+            از خدمات حضوری نیز استفاده کنید
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -103,15 +114,16 @@ export default function Questions() {
         onChange={handleChange("panel3")}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
           <Typography sx={{ fontFamily: "Modam" }} component="span">
-            سوال پر تکرار سوم
+            چگونه می توانم ملک خود را آگهی کنم؟
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{ fontFamily: "Modam" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            برای ثبت آگهی ملک، ابتدا وارد حساب کاربری خود شوید و به بخش “افزودن
+            آگهی” بروید. اطلاعات مربوط به ملک خود را وارد کرده و سپس بر روی دکمه
+            ثبت آگهی کلیک کنید، پس از بررسی تیم هومینکس، آگهی شما منتشر می شود.
+            برای نمایش در بخش “پیشنهادهای ویژه ” کافی است در توضیحات ذکر کنید.
+            در صورت نیاز، تیم پشتیبانی ما در هر مرحله همراه شما خواهد بود
           </Typography>
         </AccordionDetails>
       </Accordion>

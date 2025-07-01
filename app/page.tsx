@@ -3,10 +3,11 @@ import Questions from "@/components/Home/Questions";
 import Why from "@/components/Home/Why";
 import Consult from "@/components/Home/Consult";
 import Mag from "@/components/Home/Mag";
+import Market from "@/components/Home/Market";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-20">
       {/* Hero Section */}
       <Hero />
 
@@ -19,7 +20,7 @@ export default function Home() {
       <Consult />
 
       {/* market section */}
-      <div></div>
+      <Market />
 
       {/* information section */}
       <div></div>
