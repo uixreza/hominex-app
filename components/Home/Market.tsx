@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Pic from "../../public/assets/img/isometric.png";
+
 export default function Market() {
   return (
     <div className="flex  flex-col lg:flex-row-reverse lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-4 mt-20">
@@ -10,7 +13,9 @@ export default function Market() {
           رو پیدا کنید.
         </span>
       </div>
-      <div className="flex justify-center items-center">Image</div>
+      <div className="flex justify-center items-center">
+        <Image src={Pic} alt="market" width={400} height={400} />
+      </div>
     </div>
   );
 }

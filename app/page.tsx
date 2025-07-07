@@ -7,7 +7,7 @@ import Market from "@/components/Home/Market";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col [&>div]:items-center gap-10">
       {/* Hero Section */}
       <Hero />
 

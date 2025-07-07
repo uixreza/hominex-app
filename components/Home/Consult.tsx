@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Pic from "../../public/assets/img/isometric2.png";
+
 export default function Consult() {
   return (
     <div className="flex lg:flex-row flex-col lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-4 mt-5">
@@ -10,7 +13,9 @@ export default function Consult() {
           رو پیدا کنید.
         </span>
       </div>
-      <div className="flex justify-center items-center">Image</div>
+      <div className="flex justify-center items-center">
+        <Image src={Pic} alt="market" width={400} height={400} />
+      </div>
     </div>
   );
 }
