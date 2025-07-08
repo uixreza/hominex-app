@@ -106,6 +106,7 @@ const Page = () => {
         phoneNumber: "0915",
       },
       date: farsiDate,
+      done: false,
     };
 
     try {
@@ -178,7 +179,7 @@ const Page = () => {
     setRent("");
     setMortgage("");
     setMapSelection([]);
-    setEnvTypePrefer("main");
+    setEnvTypePrefer("اصلی");
     setLandLocation("");
     setLandFunctionality("");
   }, [selectedTab]);

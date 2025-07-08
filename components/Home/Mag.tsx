@@ -3,6 +3,7 @@ import React from "react";
 import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
+import Button from "../UI/Button";
 
 const carousel: KeenSliderPlugin = (slider) => {
   const z = 300;
@@ -33,13 +34,14 @@ export default function Mag() {
 
   return (
     <div className="flex lg:flex-row flex-col lg:[&>div]:w-1/2 [&>div]:w-full lg:justify-between justify-center  lg:gap-4 gap-10 my-5">
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-3">
         <span className="font-bold text-3xl mb-5">هومینکس مگ</span>
         <span>
           در دنیای پرتحول املاک و ساخت‌وساز، اطلاعات دقیق و به‌روز ، کلید
           تصمیم‌گیری‌های بهتر است. هومینکس مگ جایی است که می‌توانید جدیدترین
           اخبار، تحلیل‌های بازار، راهنمای خرید و آموزش‌های تخصصی را دنبال کنید
         </span>
+        <Button href="https://hominex.ir/blog/" title="مشاهده" />
       </div>
       <div className="flex justify-center items-center">
         <div className="wrapper">

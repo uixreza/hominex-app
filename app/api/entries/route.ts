@@ -1,3 +1,53 @@
+// PATCH: Mark entry as done
+export async function PATCH(request: Request) {
+  try {
+    const { id } = await request.json();
+    if (!id) {
+      return new NextResponse(JSON.stringify({ error: "Missing id" }), {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,POST,OPTIONS,PATCH",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      });
+    }
+    const data = readData();
+    if (!data[id]) {
+      return new NextResponse(JSON.stringify({ error: "Entry not found" }), {
+        status: 404,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,POST,OPTIONS,PATCH",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      });
+    }
+    data[id].done = true;
+    writeData(data);
+    return new NextResponse(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS,PATCH",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
+  } catch (error) {
+    return new NextResponse(JSON.stringify({ error: "Invalid JSON" }), {
+      status: 400,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS,PATCH",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
+  }
+}
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
@@ -75,7 +125,7 @@ export async function OPTIONS() {
     status: 204,
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS,PATCH",
       "Access-Control-Allow-Headers": "Content-Type",
     },
   });

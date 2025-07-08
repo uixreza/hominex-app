@@ -24,7 +24,7 @@ export default function Hero() {
           playsInline
           className="relative rounded-2xl w-full max-w-[460px] h-[320px] object-cover shadow-lg z-10"
         />
-        <div className="absolute w-full bottom-0 flex justify-center items-center py-2 rounded-br-md text-[15px] bg-[#5e768f] z-20">
+        <div className="absolute w-full bottom-0 flex justify-center items-center py-2 rounded-br-md text-[15px] bg-[#5e768f] z-10">
           ir.<span className="font-bold">Hominex</span>
         </div>
       </div>

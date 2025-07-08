@@ -75,9 +75,9 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="رهن"
+              value="اجاره"
               onChange={(e) => setRequestType(e.target.value)}
-              checked={requestType === "رهن"}
+              checked={requestType === "اجاره"}
               className="accent-blue-600"
             />
             <span>اجاره</span>
@@ -149,9 +149,8 @@ export function Residential({ vals }: Form) {
           placeholder="مثلا : 150 متر"
         />
       </div>
-
       {/* budget seciton */}
-      {requestType === "rent" ? (
+      {requestType === "اجاره" ? (
         <div className="w-full  gap-3">
           <div className="flex w-full flex-col gap-2 mt-4">
             <span>اجاره ( تومان ) : </span>
@@ -337,8 +336,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="طبقه پایینی"
-              checked={floorPrefer === "طبقه پایینی"}
+              value="پایین"
+              checked={floorPrefer === "پایین"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -348,8 +347,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="طبقه بالایی"
-              checked={floorPrefer === "طبقه بالایی"}
+              value="بالا"
+              checked={floorPrefer === "بالا"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -542,8 +541,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="buy"
-              checked={requestType === "buy"}
+              value="خرید"
+              checked={requestType === "خرید"}
               onChange={(e) => setRequestType(e.target.value)}
               className="accent-green-600"
             />
@@ -553,8 +552,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="rent"
-              checked={requestType === "rent"}
+              value="رجاره"
+              checked={requestType === "اجاره"}
               onChange={(e) => setRequestType(e.target.value)}
               className="accent-blue-600"
             />
@@ -642,13 +641,15 @@ export function Commercial({ vals }: Form) {
             id="env"
             onChange={(e) => setEnvTypePrefer(e.target.value)}
             className="bg-[var(--box)]/40  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 sm:w-[40%] w-full px-4 py-3 rounded-xl cursor-pointer border border-white/30 transition-all duration-200 hover:shadow-2xl ">
-            <option className="text-black font-bold" value="main">
+            <option className="text-black font-bold" value="اصلی">
               خیابان اصلی
             </option>
-            <option className="text-black font-bold" value="peripheral">
+            <option className="text-black font-bold" value="فرعی">
               خیابان فرعی
             </option>
-            <option className="text-black font-bold" value="passage">
+            <option
+              className="text-black font-bold"
+              value="پاساژ و مجتمع تجاری">
               پاساژ و مجتمع تجاری
             </option>
           </select>
@@ -662,8 +663,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="down"
-              checked={floorPrefer === "down"}
+              value="پایین"
+              checked={floorPrefer === "پایین"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -673,8 +674,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="up"
-              checked={floorPrefer === "up"}
+              value="بالا"
+              checked={floorPrefer === "بالا"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -691,8 +692,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="asap"
-              checked={deadline === "asap"}
+              value="فوری"
+              checked={deadline === "فوری"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -702,8 +703,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="twoWeeks"
-              checked={deadline === "twoWeeks"}
+              value="دو هفته"
+              checked={deadline === "دو هفته"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -713,8 +714,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="oneMonth"
-              checked={deadline === "oneMonth"}
+              value="یک ماه"
+              checked={deadline === "یک ماه"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -724,8 +725,8 @@ export function Commercial({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="longTerm"
-              checked={deadline === "longTerm"}
+              value="بلند مدت"
+              checked={deadline === "بلند مدت"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -752,8 +753,8 @@ export function Commercial({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="instagram"
-              value="instagram"
-              checked={visitMethod === "instagram"}
+              value="اینستاگرام"
+              checked={visitMethod === "اینستاگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="instagram"
             />
@@ -764,8 +765,8 @@ export function Commercial({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="telegram"
-              value="telegram"
-              checked={visitMethod === "telegram"}
+              value="تلگرام"
+              checked={visitMethod === "تلگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="telegram"
             />
@@ -776,8 +777,8 @@ export function Commercial({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="friends"
-              value="friends"
-              checked={visitMethod === "friends"}
+              value="دوستان"
+              checked={visitMethod === "دوستان"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="friends"
             />
@@ -788,8 +789,8 @@ export function Commercial({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="other"
-              value="other"
-              checked={visitMethod === "other"}
+              value="سایر"
+              checked={visitMethod === "سایر"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="other"
             />
@@ -866,8 +867,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="buy"
-              checked={requestType === "buy"}
+              value="خرید"
+              checked={requestType === "خرید"}
               onChange={(e) => setRequestType(e.target.value)}
               className="accent-green-600"
             />
@@ -877,8 +878,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="rent"
-              checked={requestType === "rent"}
+              value="اجاره"
+              checked={requestType === "اجاره"}
               onChange={(e) => setRequestType(e.target.value)}
               className="accent-blue-600"
             />
@@ -902,7 +903,7 @@ export function Office({ vals }: Form) {
       </div>
 
       {/* budget seciton */}
-      {requestType === "rent" ? (
+      {requestType === "اجاره" ? (
         <div className="w-full  gap-3">
           <div className="flex w-full flex-col gap-2 mt-4">
             <span>اجاره ( تومان ) : </span>
@@ -965,8 +966,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="down"
-              checked={floorPrefer === "down"}
+              value="پایین"
+              checked={floorPrefer === "پایین"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -976,8 +977,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="up"
-              checked={floorPrefer === "up"}
+              value="بالا"
+              checked={floorPrefer === "بالا"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -994,8 +995,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="asap"
-              checked={deadline === "asap"}
+              value="فوری"
+              checked={deadline === "فوری"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -1005,8 +1006,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="twoWeeks"
-              checked={deadline === "twoWeeks"}
+              value="دو هفته"
+              checked={deadline === "دو هفته"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -1016,8 +1017,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="oneMonth"
-              checked={deadline === "oneMonth"}
+              value="یک ماه"
+              checked={deadline === "یک ماه"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -1027,8 +1028,8 @@ export function Office({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="longTerm"
-              checked={deadline === "longTerm"}
+              value="بلند مدت"
+              checked={deadline === "بلند مدت"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -1055,8 +1056,8 @@ export function Office({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="instagram"
-              value="instagram"
-              checked={visitMethod === "instagram"}
+              value="اینستاگرام"
+              checked={visitMethod === "اینستاگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="instagram"
             />
@@ -1067,8 +1068,8 @@ export function Office({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="telegram"
-              value="telegram"
-              checked={visitMethod === "telegram"}
+              value="تلگرام"
+              checked={visitMethod === "تلگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="telegram"
             />
@@ -1079,8 +1080,8 @@ export function Office({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="friends"
-              value="friends"
-              checked={visitMethod === "friends"}
+              value="دوستان"
+              checked={visitMethod === "دوستان"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="friends"
             />
@@ -1091,8 +1092,8 @@ export function Office({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="other"
-              value="other"
-              checked={visitMethod === "other"}
+              value="سایر"
+              checked={visitMethod === "سایر"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="other"
             />
@@ -1169,8 +1170,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="buy"
-              checked={requestType === "buy"}
+              value="خرید"
+              checked={requestType === "خرید"}
               onChange={(e) => setRequestType(e.target.value)}
               className="accent-green-600"
             />
@@ -1180,8 +1181,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="requestType"
-              value="rent"
-              checked={requestType === "rent"}
+              value="اجاره"
+              checked={requestType === "اجاره"}
               onChange={(e) => setRequestType(e.target.value)}
               className="accent-blue-600"
             />
@@ -1254,8 +1255,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="Land"
-              value="Bayer"
-              checked={landFunctionality === "Bayer"}
+              value="بایر"
+              checked={landFunctionality === "بایر"}
               onChange={(e) => setLandFunctionality(e.target.value)}
               className="accent-green-600"
             />
@@ -1265,8 +1266,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="Land"
-              value="Garden&Farm"
-              checked={landFunctionality === "Garden&Farm"}
+              value="باغ و کشاورزی"
+              checked={landFunctionality === "باغ و کشاورزی"}
               onChange={(e) => setLandFunctionality(e.target.value)}
               className="accent-green-600"
             />
@@ -1276,8 +1277,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="Land"
-              value="other"
-              checked={landFunctionality === "other"}
+              value="سایر"
+              checked={landFunctionality === "سایر"}
               onChange={(e) => setLandFunctionality(e.target.value)}
               className="accent-green-600"
             />
@@ -1294,8 +1295,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="landLocation"
-              value="outOfTown"
-              checked={landLocation === "outOfTown"}
+              value="داخل شهر"
+              checked={landLocation === "داخل شهر"}
               onChange={(e) => setLandLocation(e.target.value)}
               className="accent-green-600"
             />
@@ -1305,8 +1306,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="landLocation"
-              value="inTown"
-              checked={landLocation === "inTown"}
+              value="بیرون شهر"
+              checked={landLocation === "بیرون شهر"}
               onChange={(e) => setLandLocation(e.target.value)}
               className="accent-green-600"
             />
@@ -1323,7 +1324,7 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="asap"
+              value="فوری"
               checked={deadline === "asap"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
@@ -1334,7 +1335,7 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="twoWeeks"
+              value="دو هفته"
               checked={deadline === "twoWeeks"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
@@ -1345,8 +1346,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="oneMonth"
-              checked={deadline === "oneMonth"}
+              value="یک ماه"
+              checked={deadline === "یک ماه"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -1356,8 +1357,8 @@ export function Land({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="longTerm"
-              checked={deadline === "longTerm"}
+              value="بلند مدت"
+              checked={deadline === "بلند مدت"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -1384,8 +1385,8 @@ export function Land({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="instagram"
-              value="instagram"
-              checked={visitMethod === "instagram"}
+              value="اینستاگرام"
+              checked={visitMethod === "اینستاگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="instagram"
             />
@@ -1396,8 +1397,8 @@ export function Land({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="telegram"
-              value="telegram"
-              checked={visitMethod === "telegram"}
+              value="تلگرام"
+              checked={visitMethod === "تلگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="telegram"
             />
@@ -1408,8 +1409,8 @@ export function Land({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="friends"
-              value="friends"
-              checked={visitMethod === "friends"}
+              value="دوستان"
+              checked={visitMethod === "دوستان"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="friends"
             />
@@ -1420,8 +1421,8 @@ export function Land({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="other"
-              value="other"
-              checked={visitMethod === "other"}
+              value="سایر"
+              checked={visitMethod === "سایر"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="other"
             />
