@@ -1,10 +1,26 @@
-import Hero from "../components/Home/Hero";
-import Questions from "@/components/Home/Questions";
-import Why from "@/components/Home/Why";
-import Consult from "@/components/Home/Consult";
-import Mag from "@/components/Home/Mag";
-import Market from "@/components/Home/Market";
-import Roadmap from "@/components/Home/Roadmap";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("../components/Home/Hero"), {
+  loading: () => <div>Loading...</div>,
+});
+const Questions = dynamic(() => import("@/components/Home/Questions"), {
+  loading: () => <div>Loading...</div>,
+});
+const Why = dynamic(() => import("@/components/Home/Why"), {
+  loading: () => <div>Loading...</div>,
+});
+const Consult = dynamic(() => import("@/components/Home/Consult"), {
+  loading: () => <div>Loading...</div>,
+});
+const Mag = dynamic(() => import("@/components/Home/Mag"), {
+  loading: () => <div>Loading...</div>,
+});
+const Market = dynamic(() => import("@/components/Home/Market"), {
+  loading: () => <div>Loading...</div>,
+});
+const Roadmap = dynamic(() => import("@/components/Home/Roadmap"), {
+  loading: () => <div>Loading...</div>,
+});
 
 export default function Home() {
   return (

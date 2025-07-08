@@ -1,14 +1,34 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Residential,
-  Commercial,
-  Office,
-  Land,
-} from "@/components/UI/consultation/Forms";
-import Button from "@/components/UI/consultation/Button";
-import SplitText from "../../blocks/TextAnimations/SplitText/SplitText";
-import SpringModal from "@/components/UI/SpringModal";
+import dynamic from "next/dynamic";
+const Residential = dynamic(
+  () =>
+    import("@/components/UI/consultation/Forms").then((mod) => mod.Residential),
+  { loading: () => <div>Loading...</div> }
+);
+const Commercial = dynamic(
+  () =>
+    import("@/components/UI/consultation/Forms").then((mod) => mod.Commercial),
+  { loading: () => <div>Loading...</div> }
+);
+const Office = dynamic(
+  () => import("@/components/UI/consultation/Forms").then((mod) => mod.Office),
+  { loading: () => <div>Loading...</div> }
+);
+const Land = dynamic(
+  () => import("@/components/UI/consultation/Forms").then((mod) => mod.Land),
+  { loading: () => <div>Loading...</div> }
+);
+const Button = dynamic(() => import("@/components/UI/consultation/Button"), {
+  loading: () => <div>Loading...</div>,
+});
+const SplitText = dynamic(
+  () => import("../../blocks/TextAnimations/SplitText/SplitText"),
+  { loading: () => <div>Loading...</div> }
+);
+const SpringModal = dynamic(() => import("@/components/UI/SpringModal"), {
+  loading: () => <div>Loading...</div>,
+});
 import axios from "axios";
 import { toast } from "react-toastify";
 
