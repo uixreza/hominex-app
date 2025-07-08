@@ -68,7 +68,7 @@ export default function Questions() {
     };
 
   return (
-    <div>
+    <div className="mb-10">
       {/* shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 */}
       <p className="text-3xl font-bold mb-5">سوالات متداول</p>
       <Accordion

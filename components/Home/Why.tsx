@@ -1,7 +1,7 @@
 export default function Why() {
   return (
-    <div>
-      <span className="text-3xl font-bold">چرا هومینکس ؟</span>
+    <div className="flex flex-col gap-4">
+      <span className="text-3xl font-bold w-full">چرا هومینکس ؟</span>
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         <li className="bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 shadow-lg backdrop-blur-md bg-opacity-60 rounded-xl px-4 py-8">
           <span className="font-bold text-center w-full">

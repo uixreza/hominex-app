@@ -5,11 +5,10 @@ import { Slide, ToastContainer } from "react-toastify";
 import NewsBar from "@/components/UI/NewsBar";
 import Footer from "@/components/Footer";
 import Socials from "@/components/Socials";
-import Waitlist from "@/components/UI/Waitlist";
 
 export const metadata: Metadata = {
-  title: "Hominex",
-  description: "find your dream house with just a click",
+  title: "Hominex | هومینکس",
+  description: "خونه رویاییتو با یک تصمیم هوشمند انتخاب کن",
 };
 
 export default function RootLayout({
