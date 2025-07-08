@@ -223,8 +223,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="checkbox"
               name="parking"
-              checked={vitals.includes("parking")}
-              onChange={() => handleVitalsArr("parking", vitals, setVitals)}
+              checked={vitals.includes("پارکینگ")}
+              onChange={() => handleVitalsArr("پارکینگ", vitals, setVitals)}
               id="parking"
             />
             پارکینگ
@@ -234,8 +234,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="checkbox"
               name="elevator"
-              checked={vitals.includes("elevator")}
-              onChange={() => handleVitalsArr("elevator", vitals, setVitals)}
+              checked={vitals.includes("آسانسور")}
+              onChange={() => handleVitalsArr("آسانسور", vitals, setVitals)}
               id="elevator"
             />
             آسانسور
@@ -245,8 +245,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="checkbox"
               name="warehouse"
-              checked={vitals.includes("warehouse")}
-              onChange={() => handleVitalsArr("warehouse", vitals, setVitals)}
+              checked={vitals.includes("انباری")}
+              onChange={() => handleVitalsArr("انباری", vitals, setVitals)}
               id="warehouse"
             />
             انباری
@@ -256,8 +256,10 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="checkbox"
               name="yard"
-              checked={vitals.includes("yard")}
-              onChange={() => handleVitalsArr("yard", vitals, setVitals)}
+              checked={vitals.includes("حیاط / بالکن")}
+              onChange={() =>
+                handleVitalsArr("حیاط / بالکن", vitals, setVitals)
+              }
               id="yard"
             />
             حیاط / بالکن
@@ -267,8 +269,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="checkbox"
               name="master"
-              checked={vitals.includes("master")}
-              onChange={() => handleVitalsArr("master", vitals, setVitals)}
+              checked={vitals.includes("اتاق مستر")}
+              onChange={() => handleVitalsArr("اتاق مستر", vitals, setVitals)}
               id="master"
             />
             اتاق مستر
@@ -278,8 +280,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="checkbox"
               name="yard"
-              checked={vitals.includes("garden")}
-              onChange={() => handleVitalsArr("garden", vitals, setVitals)}
+              checked={vitals.includes("روف گاردن")}
+              onChange={() => handleVitalsArr("روف گاردن", vitals, setVitals)}
               id="garden"
             />
             روف گاردن
@@ -295,8 +297,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="propertyType"
-              value="villa"
-              checked={clientPrefer === "villa"}
+              value="ویلایی"
+              checked={clientPrefer === "ویلایی"}
               onChange={(e) => setClientPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -306,8 +308,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="propertyType"
-              value="apartment"
-              checked={clientPrefer === "apartment"}
+              value="آپارتمان"
+              checked={clientPrefer === "آپارتمان"}
               onChange={(e) => setClientPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -317,8 +319,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="propertyType"
-              value="complex"
-              checked={clientPrefer === "complex"}
+              value="مجتمع مسکونی"
+              checked={clientPrefer === "مجتمع مسکونی"}
               onChange={(e) => setClientPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -335,8 +337,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="down"
-              checked={floorPrefer === "down"}
+              value="طبقه پایینی"
+              checked={floorPrefer === "طبقه پایینی"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -346,8 +348,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="floor"
-              value="up"
-              checked={floorPrefer === "up"}
+              value="طبقه بالایی"
+              checked={floorPrefer === "طبقه بالایی"}
               onChange={(e) => setFloorPrefer(e.target.value)}
               className="accent-green-600"
             />
@@ -364,8 +366,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="asap"
-              checked={deadline === "asap"}
+              value="فوری"
+              checked={deadline === "فوری"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -375,8 +377,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="twoWeeks"
-              checked={deadline === "twoWeeks"}
+              value="دو هفته"
+              checked={deadline === "دو هفته"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -386,8 +388,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="oneMonth"
-              checked={deadline === "oneMonth"}
+              value="یک ماه"
+              checked={deadline === "یک ماه"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -397,8 +399,8 @@ export function Residential({ vals }: Form) {
             <input
               type="radio"
               name="deadline"
-              value="longTerm"
-              checked={deadline === "longTerm"}
+              value="بلند مدت"
+              checked={deadline === "بلند مدت"}
               onChange={(e) => setDeadline(e.target.value)}
               className="accent-green-600"
             />
@@ -425,8 +427,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="instagram"
-              value="instagram"
-              checked={visitMethod === "instagram"}
+              value="اینستاگرام"
+              checked={visitMethod === "اینستاگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="instagram"
             />
@@ -437,8 +439,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="telegram"
-              value="telegram"
-              checked={visitMethod === "telegram"}
+              value="تلگرام"
+              checked={visitMethod === "تلگرام"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="telegram"
             />
@@ -449,8 +451,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="friends"
-              value="friends"
-              checked={visitMethod === "friends"}
+              value="دوستان"
+              checked={visitMethod === "دوستان"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="friends"
             />
@@ -461,8 +463,8 @@ export function Residential({ vals }: Form) {
               className="ml-2"
               type="radio"
               name="other"
-              value="other"
-              checked={visitMethod === "other"}
+              value="سایر"
+              checked={visitMethod === "سایر"}
               onChange={(e) => setVisitMethod(e.target.value)}
               id="other"
             />

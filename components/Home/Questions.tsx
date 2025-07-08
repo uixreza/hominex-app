@@ -73,7 +73,7 @@ export default function Questions() {
       <p className="text-3xl font-bold mb-5">سوالات متداول</p>
       <Accordion
         sx={{ fontFamily: "Modam", marginBottom: "5px" }}
-        className="shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
+        className="shadow-lg backdrop-blur-md bg-opacity-60 rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
@@ -92,6 +92,7 @@ export default function Questions() {
       </Accordion>
       <Accordion
         sx={{ fontFamily: "Modam", marginBottom: "5px" }}
+        className="shadow-lg backdrop-blur-md bg-opacity-60 rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
@@ -111,6 +112,7 @@ export default function Questions() {
       <Accordion
         sx={{ fontFamily: "Modam" }}
         expanded={expanded === "panel3"}
+        className="shadow-lg backdrop-blur-md bg-opacity-60 rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
         onChange={handleChange("panel3")}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
           <Typography sx={{ fontFamily: "Modam" }} component="span">

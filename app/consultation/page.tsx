@@ -75,6 +75,13 @@ const Page = () => {
 
   // send request function
   const sendReq = async () => {
+    // Format date in Persian (Jalali) calendar
+    const date = new Date();
+    const farsiDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
     const entry = {
       data: {
         price,
@@ -98,6 +105,7 @@ const Page = () => {
       credentials: {
         phoneNumber: "0915",
       },
+      date: farsiDate,
     };
 
     try {

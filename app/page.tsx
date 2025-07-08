@@ -4,6 +4,7 @@ import Why from "@/components/Home/Why";
 import Consult from "@/components/Home/Consult";
 import Mag from "@/components/Home/Mag";
 import Market from "@/components/Home/Market";
+import Roadmap from "@/components/Home/Roadmap";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       <Hero />
 
       {/* roadmap section */}
-      <div></div>
+      <Roadmap />
 
       {/* about section */}
       <Why />

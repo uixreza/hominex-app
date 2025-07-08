@@ -17,7 +17,7 @@ const Header = () => {
   };
   const notify = () => toast("درحال انتقال به صفحه ورود 🔒");
   return (
-    <div className="fixed top-0 sm:top-5 text-white z-10 flex justify-between items-center py-2 pr-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
+    <div className="fixed top-0 sm:top-5 text-white z-10 flex justify-between items-center py-2 pr-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
       {/* hamb icon */}
       <CgMenuGridO
         onClick={() => handleToggleMenu()}

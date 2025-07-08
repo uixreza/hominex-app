@@ -21,7 +21,15 @@ function writeData(data: object) {
 
 export async function GET() {
   const data = readData();
-  return NextResponse.json(data);
+  return new NextResponse(JSON.stringify(data), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
 }
 
 export async function POST(request: Request) {
@@ -40,8 +48,35 @@ export async function POST(request: Request) {
     // Write updated data back
     writeData(data);
 
-    return NextResponse.json({ success: true, id });
+    return new NextResponse(JSON.stringify({ success: true, id }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
   } catch (error) {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    return new NextResponse(JSON.stringify({ error: "Invalid JSON" }), {
+      status: 400,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
   }
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
 }
