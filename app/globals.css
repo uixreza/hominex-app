@@ -74,7 +74,7 @@
 
 /* roots */
 :root {
-  --background: #4c4b4b;
+  --background: rgb(211, 211, 211);
   --foreground: white;
   --box: #b5b5b3;
   --button-background: #000000;
@@ -88,7 +88,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #4c4b4b;
+    --background: rgb(211, 211, 211);
     --foreground: white;
     --box: #232323;
     --button-background: #000000;
@@ -108,11 +108,15 @@ body {
 }
 
 html {
-  background-color: #5e768f;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(
+      rgba(168, 168, 168, 0.7),
+      rgba(168, 168, 168, 0.7)
+    ),
+    url("/assets/img/noise.svg"); /* <-- Replace with your actual pattern path */
+  background-size: cover, auto;
+  background-position: center, center;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, fixed;
 }
 
 body {

@@ -21,6 +21,12 @@ const Market = dynamic(() => import("@/components/Home/Market"), {
 const Roadmap = dynamic(() => import("@/components/Home/Roadmap"), {
   loading: () => <div>Loading...</div>,
 });
+const Roadmap_mini = dynamic(() => import("@/components/Home/Roadmap_mini"), {
+  loading: () => <div>Loading...</div>,
+});
+const Information = dynamic(() => import("@/components/Home/Information"), {
+  loading: () => <div>Loading...</div>,
+});
 
 export default function Home() {
   return (
@@ -30,6 +36,7 @@ export default function Home() {
 
       {/* roadmap section */}
       <Roadmap />
+      <Roadmap_mini />
 
       {/* about section */}
       <Why />
@@ -40,7 +47,7 @@ export default function Home() {
       <Market />
 
       {/* information section */}
-      <div></div>
+      {/* <Information /> */}
 
       {/* mag sectdion */}
       <Mag />

@@ -33,7 +33,9 @@ const Accordion = styled((props: AccordionProps) => {
 
 const AccordionSummary = styled((props: AccordionSummaryProps) => (
   <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+    expandIcon={
+      <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem", color: "#fff" }} />
+    }
     {...props}
   />
 ))(({ theme }) => ({
@@ -68,12 +70,25 @@ export default function Questions() {
     };
 
   return (
-    <div className="mb-10">
+    <div className="my-16">
       {/* shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 */}
-      <p className="text-3xl font-bold mb-5">سوالات متداول</p>
+      <p className="text-3xl font-extrabold text-blue-900 mb-5">
+        سوالات متداول
+      </p>
       <Accordion
-        sx={{ fontFamily: "Modam", marginBottom: "5px" }}
-        className="shadow-lg backdrop-blur-md bg-opacity-60 rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
+        sx={{
+          fontFamily: "Modam",
+          marginBottom: "5px",
+          boxShadow:
+            "0 10px 15px -3px rgba(0,0,0,0.2), 0 4px 6px -4px rgba(0,0,0,0.2)",
+          backdropFilter: "blur(12px)",
+          backgroundColor: "rgba(0,0,0,0.6)",
+          borderRadius: "1rem",
+          opacity: 0.9,
+          color: "#fff",
+          WebkitBackdropFilter: "blur(12px)",
+        }}
+        className="bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-60 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl text-white"
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
@@ -82,7 +97,7 @@ export default function Questions() {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography sx={{ fontFamily: "Modam" }}>
+          <Typography sx={{ fontFamily: "Modam", color: "#fff" }}>
             برای استعلام مدارک ملکی، به بخش “استعلام مدارک” در سایت هومینکس
             مراجعه کنید. در این بخش می توانید اصالت سند، کد رهگیری قرارداد،
             وضعیت شهرداری و سایر موارد مربوط به ملک خود را استعلام کنید. کافی
@@ -91,8 +106,19 @@ export default function Questions() {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        sx={{ fontFamily: "Modam", marginBottom: "5px" }}
-        className="shadow-lg backdrop-blur-md bg-opacity-60 rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
+        sx={{
+          fontFamily: "Modam",
+          marginBottom: "5px",
+          boxShadow:
+            "0 10px 15px -3px rgba(0,0,0,0.2), 0 4px 6px -4px rgba(0,0,0,0.2)",
+          backdropFilter: "blur(12px)",
+          backgroundColor: "rgba(0,0,0,0.6)",
+          borderRadius: "1rem",
+          opacity: 0.9,
+          color: "#fff",
+          WebkitBackdropFilter: "blur(12px)",
+        }}
+        className="bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-60 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl text-white"
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
@@ -101,7 +127,7 @@ export default function Questions() {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography sx={{ fontFamily: "Modam" }}>
+          <Typography sx={{ fontFamily: "Modam", color: "#fff" }}>
             خدمات هومینکس از طریق پلتفرم آنلاین ارائه می شود تا شما سریعتر و
             مؤثرتر از مشاوره ها بهره مند شوید. با این حال، اگر ترجیح می دهید به
             صورت حضوری مشاوره دریافت کنید، می توانید با مراجعه به دفتر هومینکس،
@@ -110,9 +136,20 @@ export default function Questions() {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        sx={{ fontFamily: "Modam" }}
+        sx={{
+          fontFamily: "Modam",
+          marginBottom: "5px",
+          boxShadow:
+            "0 10px 15px -3px rgba(0,0,0,0.2), 0 4px 6px -4px rgba(0,0,0,0.2)",
+          backdropFilter: "blur(12px)",
+          backgroundColor: "rgba(0,0,0,0.6)",
+          borderRadius: "1rem",
+          opacity: 0.9,
+          color: "#fff",
+          WebkitBackdropFilter: "blur(12px)",
+        }}
+        className="bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-60 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl text-white"
         expanded={expanded === "panel3"}
-        className="shadow-lg backdrop-blur-md bg-opacity-60 rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20"
         onChange={handleChange("panel3")}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
           <Typography sx={{ fontFamily: "Modam" }} component="span">
@@ -120,7 +157,7 @@ export default function Questions() {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography sx={{ fontFamily: "Modam" }}>
+          <Typography sx={{ fontFamily: "Modam", color: "#fff" }}>
             برای ثبت آگهی ملک، ابتدا وارد حساب کاربری خود شوید و به بخش “افزودن
             آگهی” بروید. اطلاعات مربوط به ملک خود را وارد کرده و سپس بر روی دکمه
             ثبت آگهی کلیک کنید، پس از بررسی تیم هومینکس، آگهی شما منتشر می شود.

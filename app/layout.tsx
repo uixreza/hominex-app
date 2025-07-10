@@ -25,7 +25,7 @@ export default function RootLayout({
         <Header />
         {/* body */}
         <div className="container flex flex-col items-center pt-10">
-          <div className="content max-w-4xl w-full">
+          <div className=" max-w-5xl w-full">
             {children}
             {/* <Waitlist /> */}
           </div>

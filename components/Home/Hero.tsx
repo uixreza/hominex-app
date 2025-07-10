@@ -1,14 +1,33 @@
+import Image from "next/image";
+import Button from "../UI/Button";
+
 export default function Hero() {
   return (
-    <div className="lg:mt-[-8rem] flex lg:flex-row-reverse flex-col lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-10 lg:h-[100vh]">
-      <div className="flex flex-col">
-        <span className="font-bold text-3xl mb-5">هومینکس</span>
-        <span className="leading-8">
+    <div className="lg:mt-[-8rem] flex lg:flex-row-reverse flex-col lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-20 lg:h-[100vh]">
+      <div className="relative flex flex-col lg:mt-[-3rem]">
+        <span className="font-extrabold text-4xl mb-5">
+          <div className="text-blue-900">مشاور</div> هوشمند هومینکس
+        </span>
+        <p className="leading-8 text-wrap">
           هومینکس، پلتفرمی هست که تصمیم‌های ملکی رو از حدس و تجربه‌های پراکنده،
           به تحلیل‌های قابل‌اعتماد و داده‌محور تبدیل می‌کنه. اینجا اطلاعات دقیق
           داریم، نگاه علمی داریم، و کمک می‌کنیم تا با خیال راحت ملک مورد نظرتون
           رو پیدا کنید.
-        </span>
+        </p>
+        <div className="pt-5 w-full flex justify-end items-center">
+          <Button
+            href="https://hominex.ir/about/"
+            title="درباره ما"
+            icon={true}
+          />
+        </div>
+        {/* <Image
+          src={"/assets/svg/pppointed.svg"}
+          width={300}
+          height={300}
+          alt="arrow icon"
+          className="hidden md:block absolute left-32 bottom-[2rem]"
+        /> */}
       </div>
       <div className="relative flex justify-center items-center">
         {/* Ambient effect only on md+ screens */}
@@ -22,9 +41,9 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="relative rounded-2xl w-full max-w-[460px] h-[320px] object-cover shadow-lg z-10"
+          className="relative rounded-2xl w-full max-w-[520px] h-[380px] object-cover shadow-lg z-10"
         />
-        <div className="absolute w-full bottom-0 flex justify-center items-center py-2 rounded-br-md text-[15px] bg-[#5e768f] z-10">
+        <div className="absolute w-full bottom-0 flex justify-center items-center py-3 rounded-br-md rounded-bl-md text-[15px] bg-[#5e768f] z-10">
           ir.<span className="font-bold">Hominex</span>
         </div>
       </div>
