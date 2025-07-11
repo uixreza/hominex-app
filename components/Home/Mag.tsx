@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";

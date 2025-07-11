@@ -33,7 +33,7 @@ const Header = () => {
       {toggleMenu && <DropdownMenu />}
       {/* logo */}
       <div className="flex gap-2 items-center">
-        <Link href={"https://hominex.ir"}>
+        <Link href={"/"}>
           <Image
             className="cursor-pointer"
             src={"/logo.png"}

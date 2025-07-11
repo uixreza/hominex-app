@@ -2,6 +2,7 @@
 import { LuArrowBigUpDash } from "react-icons/lu";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
+import Image from "next/image";
 
 export default function Footer() {
   const scrollTop = () => {
@@ -11,7 +12,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="w-full text-white z-10 flex flex-col lg:flex-row justify-between items-center p-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
+    <div className="w-full text-white z-10 flex flex-col lg:flex-row justify-between items-center p-4 sm:pl-9 px-5 sm:mt-3 h-auto rounded-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 container mx-auto shadow-lg backdrop-blur-md bg-opacity-60 ">
       {/* about content */}
       <div className="flex flex-col items-start">
         <ul>
@@ -66,8 +67,8 @@ export default function Footer() {
           </span>
           <div className="flex flex-row gap-5 mr-4 mt-3">
             <a href="https://trustseal.enamad.ir/?id=578965&Code=RBGUFTHNcR5l3JS6UtEQL9CzV5tLM97p">
-              <img
-                src={"assets/img/enamad.png"}
+              <Image
+                src={"/assets/img/enamad.png"}
                 alt="enamad logo"
                 width={50}
                 height={50}

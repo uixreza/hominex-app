@@ -8,11 +8,9 @@ const Map = dynamic(() => import("@/components/UI/consultation/map"), {
 import SubmitButton from "./SubmitButton";
 import { addCommasToNumber } from "@/utils/digits";
 
-/* eslint-disable */
 type Form = {
   vals: any[];
 };
-/* eslint-enable */
 
 export function Residential({ vals }: Form) {
   const [

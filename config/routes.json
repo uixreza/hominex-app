@@ -10,11 +10,11 @@
     },
     {
       "title": "معرفی محله",
-      "route": "https://hominex.ir/properties/"
+      "route": "https://hominex.ir/mahallat/"
     },
     {
       "title": "ویژگی خانه من",
-      "route": "/features"
+      "route": "/"
     }
   ]
 }

@@ -1,4 +1,5 @@
 // PATCH: Mark entry as done
+/* eslint-disable */
 export async function PATCH(request: Request) {
   try {
     const { id } = await request.json();

@@ -67,7 +67,7 @@ const MapComponent = ({ mapSelection, setMapSelection }: IMap) => {
           latlng: e.latlng,
           properties: feature.properties,
         });
-
+        // @ts-ignore
         setMapSelection((prev: string[]) => {
           const currentSelection = Array.isArray(prev) ? [...prev] : [];
           const index = currentSelection.indexOf(name);

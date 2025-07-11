@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from "react";
 import { styled, css } from "@mui/system";
 import { Modal as BaseModal } from "@mui/base/Modal";

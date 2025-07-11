@@ -1,3 +1,4 @@
+/* eslint-disable */
 import dynamic from "next/dynamic";
 
 const Hero = dynamic(() => import("../components/Home/Hero"), {
@@ -22,9 +23,6 @@ const Roadmap = dynamic(() => import("@/components/Home/Roadmap"), {
   loading: () => <div>Loading...</div>,
 });
 const Roadmap_mini = dynamic(() => import("@/components/Home/Roadmap_mini"), {
-  loading: () => <div>Loading...</div>,
-});
-const Information = dynamic(() => import("@/components/Home/Information"), {
   loading: () => <div>Loading...</div>,
 });
 

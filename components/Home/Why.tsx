@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Why() {
   return (
     <div className="flex flex-col gap-4 mt-20">
