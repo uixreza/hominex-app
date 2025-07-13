@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body
-        className={`w-full overflow-y-scroll overflow-x-hidden box-border flex items-center flex-col pt-30 px-3 sm:px-0`}>
+        className={`w-full overflow-y-scroll overflow-x-hidden box-border flex items-center flex-col pt-30 px-5 sm:px-0`}>
         <NewsBar />
         {/* header */}
         <Header />

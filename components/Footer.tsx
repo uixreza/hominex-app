@@ -3,6 +3,7 @@ import { LuArrowBigUpDash } from "react-icons/lu";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   const scrollTop = () => {
@@ -20,7 +21,7 @@ export default function Footer() {
             <span className="font-bold pr-3 | relative before:absolute before:content-[''] before:rounded-full before:bg-white/60 before:right-[-0.2rem] before:top-[0.5rem] before:w-2 before:h-2 | after:content-[''] after:w-[0.1rem] after:h-full after:absolute after:right-0 after:top-5 after:bg-white/60 after:rounded-2xl">
               درباره ما
             </span>
-            <p className="mr-4 mt-3">
+            <p className="mr-4 mt-3 text-justify">
               هومینکس با هدف تحول در صنعت مسکن ایران، از هوش مصنوعی و مصالح نوین
               برای بهبود خرید، فروش و ساخت‌وساز استفاده می‌کند. ما با رویکردی
               شفاف و مبتنی بر فناوری، بدنبال افزایش آگاهی مردم در معاملات مسکن
@@ -66,15 +67,15 @@ export default function Footer() {
             مجوز ها
           </span>
           <div className="flex flex-row gap-5 mr-4 mt-3">
-            <a href="https://trustseal.enamad.ir/?id=578965&Code=RBGUFTHNcR5l3JS6UtEQL9CzV5tLM97p">
+            <Link href="https://trustseal.enamad.ir/?id=578965&Code=RBGUFTHNcR5l3JS6UtEQL9CzV5tLM97p">
               <Image
                 src={"/assets/img/enamad.png"}
                 alt="enamad logo"
                 width={50}
                 height={50}
-                className="cursor-pointer"
+                className="cursor-pointer w-auto h-auto"
               />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

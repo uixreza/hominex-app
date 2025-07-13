@@ -9,6 +9,7 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 const Accordion = styled((props: AccordionProps) => {
   const { className, ...other } = props;
@@ -73,7 +74,7 @@ export default function Questions() {
     <div className="my-16">
       {/* shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 */}
       <p className="text-4xl font-extrabold mb-8">
-        <span className="text-blue-900">سوالات</span> متداول
+        <span className="text-[var(--blue)]">سوالات</span> متداول
       </p>
       <Accordion
         sx={{
@@ -133,9 +134,15 @@ export default function Questions() {
         <AccordionDetails>
           <Typography sx={{ fontFamily: "Modam", color: "#fff" }}>
             خدمات هومینکس از طریق پلتفرم آنلاین ارائه می شود تا شما سریعتر و
-            مؤثرتر از مشاوره ها بهره مند شوید. با این حال، اگر ترجیح می دهید به
-            صورت حضوری مشاوره دریافت کنید، می توانید با مراجعه به دفتر هومینکس،
-            از خدمات حضوری نیز استفاده کنید
+            مؤثرتر از{" "}
+            <Link
+              className="text-[var(--blue)] font-bold mx-2 underline underline-offset-5"
+              href={"/consultation"}>
+              مشاوره
+            </Link>{" "}
+            ها بهره مند شوید. با این حال، اگر ترجیح می دهید به صورت حضوری مشاوره
+            دریافت کنید، می توانید با مراجعه به دفتر هومینکس، از خدمات حضوری نیز
+            استفاده کنید
           </Typography>
         </AccordionDetails>
       </Accordion>

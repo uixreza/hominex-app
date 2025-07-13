@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const DropdownMenu = () => {
   return (
-    <ul className="z-20 bg-[rgba(181, 181, 179,0.6)] backdrop-blur-xl shadow-lg shadow-black/40 p-4 rounded-3xl flex flex-col gap-2 absolute bottom-[-18rem] w-[13rem]">
+    <ul className="z-20 shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 p-4 rounded-3xl flex flex-col gap-2 absolute bottom-[-18rem] w-[13rem]">
       <Link
         href={"https://hominex.ir/about/"}
         className="cursor-pointer flex items-center gap-2">

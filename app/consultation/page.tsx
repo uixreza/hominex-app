@@ -2,39 +2,41 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+
+const loadText = <div>بارگذاری ...</div>;
 const Residential = dynamic(
   () =>
     import("@/components/UI/consultation/Forms").then((mod) => mod.Residential),
-  { loading: () => <div>Loading...</div> }
+  { loading: () => loadText }
 );
 const Commercial = dynamic(
   () =>
     import("@/components/UI/consultation/Forms").then((mod) => mod.Commercial),
-  { loading: () => <div>Loading...</div> }
+  { loading: () => loadText }
 );
 const Office = dynamic(
   () => import("@/components/UI/consultation/Forms").then((mod) => mod.Office),
-  { loading: () => <div>Loading...</div> }
+  { loading: () => loadText }
 );
 const Land = dynamic(
   () => import("@/components/UI/consultation/Forms").then((mod) => mod.Land),
-  { loading: () => <div>Loading...</div> }
+  { loading: () => loadText }
 );
 const Button = dynamic(() => import("@/components/UI/consultation/Button"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => loadText,
 });
 const SplitText = dynamic(
   () => import("../../blocks/TextAnimations/SplitText/SplitText"),
-  { loading: () => <div>Loading...</div> }
+  { loading: () => loadText }
 );
 const SpringModal = dynamic(() => import("@/components/UI/SpringModal"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => loadText,
 });
 
 const Waitscreen = dynamic(
   () => import("@/components/UI/consultation/Waitscreen"),
   {
-    loading: () => <div>Loading...</div>,
+    loading: () => loadText,
   }
 );
 

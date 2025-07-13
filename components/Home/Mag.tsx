@@ -40,7 +40,13 @@ export default function Mag() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://hominex.ir/wp-json/wp/v2/posts?per_page=5&_embed")
+
+    fetch("https://hominex.ir/wp-json/wp/v2/posts?per_page=5&_embed", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         if (!res.ok) throw new Error("خطا در دریافت اطلاعات مقالات");
         return res.json();
@@ -61,10 +67,10 @@ export default function Mag() {
         <Link
           href={"https://hominex.ir/blog/"}
           className="font-extrabold text-4xl mb-5 flex items-center gap-3 cursor-pointer group">
-          <span className="text-blue-900">هومینکس</span> مگ{" "}
+          <span className="text-[var(--blue)]">هومینکس</span> مگ{" "}
           <FiLink className="text-[20px] group-hover:mr-3 transition-all" />
         </Link>
-        <span className="leading-10 text-wrap text-xl lg:text-2xl">
+        <span className="leading-10 text-wrap text-xl lg:text-2xl text-justify">
           در دنیای پرتحول املاک و ساخت‌وساز، اطلاعات دقیق و به‌روز ، کلید
           تصمیم‌گیری‌های بهتر است. هومینکس مگ جایی است که می‌توانید جدیدترین
           اخبار، تحلیل‌های بازار، راهنمای خرید و آموزش‌های تخصصی را دنبال کنید
@@ -87,10 +93,10 @@ export default function Mag() {
                 {posts.map((post, idx) => {
                   // Get image from _embedded if available
                   const img =
-                    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-                    "/assets/img/estate.jpg";
+                    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+                  console.log(img);
                   return (
-                    <a
+                    <Link
                       key={post.id}
                       href={post.link}
                       target="_blank"
@@ -105,8 +111,8 @@ export default function Mag() {
                           src={img}
                           alt={post.title?.rendered || "post"}
                           fill={false}
-                          width={480}
-                          height={270}
+                          width={0}
+                          height={0}
                           style={{
                             objectFit: "cover",
                             width: "100%",
@@ -125,7 +131,7 @@ export default function Mag() {
                           }}
                         />
                       </div>
-                    </a>
+                    </Link>
                   );
                 })}
               </div>

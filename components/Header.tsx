@@ -44,7 +44,12 @@ const Header = () => {
         />
       )}
       {/* dropDown menu */}
-      {toggleMenu && <DropdownMenu />}
+      <div
+        className={`${
+          toggleMenu ? "opacity-100 select-all" : "opacity-0 select-all"
+        } transition-all absolute top-20`}>
+        <DropdownMenu />
+      </div>
       {/* logo */}
       <div className="flex gap-2 items-center">
         <Link href={"/"}>
@@ -62,7 +67,7 @@ const Header = () => {
       </div>
       {/* menu */}
       <div className="hidden lg:flex">
-        <ul className="flex gap-8 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
+        <ul className="flex gap-12 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
           {routes.map((item: routeItem, i: number) => (
             <li key={i} className="group flex flex-col items-center">
               <Link

@@ -58,7 +58,9 @@ export function Residential({ vals }: Form) {
     <>
       {/* type of request section */}
       <div className="flex flex-col gap-2 mt-4 ">
-        <span className="mb-2">نوع درخواست : </span>
+        <span className="mb-2 text-[var(--blue)] font-bold">
+          نوع درخواست :{" "}
+        </span>
         <div className="flex flex-row gap-5 ">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -86,7 +88,9 @@ export function Residential({ vals }: Form) {
       </div>
       {/* number of rooms section */}
       <div className="flex flex-col gap-2 mt-4">
-        <span className="mb-2">تعداد اتاق خواب :</span>
+        <span className="mb-2 text-[var(--blue)] font-bold">
+          تعداد اتاق خواب :
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -136,7 +140,9 @@ export function Residential({ vals }: Form) {
       </div>
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
-        <span>متراژ مورد نظر ( متر ) : </span>
+        <span className="text-[var(--blue)] font-bold">
+          متراژ مورد نظر ( متر ) :{" "}
+        </span>
         <input
           className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
@@ -151,7 +157,9 @@ export function Residential({ vals }: Form) {
       {requestType === "اجاره" ? (
         <div className="w-full  gap-3">
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>اجاره ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              اجاره ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -163,7 +171,9 @@ export function Residential({ vals }: Form) {
             />
           </div>
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>رهن ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              رهن ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -177,7 +187,9 @@ export function Residential({ vals }: Form) {
         </div>
       ) : (
         <div className="flex flex-col gap-2 mt-4">
-          <span>بودجه مورد نظر ( تومان ) : </span>
+          <span className="text-[var(--blue)] font-bold">
+            بودجه مورد نظر ( تومان ) :{" "}
+          </span>
           <input
             className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
@@ -194,7 +206,7 @@ export function Residential({ vals }: Form) {
         <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
           *
         </span>
-        <span>شماره تماس : </span>
+        <span className="text-[var(--blue)] font-bold">شماره تماس : </span>
         <div className="relative">
           <input
             className="border-b-2 pb-2 pl-10 outline-none w-1/2"
@@ -214,7 +226,7 @@ export function Residential({ vals }: Form) {
       </div>
       {/* vital requirements */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>امکانات ضوروی : </span>
+        <span className="text-[var(--blue)] font-bold">امکانات ضوروی : </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="parking">
             <input
@@ -288,7 +300,9 @@ export function Residential({ vals }: Form) {
       </div>
       {/* clients prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>چه ملکی را ترجیح میدهید</span>
+        <span className="text-[var(--blue)] font-bold">
+          چه ملکی را ترجیح میدهید :
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -327,7 +341,9 @@ export function Residential({ vals }: Form) {
       </div>
       {/* floor prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
+        <span className="text-[var(--blue)] font-bold">
+          چه طبقه ای را برای سکونت ترجیح می دهید :
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -355,7 +371,9 @@ export function Residential({ vals }: Form) {
       </div>
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
+        <span className="text-[var(--blue)] font-bold">
+          فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -406,14 +424,16 @@ export function Residential({ vals }: Form) {
       {/* Map */}
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
-          <span>محله مورد نظر : </span>
+          <span className="text-[var(--blue)] font-bold">محله مورد نظر : </span>
           {/* map will render from map.tsx component */}
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>طریقه آشنایی با هومینکس : </span>
+        <span className="text-[var(--blue)] font-bold">
+          طریقه آشنایی با هومینکس :{" "}
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
@@ -467,7 +487,7 @@ export function Residential({ vals }: Form) {
       </div>
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>توضیحات تکمیلی : </span>
+        <span className="text-[var(--blue)] font-bold">توضیحات تکمیلی : </span>
         <textarea
           name="explanation"
           id="explanation"
@@ -529,7 +549,9 @@ export function Commercial({ vals }: Form) {
     <>
       {/* type of request section */}
       <div className="flex flex-col gap-2 mt-4">
-        <span className="mb-2">نوع درخواست : </span>
+        <span className="mb-2 text-[var(--blue)] font-bold">
+          نوع درخواست :{" "}
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -557,7 +579,9 @@ export function Commercial({ vals }: Form) {
       </div>
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
-        <span>متراژ مورد نظر ( متر ) : </span>
+        <span className="text-[var(--blue)] font-bold">
+          متراژ مورد نظر ( متر ) :{" "}
+        </span>
         <input
           className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
@@ -572,7 +596,9 @@ export function Commercial({ vals }: Form) {
       {requestType === "rent" ? (
         <div className="w-full  gap-3">
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>اجاره ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              اجاره ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -584,7 +610,9 @@ export function Commercial({ vals }: Form) {
             />
           </div>
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>رهن ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              رهن ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -598,7 +626,9 @@ export function Commercial({ vals }: Form) {
         </div>
       ) : (
         <div className="flex flex-col gap-2 mt-4">
-          <span>بودجه مورد نظر ( تومان ) : </span>
+          <span className="text-[var(--blue)] font-bold">
+            بودجه مورد نظر ( تومان ) :{" "}
+          </span>
           <input
             className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
@@ -615,7 +645,7 @@ export function Commercial({ vals }: Form) {
         <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
           *
         </span>
-        <span>شماره تماس : </span>
+        <span className="text-[var(--blue)] font-bold">شماره تماس : </span>
         <div className="relative">
           <input
             className="border-b-2 pb-2 pl-10 outline-none w-1/2"
@@ -635,7 +665,7 @@ export function Commercial({ vals }: Form) {
       </div>
       {/* Type of functionality section */}
       <div className="flex flex-col gap-2 mt-4">
-        <span>نوع کاربری : </span>
+        <span className="text-[var(--blue)] font-bold">نوع کاربری : </span>
         <input
           className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
@@ -648,7 +678,9 @@ export function Commercial({ vals }: Form) {
       </div>
       {/* env type prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>چه نوع فضای کاری را ترجیح میدهید:</span>
+        <span className="text-[var(--blue)] font-bold">
+          چه نوع فضای کاری را ترجیح میدهید :
+        </span>
         <div className="flex flex-row gap-5">
           <select
             name="env"
@@ -671,7 +703,9 @@ export function Commercial({ vals }: Form) {
       </div>
       {/* floor prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
+        <span className="text-[var(--blue)] font-bold">
+          چه طبقه ای را برای سکونت ترجیح می دهید :{" "}
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -699,7 +733,9 @@ export function Commercial({ vals }: Form) {
       </div>
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
+        <span className="text-[var(--blue)] font-bold">
+          فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -757,7 +793,9 @@ export function Commercial({ vals }: Form) {
       </div>
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4 flex-wrap">
-        <span>طریقه آشنایی با هومینکس : </span>
+        <span className="text-[var(--blue)] font-bold">
+          طریقه آشنایی با هومینکس :{" "}
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
@@ -811,7 +849,7 @@ export function Commercial({ vals }: Form) {
       </div>
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>توضیحات تکمیلی : </span>
+        <span className="text-[var(--blue)] font-bold">توضیحات تکمیلی : </span>
         <textarea
           name="explanation"
           id="explanation"
@@ -872,7 +910,9 @@ export function Office({ vals }: Form) {
     <>
       {/* type of request section */}
       <div className="flex flex-col gap-2 mt-4">
-        <span className="mb-2">نوع درخواست : </span>
+        <span className="mb-2 text-[var(--blue)] font-bold">
+          نوع درخواست :{" "}
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -900,7 +940,9 @@ export function Office({ vals }: Form) {
       </div>
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
-        <span>متراژ مورد نظر ( متر ) : </span>
+        <span className="text-[var(--blue)] font-bold">
+          متراژ مورد نظر ( متر ) :{" "}
+        </span>
         <input
           className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
@@ -915,7 +957,9 @@ export function Office({ vals }: Form) {
       {requestType === "اجاره" ? (
         <div className="w-full  gap-3">
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>اجاره ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              اجاره ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -927,7 +971,9 @@ export function Office({ vals }: Form) {
             />
           </div>
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>رهن ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              رهن ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -941,7 +987,9 @@ export function Office({ vals }: Form) {
         </div>
       ) : (
         <div className="flex flex-col gap-2 mt-4">
-          <span>بودجه مورد نظر ( تومان ) : </span>
+          <span className="text-[var(--blue)] font-bold">
+            بودجه مورد نظر ( تومان ) :{" "}
+          </span>
           <input
             className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
@@ -958,7 +1006,7 @@ export function Office({ vals }: Form) {
         <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
           *
         </span>
-        <span>شماره تماس : </span>
+        <span className="text-[var(--blue)] font-bold">شماره تماس : </span>
         <div className="relative">
           <input
             className="border-b-2 pb-2 pl-10 outline-none w-1/2"
@@ -978,7 +1026,7 @@ export function Office({ vals }: Form) {
       </div>
       {/* Type of functionality section */}
       <div className="flex flex-col gap-2 mt-4">
-        <span>نوع کاربری : </span>
+        <span className="text-[var(--blue)] font-bold">نوع کاربری : </span>
         <input
           className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
@@ -991,7 +1039,9 @@ export function Office({ vals }: Form) {
       </div>
       {/* floor prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
+        <span className="text-[var(--blue)] font-bold">
+          چه طبقه ای را برای سکونت ترجیح می دهید :{" "}
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -1019,7 +1069,9 @@ export function Office({ vals }: Form) {
       </div>
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
+        <span className="text-[var(--blue)] font-bold">
+          فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -1070,14 +1122,16 @@ export function Office({ vals }: Form) {
       {/* Map */}
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
-          <span>محله مورد نظر : </span>
+          <span className="text-[var(--blue)] font-bold">محله مورد نظر : </span>
 
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>طریقه آشنایی با هومینکس : </span>
+        <span className="text-[var(--blue)] font-bold">
+          طریقه آشنایی با هومینکس :{" "}
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
@@ -1131,7 +1185,7 @@ export function Office({ vals }: Form) {
       </div>
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>توضیحات تکمیلی : </span>
+        <span className="text-[var(--blue)] font-bold">توضیحات تکمیلی : </span>
         <textarea
           name="explanation"
           id="explanation"
@@ -1192,7 +1246,9 @@ export function Land({ vals }: Form) {
     <>
       {/* type of request section */}
       <div className="flex flex-col gap-2 mt-4">
-        <span className="mb-2">نوع درخواست : </span>
+        <span className="mb-2 text-[var(--blue)] font-bold">
+          نوع درخواست :{" "}
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -1220,7 +1276,9 @@ export function Land({ vals }: Form) {
       </div>
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
-        <span>متراژ مورد نظر ( متر ) : </span>
+        <span className="text-[var(--blue)] font-bold">
+          متراژ مورد نظر ( متر ) :{" "}
+        </span>
         <input
           className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
           type="text"
@@ -1235,7 +1293,9 @@ export function Land({ vals }: Form) {
       {requestType === "rent" ? (
         <div className="w-full  gap-3">
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>اجاره ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              اجاره ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -1247,7 +1307,9 @@ export function Land({ vals }: Form) {
             />
           </div>
           <div className="flex w-full flex-col gap-2 mt-4">
-            <span>رهن ( تومان ) : </span>
+            <span className="text-[var(--blue)] font-bold">
+              رهن ( تومان ) :{" "}
+            </span>
             <input
               className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
               type="text"
@@ -1261,7 +1323,9 @@ export function Land({ vals }: Form) {
         </div>
       ) : (
         <div className="flex flex-col gap-2 mt-4">
-          <span>بودجه مورد نظر ( تومان ) : </span>
+          <span className="text-[var(--blue)] font-bold">
+            بودجه مورد نظر ( تومان ) :{" "}
+          </span>
           <input
             className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
             type="text"
@@ -1278,7 +1342,7 @@ export function Land({ vals }: Form) {
         <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
           *
         </span>
-        <span>شماره تماس : </span>
+        <span className="text-[var(--blue)] font-bold">شماره تماس : </span>
         <div className="relative">
           <input
             className="border-b-2 pb-2 pl-10 outline-none w-1/2"
@@ -1298,7 +1362,7 @@ export function Land({ vals }: Form) {
       </div>
       {/* land functionality section */}
       <div className="flex flex-col gap-2 mt-4">
-        <span>کاربری زمین : </span>
+        <span className="text-[var(--blue)] font-bold">کاربری زمین : </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -1337,7 +1401,9 @@ export function Land({ vals }: Form) {
       </div>
       {/* land location */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>موقعیت مکانی زمین : </span>
+        <span className="text-[var(--blue)] font-bold">
+          موقعیت مکانی زمین :{" "}
+        </span>
         <div className="flex flex-row gap-5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -1365,7 +1431,9 @@ export function Land({ vals }: Form) {
       </div>
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
+        <span className="text-[var(--blue)] font-bold">
+          فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -1416,14 +1484,16 @@ export function Land({ vals }: Form) {
       {/* Map */}
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
-          <span>محله مورد نظر : </span>
+          <span className="text-[var(--blue)] font-bold">محله مورد نظر : </span>
 
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>طریقه آشنایی با هومینکس : </span>
+        <span className="text-[var(--blue)] font-bold">
+          طریقه آشنایی با هومینکس :{" "}
+        </span>
         <div className="flex flex-row gap-5 flex-wrap">
           <label htmlFor="instagram">
             <input
@@ -1477,7 +1547,7 @@ export function Land({ vals }: Form) {
       </div>
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
-        <span>توضیحات تکمیلی : </span>
+        <span className="text-[var(--blue)] font-bold">توضیحات تکمیلی : </span>
         <textarea
           name="explanation"
           id="explanation"

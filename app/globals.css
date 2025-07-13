@@ -88,8 +88,9 @@
 
 /* @media (prefers-color-scheme: dark) { */
 :root {
-  --background: rgb(211, 211, 211);
-  --foreground: white;
+  --background: rgb(53, 53, 53);
+  --foreground: rgb(229, 228, 226);
+  --blue: #238fab;
   --box: #232323;
   --button-background: #000000;
   --header-background: #303030;
@@ -108,12 +109,12 @@ body {
 }
 
 html {
-  background: rgb(119, 119, 119);
+  background-color: var(--background);
   /* urgba(135, 135, 135, 0.7)g"); <-- Replace with your actual pattern path */
-  background-size: cover, auto;
+  /* background-size: cover, auto;
   background-position: center, center;
   background-repeat: no-repeat, repeat;
-  background-attachment: fixed, fixed;
+  background-attachment: fixed, fixed; */
 }
 
 body {
