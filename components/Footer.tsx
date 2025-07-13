@@ -8,7 +8,7 @@ export default function Footer() {
   const scrollTop = () => {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 1000);
+    }, 500);
   };
 
   return (

@@ -50,6 +50,8 @@ export function Residential({ vals }: Form) {
     landFunctionality,
     setLandFunctionality,
     sendReq,
+    phone,
+    setPhone,
   ] = vals;
 
   return (
@@ -82,7 +84,6 @@ export function Residential({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* number of rooms section */}
       <div className="flex flex-col gap-2 mt-4">
         <span className="mb-2">تعداد اتاق خواب :</span>
@@ -133,7 +134,6 @@ export function Residential({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
@@ -189,8 +189,7 @@ export function Residential({ vals }: Form) {
           />
         </div>
       )}
-
-      {/* phone number seciton
+      {/* phone number section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
           *
@@ -198,19 +197,21 @@ export function Residential({ vals }: Form) {
         <span>شماره تماس : </span>
         <div className="relative">
           <input
-            className="border-b-2 pb-2 px-10 outline-none w-1/3 sm:w-1/2"
+            className="border-b-2 pb-2 pl-10 outline-none w-1/2"
             type="text"
             name="budget"
             id="budget"
             dir="ltr"
             maxLength={10}
+            onChange={(e) => setPhone(e.currentTarget.value)}
+            value={phone}
             placeholder="شماره تماس"
           />
-          <span className="opacity-60 absolute right-[46%] select-none">
+          <span className="opacity-60 absolute md:right-[50%] select-none">
             | 98+
           </span>
         </div>
-      </div> */}
+      </div>
       {/* vital requirements */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>امکانات ضوروی : </span>
@@ -285,7 +286,6 @@ export function Residential({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* clients prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه ملکی را ترجیح میدهید</span>
@@ -325,7 +325,6 @@ export function Residential({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* floor prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
@@ -354,7 +353,6 @@ export function Residential({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
@@ -405,7 +403,6 @@ export function Residential({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* Map */}
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
@@ -414,7 +411,6 @@ export function Residential({ vals }: Form) {
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
-
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>طریقه آشنایی با هومینکس : </span>
@@ -469,7 +465,6 @@ export function Residential({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>توضیحات تکمیلی : </span>
@@ -480,7 +475,6 @@ export function Residential({ vals }: Form) {
           onChange={(e) => setDescription(e.target.value)}
           className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
       </div>
-
       {/* submit button */}
       <SubmitButton
         title="ثبت درخواست مشاوره واحد مسکونی"
@@ -528,6 +522,8 @@ export function Commercial({ vals }: Form) {
     landFunctionality,
     setLandFunctionality,
     sendReq,
+    phone,
+    setPhone,
   ] = vals;
   return (
     <>
@@ -559,7 +555,6 @@ export function Commercial({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
@@ -573,7 +568,6 @@ export function Commercial({ vals }: Form) {
           placeholder="مثلا : 150 متر"
         />
       </div>
-
       {/* budget seciton */}
       {requestType === "rent" ? (
         <div className="w-full  gap-3">
@@ -616,6 +610,29 @@ export function Commercial({ vals }: Form) {
           />
         </div>
       )}
+      {/* phone number section */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
+          *
+        </span>
+        <span>شماره تماس : </span>
+        <div className="relative">
+          <input
+            className="border-b-2 pb-2 pl-10 outline-none w-1/2"
+            type="text"
+            name="budget"
+            id="budget"
+            dir="ltr"
+            maxLength={10}
+            onChange={(e) => setPhone(e.currentTarget.value)}
+            value={phone}
+            placeholder="شماره تماس"
+          />
+          <span className="opacity-60 absolute md:right-[50%] select-none">
+            | 98+
+          </span>
+        </div>
+      </div>
       {/* Type of functionality section */}
       <div className="flex flex-col gap-2 mt-4">
         <span>نوع کاربری : </span>
@@ -629,7 +646,6 @@ export function Commercial({ vals }: Form) {
           placeholder="رستوران ، فروشگاه ، رستوران ، بیمه ..."
         />
       </div>
-
       {/* env type prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه نوع فضای کاری را ترجیح میدهید:</span>
@@ -681,7 +697,6 @@ export function Commercial({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
@@ -732,7 +747,6 @@ export function Commercial({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* Map */}
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
@@ -741,7 +755,6 @@ export function Commercial({ vals }: Form) {
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
-
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4 flex-wrap">
         <span>طریقه آشنایی با هومینکس : </span>
@@ -796,7 +809,6 @@ export function Commercial({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>توضیحات تکمیلی : </span>
@@ -807,7 +819,6 @@ export function Commercial({ vals }: Form) {
           onChange={(e) => setDescription(e.target.value)}
           className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
       </div>
-
       {/* submit button */}
       <SubmitButton
         title="ثبت درخواست مشاوره واحد تجاری"
@@ -854,6 +865,8 @@ export function Office({ vals }: Form) {
     landFunctionality,
     setLandFunctionality,
     sendReq,
+    phone,
+    setPhone,
   ] = vals;
   return (
     <>
@@ -885,7 +898,6 @@ export function Office({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
@@ -899,7 +911,6 @@ export function Office({ vals }: Form) {
           placeholder="مثلا : 150 متر"
         />
       </div>
-
       {/* budget seciton */}
       {requestType === "اجاره" ? (
         <div className="w-full  gap-3">
@@ -942,6 +953,29 @@ export function Office({ vals }: Form) {
           />
         </div>
       )}
+      {/* phone number section */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
+          *
+        </span>
+        <span>شماره تماس : </span>
+        <div className="relative">
+          <input
+            className="border-b-2 pb-2 pl-10 outline-none w-1/2"
+            type="text"
+            name="budget"
+            id="budget"
+            dir="ltr"
+            maxLength={10}
+            onChange={(e) => setPhone(e.currentTarget.value)}
+            value={phone}
+            placeholder="شماره تماس"
+          />
+          <span className="opacity-60 absolute md:right-[50%] select-none">
+            | 98+
+          </span>
+        </div>
+      </div>
       {/* Type of functionality section */}
       <div className="flex flex-col gap-2 mt-4">
         <span>نوع کاربری : </span>
@@ -955,7 +989,6 @@ export function Office({ vals }: Form) {
           placeholder="رستوران ، فروشگاه ، رستوران ، بیمه ..."
         />
       </div>
-
       {/* floor prefer */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>چه طبقه ای را برای سکونت ترجیح می دهید</span>
@@ -984,7 +1017,6 @@ export function Office({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
@@ -1035,7 +1067,6 @@ export function Office({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* Map */}
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
@@ -1044,7 +1075,6 @@ export function Office({ vals }: Form) {
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
-
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>طریقه آشنایی با هومینکس : </span>
@@ -1099,7 +1129,6 @@ export function Office({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>توضیحات تکمیلی : </span>
@@ -1110,7 +1139,6 @@ export function Office({ vals }: Form) {
           onChange={(e) => setDescription(e.target.value)}
           className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
       </div>
-
       {/* submit button */}
       <SubmitButton
         title="ثبت درخواست مشاوره واحد تجاری"
@@ -1157,6 +1185,8 @@ export function Land({ vals }: Form) {
     landFunctionality,
     setLandFunctionality,
     sendReq,
+    phone,
+    setPhone,
   ] = vals;
   return (
     <>
@@ -1188,7 +1218,6 @@ export function Land({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* lendth seciton */}
       <div className="flex flex-col gap-2 mt-4">
         <span>متراژ مورد نظر ( متر ) : </span>
@@ -1202,7 +1231,6 @@ export function Land({ vals }: Form) {
           placeholder="مثلا : 150 متر"
         />
       </div>
-
       {/* budget seciton */}
       {requestType === "rent" ? (
         <div className="w-full  gap-3">
@@ -1245,6 +1273,29 @@ export function Land({ vals }: Form) {
           />
         </div>
       )}
+      {/* phone number section */}
+      <div className="relative flex flex-col gap-2 mt-4">
+        <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
+          *
+        </span>
+        <span>شماره تماس : </span>
+        <div className="relative">
+          <input
+            className="border-b-2 pb-2 pl-10 outline-none w-1/2"
+            type="text"
+            name="budget"
+            id="budget"
+            dir="ltr"
+            maxLength={10}
+            onChange={(e) => setPhone(e.currentTarget.value)}
+            value={phone}
+            placeholder="شماره تماس"
+          />
+          <span className="opacity-60 absolute md:right-[50%] select-none">
+            | 98+
+          </span>
+        </div>
+      </div>
       {/* land functionality section */}
       <div className="flex flex-col gap-2 mt-4">
         <span>کاربری زمین : </span>
@@ -1284,7 +1335,6 @@ export function Land({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* land location */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>موقعیت مکانی زمین : </span>
@@ -1313,7 +1363,6 @@ export function Land({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* deadline */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>فرصت مورد نیاز شما برای پیداکردن فایل و قرار داد نهایی!؟</span>
@@ -1364,7 +1413,6 @@ export function Land({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* Map */}
       <div>
         <div className="relative flex flex-col gap-2 mt-4">
@@ -1373,7 +1421,6 @@ export function Land({ vals }: Form) {
           <Map mapSelection={mapSelection} setMapSelection={setMapSelection} />
         </div>
       </div>
-
       {/* how section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>طریقه آشنایی با هومینکس : </span>
@@ -1428,7 +1475,6 @@ export function Land({ vals }: Form) {
           </label>
         </div>
       </div>
-
       {/* explanation section */}
       <div className="relative flex flex-col gap-2 mt-4">
         <span>توضیحات تکمیلی : </span>
@@ -1439,7 +1485,6 @@ export function Land({ vals }: Form) {
           onChange={(e) => setDescription(e.target.value)}
           className="resize-none outline-none border-white border-b-2 text-white/60 pb-0"></textarea>
       </div>
-
       {/* submit button */}
       <SubmitButton
         title="ثبت درخواست مشاوره واحد تجاری"

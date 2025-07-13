@@ -30,6 +30,14 @@ const SplitText = dynamic(
 const SpringModal = dynamic(() => import("@/components/UI/SpringModal"), {
   loading: () => <div>Loading...</div>,
 });
+
+const Waitscreen = dynamic(
+  () => import("@/components/UI/consultation/Waitscreen"),
+  {
+    loading: () => <div>Loading...</div>,
+  }
+);
+
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -42,7 +50,7 @@ enum forms {
 
 const Page = () => {
   // toast notification for sending error
-  const notify = () => toast("اطلاعات تکمیل نیست ❗");
+  const notify = () => toast("خطا، مجدد تلاش نمایید❗");
 
   // switch between tabs
   const [selectedTab, setSelectedTab] = useState<forms | null>(null);
@@ -81,6 +89,8 @@ const Page = () => {
   const [description, setDescription] = useState("");
   const [rent, setRent] = useState("");
   const [mortgage, setMortgage] = useState("");
+  const [wait, setWait] = useState(false);
+  const [phone, setPhone] = useState("");
   // eslint-disable-next-line
   // const [mapSelection, setMapSelection] = useState<any>();
   const [mapSelection, setMapSelection] = useState<string[]>([]);
@@ -124,24 +134,30 @@ const Page = () => {
         landFunctionality,
       },
       credentials: {
-        phoneNumber: "0915",
+        phone,
       },
       date: farsiDate,
       done: false,
     };
 
+    setWait(true);
     try {
-      await axios.post("http://validitycheck.sub4u.site/", entry);
-      // console.log("Saved entry:", response.data);
+      await axios.post("https://validitycheck.sub4u.site/", entry, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: false, // optional: true if you use cookies
+      });
+
       handleOpen();
 
-      // close alrt box in 3 seconds
       setTimeout(() => {
         handleClose();
       }, 3000);
     } catch (error) {
-      // console.error("Error saving entry:", error);
       notify();
+    } finally {
+      setWait(false);
     }
   };
 
@@ -182,6 +198,8 @@ const Page = () => {
     landFunctionality,
     setLandFunctionality,
     sendReq,
+    phone,
+    setPhone,
   ];
 
   // reset values after switching the form
@@ -203,6 +221,7 @@ const Page = () => {
     setEnvTypePrefer("اصلی");
     setLandLocation("");
     setLandFunctionality("");
+    setPhone("");
   }, [selectedTab]);
 
   const handleAnimationComplete = () => {
@@ -285,6 +304,7 @@ const Page = () => {
       </div>
       {/* popup */}
       <SpringModal open={open} handleClose={handleClose} />
+      {wait && <Waitscreen />}
     </div>
   );
 };

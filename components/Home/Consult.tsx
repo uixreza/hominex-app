@@ -6,10 +6,10 @@ export default function Consult() {
   return (
     <div className="flex lg:flex-row flex-col lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-4 mt-5">
       <div className="flex flex-col gap-3">
-        <span className="font-extrabold text-3xl mb-5 text-blue-900">
-          مشاوره خرید
+        <span className="font-extrabold text-4xl mb-5 ">
+          <span className="text-blue-900">مشاوره</span> خرید
         </span>
-        <span className="leading-8">
+        <span className="leading-10 text-wrap text-xl lg:text-2xl mb-5">
           هومینکس، پلتفرمی هست که تصمیم‌های ملکی رو از حدس و تجربه‌های پراکنده،
           به تحلیل‌های قابل‌اعتماد و داده‌محور تبدیل می‌کنه. اینجا اطلاعات دقیق
           داریم، نگاه علمی داریم، و کمک می‌کنیم تا با خیال راحت ملک مورد نظرتون
@@ -18,7 +18,7 @@ export default function Consult() {
         <Button href="/consultation" title="درخواست" />
       </div>
       <div className="flex justify-center items-center">
-        <Image src={Pic} alt="market" width={400} height={400} />
+        <Image src={Pic} alt="market" width={500} height={500} />
       </div>
     </div>
   );

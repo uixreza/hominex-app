@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
-import { routes } from "../config/routes.json";
 import { TbMenu4 } from "react-icons/tb";
 import { TbMenu3 } from "react-icons/tb";
 import DropdownMenu from "../components/UI/DropdownMenu";
@@ -9,8 +8,23 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
 
+type routeItem = {
+  title: string;
+  route: string;
+};
+
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [routes, setRoutes] = useState<routeItem[]>([]);
+
+  // set the header using json file data
+  useEffect(() => {
+    fetch("config/routes.json")
+      .then((res) => res.json())
+      .then((data: routeItem[]) => setRoutes(data))
+      .catch(() => setRoutes([]));
+  }, []);
+
   const handleToggleMenu = () => {
     setToggleMenu((prev) => !prev);
   };
@@ -49,7 +63,7 @@ const Header = () => {
       {/* menu */}
       <div className="hidden lg:flex">
         <ul className="flex gap-8 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
-          {routes.map((item, i) => (
+          {routes.map((item: routeItem, i: number) => (
             <li key={i} className="group flex flex-col items-center">
               <Link
                 href={item.route}

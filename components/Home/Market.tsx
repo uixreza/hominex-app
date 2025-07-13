@@ -6,10 +6,10 @@ export default function Market() {
   return (
     <div className="flex  flex-col lg:flex-row-reverse lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-4 mt-[-2rem]">
       <div className="flex flex-col gap-3">
-        <span className="font-extrabold text-3xl mb-5 text-blue-900">
-          بازار املاک
+        <span className="font-extrabold text-4xl mb-5">
+          <span className="text-blue-900">بازار</span> املاک
         </span>
-        <span className="leading-8">
+        <span className="leading-10 text-wrap text-xl lg:text-2xl mb-5">
           هومینکس، پلتفرمی هست که تصمیم‌های ملکی رو از حدس و تجربه‌های پراکنده،
           به تحلیل‌های قابل‌اعتماد و داده‌محور تبدیل می‌کنه. اینجا اطلاعات دقیق
           داریم، نگاه علمی داریم، و کمک می‌کنیم تا با خیال راحت ملک مورد نظرتون
@@ -18,7 +18,7 @@ export default function Market() {
         <Button href="/consultation" title="مشاهده" />
       </div>
       <div className="flex justify-center items-center">
-        <Image src={Pic} alt="market" width={400} height={400} />
+        <Image src={Pic} alt="market" width={600} height={600} />
       </div>
     </div>
   );

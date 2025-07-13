@@ -7,7 +7,7 @@ const sections = [
   {
     img: "/assets/img/mahallat.png",
     alt: "estate",
-    title: "ldkd محله",
+    title: "معرفی محله",
     text: "با تحلیل کامل بافت شهری، موقعیت جغرافیایی و دسترسی به خدمات شهری، تصویری شفاف از هر محله ارائه می‌دهیم تا شناخت دقیق‌تری پیش از تصمیم‌گیری داشته باشید.",
     dir: "right",
     link: "http://hominex.ir/mahallat",

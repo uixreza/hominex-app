@@ -5,6 +5,8 @@ import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
 import Button from "../UI/Button";
+import { FiLink } from "react-icons/fi";
+import Link from "next/link";
 
 const carousel: KeenSliderPlugin = (slider) => {
   const z = 300;
@@ -56,15 +58,18 @@ export default function Mag() {
   return (
     <div className="flex lg:flex-row flex-col lg:[&>div]:w-1/2 [&>div]:w-full lg:justify-between justify-center  lg:gap-4 gap-10 my-5">
       <div className="flex flex-col gap-3">
-        <span className="font-extrabold text-blue-900 text-3xl mb-5">
-          هومینکس مگ
-        </span>
-        <span className="leading-8">
+        <Link
+          href={"https://hominex.ir/blog/"}
+          className="font-extrabold text-4xl mb-5 flex items-center gap-3 cursor-pointer group">
+          <span className="text-blue-900">هومینکس</span> مگ{" "}
+          <FiLink className="text-[20px] group-hover:mr-3 transition-all" />
+        </Link>
+        <span className="leading-10 text-wrap text-xl lg:text-2xl">
           در دنیای پرتحول املاک و ساخت‌وساز، اطلاعات دقیق و به‌روز ، کلید
           تصمیم‌گیری‌های بهتر است. هومینکس مگ جایی است که می‌توانید جدیدترین
           اخبار، تحلیل‌های بازار، راهنمای خرید و آموزش‌های تخصصی را دنبال کنید
         </span>
-        <Button href="https://hominex.ir/blog/" title="مشاهده بیشتر" />
+        {/* <Button href="https://hominex.ir/blog/" title="مشاهده" /> */}
       </div>
       <div className="flex justify-center items-center">
         <div className="wrapper">

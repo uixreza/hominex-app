@@ -12,7 +12,7 @@ function Button({ title, href, icon }: IButton) {
   return (
     <Link href={href}>
       <button
-        className={`group hover:gap-4 text-[14px] bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 ${
+        className={`group hover:gap-4 text-[18px] lg:text-2xl bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 ${
           icon
             ? "w-[10rem] mt-10 border-2 border-white font-bold"
             : "w-fit border border-white/30"

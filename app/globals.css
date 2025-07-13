@@ -73,7 +73,7 @@
 }
 
 /* roots */
-:root {
+/* :root {
   --background: rgb(211, 211, 211);
   --foreground: white;
   --box: #b5b5b3;
@@ -84,22 +84,22 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --BoxColor: var(--box);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: rgb(211, 211, 211);
-    --foreground: white;
-    --box: #232323;
-    --button-background: #000000;
-    --header-background: #303030;
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
-    --BoxColor: var(--box);
-  }
+/* @media (prefers-color-scheme: dark) { */
+:root {
+  --background: rgb(211, 211, 211);
+  --foreground: white;
+  --box: #232323;
+  --button-background: #000000;
+  --header-background: #303030;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --BoxColor: var(--box);
 }
+/* } */
 
 html,
 body {
@@ -108,11 +108,8 @@ body {
 }
 
 html {
-  background: linear-gradient(
-      rgba(168, 168, 168, 0.7),
-      rgba(168, 168, 168, 0.7)
-    ),
-    url("/assets/img/noise.svg"); /* <-- Replace with your actual pattern path */
+  background: rgb(119, 119, 119);
+  /* urgba(135, 135, 135, 0.7)g"); <-- Replace with your actual pattern path */
   background-size: cover, auto;
   background-position: center, center;
   background-repeat: no-repeat, repeat;

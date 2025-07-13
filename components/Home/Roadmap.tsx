@@ -60,11 +60,13 @@ export default function Roadmap() {
                   : "sm:rounded-tl-2xl sm:rounded-bl-2xl"
               } sm:w-1/2 w-full  p-5 gap-5 h-full min-h-[inherit] flex flex-col justify-center bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20`}
               style={{ textDecoration: "none" }}>
-              <span className="font-bold md:text-2xl lg:text-3xl flex flex-row">
+              <span className="font-bold md:text-3xl lg:text-4xl flex flex-row">
                 {section.title}
                 <IoIosArrowRoundBack className="group-hover:opacity-100 opacity-0 transition-all group-hover:mr-3" />
               </span>
-              <p className=" leading-5 lg:leading-8">{section.text}</p>
+              <p className=" leading-7 lg:leading-8 md:text-xl">
+                {section.text}
+              </p>
             </Link>
           </div>
         );

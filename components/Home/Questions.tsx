@@ -72,8 +72,8 @@ export default function Questions() {
   return (
     <div className="my-16">
       {/* shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20 */}
-      <p className="text-3xl font-extrabold text-blue-900 mb-5">
-        سوالات متداول
+      <p className="text-4xl font-extrabold mb-8">
+        <span className="text-blue-900">سوالات</span> متداول
       </p>
       <Accordion
         sx={{
@@ -92,7 +92,9 @@ export default function Questions() {
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography sx={{ fontFamily: "Modam" }} component="span">
+          <Typography
+            sx={{ fontFamily: "Modam", fontSize: "18px" }}
+            component="span">
             چگونه می توانم استعلام مدارک مربوط به املاک و مستغلات را انجام دهم؟
           </Typography>
         </AccordionSummary>
@@ -122,7 +124,9 @@ export default function Questions() {
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography sx={{ fontFamily: "Modam" }} component="span">
+          <Typography
+            sx={{ fontFamily: "Modam", fontSize: "18px" }}
+            component="span">
             آیا امکان مراجعه حضوری برای استفاده از امکانات هومینکس وجود دارد؟
           </Typography>
         </AccordionSummary>
@@ -152,7 +156,9 @@ export default function Questions() {
         expanded={expanded === "panel3"}
         onChange={handleChange("panel3")}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography sx={{ fontFamily: "Modam" }} component="span">
+          <Typography
+            sx={{ fontFamily: "Modam", fontSize: "18px" }}
+            component="span">
             چگونه می توانم ملک خود را آگهی کنم؟
           </Typography>
         </AccordionSummary>
