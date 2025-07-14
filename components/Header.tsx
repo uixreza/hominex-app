@@ -46,7 +46,9 @@ const Header = () => {
       {/* dropDown menu */}
       <div
         className={`${
-          toggleMenu ? "opacity-100 select-all" : "opacity-0 select-all"
+          toggleMenu
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0  pointer-events-none"
         } transition-all absolute top-20`}>
         <DropdownMenu />
       </div>
