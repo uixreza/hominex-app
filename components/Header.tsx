@@ -7,6 +7,7 @@ import DropdownMenu from "../components/UI/DropdownMenu";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
+import { routes } from "@/public/config/routes";
 
 type routeItem = {
   title: string;
@@ -15,15 +16,7 @@ type routeItem = {
 
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [routes, setRoutes] = useState<routeItem[]>([]);
-
-  // set the header using json file data
-  useEffect(() => {
-    fetch("config/routes.json")
-      .then((res) => res.json())
-      .then((data: routeItem[]) => setRoutes(data))
-      .catch(() => setRoutes([]));
-  }, []);
+  // const [routes, setRoutes] = useState<routeItem[]>([]);
 
   const handleToggleMenu = () => {
     setToggleMenu((prev) => !prev);

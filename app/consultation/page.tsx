@@ -4,24 +4,10 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const loadText = <div>بارگذاری ...</div>;
-const Residential = dynamic(
-  () =>
-    import("@/components/UI/consultation/Forms").then((mod) => mod.Residential),
-  { loading: () => loadText }
-);
-const Commercial = dynamic(
-  () =>
-    import("@/components/UI/consultation/Forms").then((mod) => mod.Commercial),
-  { loading: () => loadText }
-);
-const Office = dynamic(
-  () => import("@/components/UI/consultation/Forms").then((mod) => mod.Office),
-  { loading: () => loadText }
-);
-const Land = dynamic(
-  () => import("@/components/UI/consultation/Forms").then((mod) => mod.Land),
-  { loading: () => loadText }
-);
+const Form = dynamic(() => import("@/components/UI/consultation/Form"), {
+  loading: () => loadText,
+});
+
 const Button = dynamic(() => import("@/components/UI/consultation/Button"), {
   loading: () => loadText,
 });
@@ -199,7 +185,6 @@ const Page = () => {
     setMapSelection,
     typeOfFunctionality,
     setTypeOfFunctionality,
-    envTypePrefer,
     setEnvTypePrefer,
     landLocation,
     setLandLocation,
@@ -305,13 +290,17 @@ const Page = () => {
         </div>
         <div className="mainBox bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-40 backdrop-blur-md shadow-lg shadow-black/20 rounded-2xl w-full h-auto mt-2 bottom-[-16rem] overflow-hidden sm:p-10 py-8 px-5">
           {selectedTab === forms.Residential && (
-            <Residential vals={[...propValues]} />
+            <Form type={forms.Residential} vals={[...propValues]} />
           )}
           {selectedTab === forms.Commercial && (
-            <Commercial vals={[...propValues]} />
+            <Form type={forms.Commercial} vals={[...propValues]} />
           )}
-          {selectedTab === forms.Office && <Office vals={[...propValues]} />}
-          {selectedTab === forms.Land && <Land vals={[...propValues]} />}
+          {selectedTab === forms.Office && (
+            <Form type={forms.Office} vals={[...propValues]} />
+          )}
+          {selectedTab === forms.Land && (
+            <Form type={forms.Land} vals={[...propValues]} />
+          )}
           {!selectedTab && (
             <>
               <p>خانه ای که میخواهید اینجاست !</p>
