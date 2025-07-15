@@ -2,6 +2,7 @@ import { RiTelegramLine } from "react-icons/ri";
 import { FiYoutube } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
+import Link from "next/link";
 
 export default function Socials() {
   return (
@@ -10,10 +11,18 @@ export default function Socials() {
         توسعه با 💪 توسط تیم هومینکس
       </span>
       <div className="flex flex-row gap-5 text-2xl py-5">
-        <RiTelegramLine className="shadow-2xl shadow-black cursor-pointer" />
-        <FiYoutube className="shadow-2xl shadow-black cursor-pointer" />
-        <FaWhatsapp className="shadow-2xl shadow-black cursor-pointer" />
-        <FaInstagram className="shadow-2xl shadow-black cursor-pointer" />
+        <Link href={""}>
+          <RiTelegramLine className="shadow-2xl shadow-black cursor-pointer" />
+        </Link>
+        <Link href={""}>
+          <FiYoutube className="shadow-2xl shadow-black cursor-pointer" />
+        </Link>
+        <Link href={""}>
+          <FaWhatsapp className="shadow-2xl shadow-black cursor-pointer" />
+        </Link>
+        <Link href={""}>
+          <FaInstagram className="shadow-2xl shadow-black cursor-pointer" />
+        </Link>
       </div>
     </div>
   );

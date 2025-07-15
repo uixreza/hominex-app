@@ -52,8 +52,8 @@ enum forms {
 
 const Page = () => {
   // toast notification for sending error
-  const notify = () => toast("خطا، مجدد تلاش نمایید❗");
-
+  const notify = () => toast("خطا، مجدد تلاش نمایید ❗");
+  const notValidNotify = () => toast("اطلاعات فرم تکمیل نیست❗");
   // switch between tabs
   const [selectedTab, setSelectedTab] = useState<forms | null>(null);
   const handleClick = (number: number) => {
@@ -100,6 +100,7 @@ const Page = () => {
   const [envTypePrefer, setEnvTypePrefer] = useState("main");
   const [landLocation, setLandLocation] = useState("");
   const [landFunctionality, setLandFunctionality] = useState("");
+  const [isFomValid, setIsFormValid] = useState(false);
 
   // popup states
   const [open, setOpen] = React.useState(false);
@@ -108,59 +109,64 @@ const Page = () => {
 
   // send request function
   const sendReq = async () => {
-    // Format date in Persian (Jalali) calendar
-    const date = new Date();
-    const farsiDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }).format(date);
-    const entry = {
-      data: {
-        price,
-        length,
-        requestType,
-        rooms,
-        vitals,
-        clientPrefer,
-        floorPrefer,
-        deadline,
-        visitMethod,
-        description,
-        rent,
-        mortgage,
-        mapSelection,
-        typeOfFunctionality,
-        envTypePrefer,
-        landLocation,
-        landFunctionality,
-      },
-      credentials: {
-        phone,
-      },
-      date: farsiDate,
-      done: false,
-    };
-
-    setWait(true);
-    try {
-      await axios.post("https://validitycheck.sub4u.site/", entry, {
-        headers: {
-          "Content-Type": "application/json",
+    if (isFomValid) {
+      // Format date in Persian (Jalali) calendar
+      const date = new Date();
+      const farsiDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(date);
+      const entry = {
+        data: {
+          price,
+          length,
+          requestType,
+          rooms,
+          vitals,
+          clientPrefer,
+          floorPrefer,
+          deadline,
+          visitMethod,
+          description,
+          rent,
+          mortgage,
+          mapSelection,
+          typeOfFunctionality,
+          envTypePrefer,
+          landLocation,
+          landFunctionality,
         },
-        withCredentials: false, // optional: true if you use cookies
-      });
+        credentials: {
+          phone,
+        },
+        date: farsiDate,
+        done: false,
+      };
 
-      handleOpen();
+      setWait(true);
+      try {
+        await axios.post("https://validitycheck.sub4u.site/", entry, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: false, // optional: true if you use cookies
+        });
 
-      setTimeout(() => {
-        handleClose();
-      }, 3000);
-    } catch (error) {
-      notify();
-    } finally {
-      setWait(false);
+        handleOpen();
+
+        setTimeout(() => {
+          handleClose();
+        }, 3000);
+      } catch (error) {
+        notify();
+      } finally {
+        setWait(false);
+      }
+    } else {
+      notValidNotify();
     }
+    // form is not valid
   };
 
   const propValues = [
@@ -224,8 +230,22 @@ const Page = () => {
     setLandLocation("");
     setLandFunctionality("");
     setPhone("");
+    setIsFormValid(false);
   }, [selectedTab]);
 
+  useEffect(() => {
+    // checkvalidity
+    if (
+      requestType !== "" &&
+      length !== "" &&
+      deadline !== "" &&
+      visitMethod !== "" &&
+      mapSelection.length >= 1 &&
+      phone !== ""
+    )
+      setIsFormValid(true);
+    else return;
+  }, [requestType, length, deadline, visitMethod, mapSelection, phone]);
   const handleAnimationComplete = () => {
     // animation complete
   };
