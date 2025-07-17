@@ -31,7 +31,7 @@ const sections = [
 
 export default function Roadmap() {
   return (
-    <div className="hidden flex-col gap-3 w-full sm:flex">
+    <div className="hidden flex-col gap-5 w-full sm:flex">
       {sections.map((section, idx) => {
         const isRight = section.dir === "right";
         return (
@@ -39,7 +39,7 @@ export default function Roadmap() {
             key={idx}
             className={`relative w-full lg:opacity-80 hover:opacity-100 group sm:rounded-2xl shadow-lg hover:shadow-none transition-all cursor-pointer bg-cover bg-center flex ${
               isRight ? "justify-start" : "justify-end"
-            } min-h-[200px] md:min-h-[260px]`}
+            } min-h-[200px] md:min-h-[380px]`}
             style={{
               backgroundImage: `url(${section.img})`,
               backgroundRepeat: "no-repeat",

@@ -62,7 +62,7 @@ const Header = () => {
       </div>
       {/* menu */}
       <div className="hidden lg:flex">
-        <ul className="flex gap-12 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
+        <ul className="flex gap-7 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
           {routes.map((item: routeItem, i: number) => (
             <li key={i} className="group flex flex-col items-center">
               <Link

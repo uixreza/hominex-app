@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "hominex.ir",
         port: "",
+        pathname: "/**",
       },
     ],
   },

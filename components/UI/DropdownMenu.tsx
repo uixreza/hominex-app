@@ -32,6 +32,12 @@ const DropdownMenu = () => {
         مشاوره خرید
       </Link>
       <Link
+        href={"https://hominex.ir/moshaveran/"}
+        className="cursor-pointer flex items-center gap-2">
+        <CiSquareQuestion />
+        مشاورین املاک
+      </Link>
+      <Link
         href={"https://hominex.ir/blog/"}
         className="cursor-pointer flex items-center gap-2">
         <GrBlog />

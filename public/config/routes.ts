@@ -15,4 +15,8 @@ export const routes = [
     title: "ویژگی خانه من",
     route: "/",
   },
+  {
+    title: "هومینکس مگ",
+    route: "https://hominex.ir/blog/",
+  },
 ];
