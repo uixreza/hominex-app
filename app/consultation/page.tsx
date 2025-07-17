@@ -79,8 +79,7 @@ const Page = () => {
   const [mortgage, setMortgage] = useState("");
   const [wait, setWait] = useState(false);
   const [phone, setPhone] = useState("");
-  // eslint-disable-next-line
-  // const [mapSelection, setMapSelection] = useState<any>();
+
   const [mapSelection, setMapSelection] = useState<string[]>([]);
   const [typeOfFunctionality, setTypeOfFunctionality] = useState("");
   const [envTypePrefer, setEnvTypePrefer] = useState("main");

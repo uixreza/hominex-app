@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
-import Button from "../UI/Button";
 import { FiLink } from "react-icons/fi";
 import Link from "next/link";
 
@@ -92,16 +91,15 @@ export default function Mag() {
               <div className="carousel keen-slider" ref={sliderRef}>
                 {posts.map((post, idx) => {
                   // Get image from _embedded if available
-                  const img =
-                    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-                  console.log(img);
+                  const img = "/assets/svg/mag.svg";
+                  // post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
                   return (
                     <Link
                       key={post.id}
                       href={post.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group cursor-pointer carousel__cell number-slide${
+                      className={`group cursor-pointer carousel__cell SLIDES number-slide${
                         idx + 1
                       } relative w-full h-40 sm:h-56 md:h-64 lg:h-40 xl:h-56 2xl:h-64 overflow-hidden rounded-xl flex-shrink-0`}>
                       <div
@@ -123,7 +121,7 @@ export default function Mag() {
                           priority={idx === 0}
                         />
                       </div>
-                      <div className="transition-all absolute lg:bottom-[-10rem] bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
+                      <div className="transition-all absolute bottom-0 group-hover:bottom-0 right-0 p-5 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent flex items-end">
                         <p
                           className="text-[16px] sm:text-[18px] md:text-[20px]"
                           dangerouslySetInnerHTML={{

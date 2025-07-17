@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FiUser } from "react-icons/fi";
 import { TbMenu4 } from "react-icons/tb";
 import { TbMenu3 } from "react-icons/tb";

@@ -144,7 +144,15 @@ input[type="radio"] {
   max-height: 100vh;
 }
 
-.number-slide1 {
+.SLIDES {
+  background: rgb(43, 43, 43);
+  background: linear-gradient(
+    128deg,
+    rgb(45, 45, 45) 0%,
+    rgba(45, 45, 45) 100%
+  );
+}
+/* .number-slide1 {
   background: rgb(64, 175, 255);
   background: linear-gradient(
     128deg,
@@ -201,7 +209,7 @@ input[type="radio"] {
     rgba(64, 76, 255, 1) 0%,
     rgba(174, 63, 255, 1) 100%
   );
-}
+} */
 
 .wrapper {
   display: flex;
@@ -226,5 +234,4 @@ input[type="radio"] {
   width: 240px;
   left: 10px;
   height: 200px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
 }
