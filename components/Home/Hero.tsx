@@ -19,12 +19,12 @@ export default function Hero() {
             مشاور
           </div>{" "}
           <BlurText
-            text="هوشمند هومینکس"
+            text="#هوشمند_هومینکس"
             delay={150}
             animateBy="words"
             direction="top"
             onAnimationComplete={handleAnimationComplete}
-            className="text-3xl mb-8 font-mono mt-3"
+            className="sm:text-4xl lg:text-6xl font-mono mt-3"
           />
         </span>
         <p
