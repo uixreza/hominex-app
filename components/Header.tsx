@@ -15,13 +15,12 @@ type routeItem = {
 };
 
 const Header = () => {
-  const [toggleMenu, setToggleMenu] = useState(false);
-  // const [routes, setRoutes] = useState<routeItem[]>([]);
+  const [toggleMenu, setToggleMenu] = useState<boolean>(false);
 
   const handleToggleMenu = () => {
     setToggleMenu((prev) => !prev);
   };
-  const notify = () => toast("درحال انتقال به صفحه ورود 🔒");
+  const notify = () => toast("درحال انتقال به صفحه احراز هویت 🔒");
   return (
     <div className="container  z-20 fixed top-0 sm:top-5 text-white flex justify-between items-center py-2 pr-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl  mx-auto shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
       {/* hamb icon */}
@@ -42,8 +41,8 @@ const Header = () => {
           toggleMenu
             ? "opacity-100 pointer-events-auto"
             : "opacity-0  pointer-events-none"
-        } transition-all absolute top-20`}>
-        <DropdownMenu />
+        } transition-all absolute top-20 lg:hidden block`}>
+        <DropdownMenu setToggleMenu={setToggleMenu} />
       </div>
       {/* logo */}
       <div className="flex gap-2 items-center">

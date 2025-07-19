@@ -1,6 +1,16 @@
+"use client";
 import Button from "../UI/Button";
+import BlurText from "@/blocks/TextAnimations/BlurText/BlurText";
+import { useRef } from "react";
 
 export default function Hero() {
+  const contextRef = useRef<HTMLDivElement>(null);
+  const handleAnimationComplete = () => {
+    if (contextRef.current) {
+      contextRef.current.style.opacity = "1";
+    }
+  };
+
   return (
     <div className="lg:mt-[-8rem] flex lg:flex-row-reverse flex-col lg:[&>div]:w-1/2 [&>div]:w-full justify-between gap-20 lg:h-[100vh]">
       <div className="relative flex flex-col lg:mt-[2rem]">
@@ -8,9 +18,18 @@ export default function Hero() {
           <div className="text-[var(--blue)] mb-2 text-5xl xl:text-6xl">
             مشاور
           </div>{" "}
-          هوشمند هومینکس
+          <BlurText
+            text="هوشمند هومینکس"
+            delay={150}
+            animateBy="words"
+            direction="top"
+            onAnimationComplete={handleAnimationComplete}
+            className="text-3xl mb-8 font-mono mt-3"
+          />
         </span>
-        <p className="leading-10 text-wrap text-xl lg:text-2xl text-justify">
+        <p
+          className="leading-10 text-wrap text-xl lg:text-2xl text-justify opacity-0 transition-opacity"
+          ref={contextRef}>
           هومینکس جایی است که خرید یا اجاره ملک، از دنیای حدس و گمان خارج میشود
           و وارد مسیر تحلیل ، مقایسه و تصمیم گیری آگاهانه میشود، ما این مسیر را
           با داده های واقعی و نگاه علمی برایتان هموار میکنیم.
