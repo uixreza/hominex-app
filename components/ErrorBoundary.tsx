@@ -1,7 +1,5 @@
-// app/components/ErrorBoundary.tsx
 "use client";
-
-import React from "react";
+import React, { ErrorInfo } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -16,19 +14,18 @@ export class ErrorBoundary extends React.Component<Props, State> {
     hasError: false,
   };
 
-  static getDerivedStateFromError(_: any): State {
+  static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
-  componentDidCatch(error: any, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("🔥 ErrorBoundary caught an error:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return <div>یه مشکل کوچیک پیش اومده 🤔</div>;
+      return <div>یه مشکل کوچیک پیش اومد - لطفا دوباره تلاش کن 🤔</div>;
     }
-
     return this.props.children;
   }
 }
