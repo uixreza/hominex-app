@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Socials from "@/components/Socials";
 import ChunkErrorHandler from "@/components/ChunkErrorHandler";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import ClarityScript from "../components/ClarityScript";
 
 export const metadata: Metadata = {
   title: "Hominex | هومینکس",
@@ -49,6 +50,7 @@ export default function RootLayout({
           theme="dark"
           transition={Slide}
         />
+        <ClarityScript />
       </body>
     </html>
   );

@@ -35,7 +35,7 @@ const DropdownMenu = ({ setToggleMenu }: componentType) => {
         ویژگی خانه من
       </li>
       <Link
-        href={"https://hominex.ir/properties/"}
+        href={"/estates"}
         className="cursor-pointer flex items-center gap-2"
         onClick={() => setToggleMenu(false)}>
         <MdOutlineRealEstateAgent />

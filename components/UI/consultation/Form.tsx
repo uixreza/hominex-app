@@ -15,6 +15,8 @@ type Form = {
 
 export default function Form({ type, vals }: Form) {
   const [
+    name,
+    setName,
     price,
     setPrice,
     length,
@@ -60,6 +62,21 @@ export default function Form({ type, vals }: Form) {
   }, [type]);
   return (
     <>
+      {/*full name section */}
+      <div className="relative flex flex-col gap-2 mt-4 ">
+        <span className="absolute right-[-17px] top-[2px] text-red-400 text-2xl">
+          *
+        </span>
+        <span className="mb-2 text-[var(--blue)] font-bold">نام کامل : </span>
+        <input
+          className="border-b-2 pb-2 px-1 outline-none sm:w-1/2"
+          type="text"
+          name="name"
+          id="name"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        />
+      </div>
       {/* type of request section */}
       <div className="flex flex-col gap-2 mt-4 ">
         <span className="mb-2 text-[var(--blue)] font-bold">

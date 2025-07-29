@@ -65,6 +65,7 @@ const Page = () => {
   };
 
   // form values - Form.tsx
+  const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [length, setLength] = useState("");
   const [requestType, setRequestType] = useState("");
@@ -104,6 +105,7 @@ const Page = () => {
       }).format(date);
       const entry = {
         data: {
+          name,
           price,
           length,
           requestType,
@@ -155,6 +157,8 @@ const Page = () => {
   };
 
   const propValues = [
+    name,
+    setName,
     price,
     setPrice,
     length,
@@ -204,16 +208,13 @@ const Page = () => {
     setClientPrefer("");
     setFloorPrefer("");
     setDeadline("");
-    setDeadline("");
     setVisitMethod("");
-    setDescription("");
     setRent("");
     setMortgage("");
     setMapSelection([]);
     setEnvTypePrefer("اصلی");
     setLandLocation("");
     setLandFunctionality("");
-    setPhone("");
     setIsFormValid(false);
   }, [selectedTab]);
 
@@ -225,7 +226,8 @@ const Page = () => {
       deadline !== "" &&
       visitMethod !== "" &&
       mapSelection.length >= 1 &&
-      phone !== ""
+      phone !== "" &&
+      name !== ""
     )
       setIsFormValid(true);
     else return;

@@ -1,7 +1,7 @@
 export const routes = [
   {
     title: "بازار املاک",
-    route: "https://hominex.ir/properties/",
+    route: "/estates",
   },
   {
     title: "مشاوره خرید",
