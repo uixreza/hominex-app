@@ -2,30 +2,31 @@
 import dynamic from "next/dynamic";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import MainSkeleton from "@/components/UI/skeleton/MainSkeleton";
 
 const Hero = dynamic(() => import("../components/Home/Hero"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => <MainSkeleton />,
 });
 const Questions = dynamic(() => import("@/components/Home/Questions"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => null,
 });
 const Why = dynamic(() => import("@/components/Home/Why"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => null,
 });
 const Consult = dynamic(() => import("@/components/Home/Consult"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => null,
 });
 const Mag = dynamic(() => import("@/components/Home/Mag"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => null,
 });
 const Market = dynamic(() => import("@/components/Home/Market"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => null,
 });
 const Roadmap = dynamic(() => import("@/components/Home/Roadmap"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => null,
 });
 const Roadmap_mini = dynamic(() => import("@/components/Home/Roadmap_mini"), {
-  loading: () => <div>Loading...</div>,
+  loading: () => null,
 });
 
 export default function Home() {

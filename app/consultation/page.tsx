@@ -64,6 +64,7 @@ const Page = () => {
     }
   };
 
+  // sorry for nasty coding there were a problem with single useState
   // form values - Form.tsx
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -133,18 +134,25 @@ const Page = () => {
 
       setWait(true);
       try {
-        await axios.post("https://validitycheck.sub4u.site/", entry, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: false, // optional: true if you use cookies
-        });
+        const response = await axios.post(
+          "https://validitycheck.sub4u.site/",
+          entry,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: false, // optional: true if you use cookies
+          }
+        );
 
-        handleOpen();
-
-        setTimeout(() => {
-          handleClose();
-        }, 3000);
+        if (response.data && response.data.stat === true) {
+          handleOpen();
+          setTimeout(() => {
+            handleClose();
+          }, 3000);
+        } else {
+          notify();
+        }
       } catch (error) {
         notify();
       } finally {
