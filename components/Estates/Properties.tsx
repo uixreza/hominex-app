@@ -6,6 +6,7 @@ import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiMoneyBill } from "react-icons/ci";
 import { TbHomeEco } from "react-icons/tb";
+import { Colorless } from "../UI/Badges";
 
 type T = {
   filteredProperties: Property[];
@@ -28,17 +29,19 @@ export default function Properties({ filteredProperties, formatPrice }: T) {
               className="w-full h-48 object-cover hover:scale-105 transition-all"
             />
             <div className="p-4">
-              <h3 className="text-lg font-semibold">{property.address} </h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {property.address}{" "}
+              </h3>
               <p className="text-gray-300 flex flex-row gap-2 items-center">
                 <CiMoneyBill /> {formatPrice(property.price)}
               </p>
               <p className="text-gray-400 flex flex-row gap-2 items-center">
                 <IoLocationOutline /> {property.city}
               </p>
-              <p className="text-gray-500 text-sm mt-2 flex flex-row gap-2 items-center">
-                <TbHomeEco />
-                {property.bedrooms} تخت | {property.bathrooms} حمام | مساحت{" "}
-                {property.sqft}
+              <p className="text-gray-500 text-sm mt-5 flex flex-row gap-2 items-center">
+                <Colorless value={`${property.bedrooms} تخت`} /> •
+                <Colorless value={`${property.bathrooms} حمام`} /> •
+                <Colorless value={`${property.sqft} مساحت`} />
               </p>
               <div className="flex flex-row gap-3">
                 <Button title={"مشاهده ملک"} />

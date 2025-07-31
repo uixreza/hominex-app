@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const sections = [
   {
-    img: "/assets/img/mahallat.png",
+    img: "/assets/img/mahallat.webp",
     alt: "estate",
     title: "معرفی محله",
     text: "با تحلیل کامل بافت شهری، موقعیت جغرافیایی و دسترسی به خدمات شهری، تصویری شفاف از هر محله ارائه می‌دهیم تا شناخت دقیق‌تری پیش از تصمیم‌گیری داشته باشید.",
@@ -12,7 +12,7 @@ const sections = [
     link: "http://hominex.ir/mahallat",
   },
   {
-    img: "/assets/img/khaneman.png",
+    img: "/assets/img/khaneman.webp",
     alt: "isometric",
     title: "ویژگی خانه من",
     text: "برای هر قطعه زمین یا ملک، داده‌های شهری و تحلیلی را ترکیب می‌کنیم تا به شما نشان دهیم دقیقاً با چه خانه‌ای روبه‌رو هستید؛ از امکانات و موقعیت تا کیفیت ساخت و ویژگی های فنی ملک.",
@@ -20,7 +20,7 @@ const sections = [
     link: "/",
   },
   {
-    img: "/assets/img/takhmin.png",
+    img: "/assets/img/takhmin.webp",
     alt: "wallpaper",
     title: "تخمین قیمت ملک",
     text: "ما تنها به قیمت‌های سطح بازار اکتفا نمی‌کنیم؛ بلکه با ترکیب داده‌های اقتصادی، موقعیت جغرافیایی ملک و کیفیت ساخت‌وساز، تحلیلی چندبعدی ارائه می‌دهیم.",

@@ -22,7 +22,7 @@ const Header = () => {
   };
   const notify = () => toast("درحال انتقال به صفحه احراز هویت 🔒");
   return (
-    <div className="container  z-20 fixed top-0 sm:top-5 text-white flex justify-between items-center py-2 pr-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl  mx-auto shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
+    <div className="container  z-20 fixed top-0 sm:top-5 text-white flex justify-between items-center py-4 pr-4 sm:pl-9 px-5 sm:mt-3 h-auto sm:rounded-2xl  mx-auto shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
       {/* hamb icon */}
       {toggleMenu ? (
         <TbMenu3

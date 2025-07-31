@@ -81,3 +81,11 @@ export const Pink = ({ value }: Badge) => (
     {value}
   </span>
 );
+
+export const Colorless = ({ value }: Badge) => {
+  return (
+    <span className=" text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-sm  dark:text-blue-400 border border-blue-400">
+      {value}
+    </span>
+  );
+};

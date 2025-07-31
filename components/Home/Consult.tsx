@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Pic from "../../public/assets/img/isometric2.png";
+import Pic from "../../public/assets/img/isometric2.webp";
 import Button from "../UI/Button";
 
 export default function Consult() {
