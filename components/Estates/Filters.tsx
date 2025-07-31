@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TbBuildingEstate } from "react-icons/tb";
 import { Blue, Yellow, Indigo, Purple } from "@/components/UI/Badges";
 import { cities } from "@/public/assets/iranian_cities_fa";
@@ -11,6 +11,10 @@ type T = {
     bedrooms: string;
     bathrooms: string;
     city: string;
+    type: string;
+    propertyType: string;
+    minArea: string;
+    maxArea: string;
   };
   handleFilterChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -18,11 +22,72 @@ type T = {
 };
 
 export default function Filters({ filters, handleFilterChange }: T) {
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
+
+  // Define price ranges for dropdown
+  const priceRanges = [
+    { label: "همه قیمت‌ها", min: "", max: "" },
+    { label: "تا ۵۰۰٬۰۰۰٬۰۰۰ تومان", min: "0", max: "500000000" },
+    {
+      label: "۵۰۰٬۰۰۰٬۰۰۰ تا ۱٬۰۰۰٬۰۰۰٬۰۰۰ تومان",
+      min: "500000000",
+      max: "1000000000",
+    },
+    {
+      label: "۱٬۰۰۰٬۰۰۰٬۰۰۰ تا ۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان",
+      min: "1000000000",
+      max: "2000000000",
+    },
+    { label: "بیش از ۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان", min: "2000000000", max: "" },
+  ];
+
+  // Define area ranges for dropdown
+  const areaRanges = [
+    { label: "همه مساحت‌ها", min: "", max: "" },
+    { label: "تا ۱۰۰ متر", min: "0", max: "100" },
+    { label: "۱۰۰ تا ۲۰۰ متر", min: "100", max: "200" },
+    { label: "۲۰۰ تا ۳۰۰ متر", min: "200", max: "300" },
+    { label: "بیش از ۳۰۰ متر", min: "300", max: "" },
+  ];
+
+  // Define property types for dropdown
+  const propertyTypes = ["همه", "زمین", "اداری", "تجاری", "مسکونی"];
+
+  // Handle price range selection
+  const handlePriceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedRange = priceRanges.find(
+      (range) => range.label === e.target.value
+    );
+    if (selectedRange) {
+      handleFilterChange({
+        target: { name: "minPrice", value: selectedRange.min },
+      } as React.ChangeEvent<HTMLSelectElement>);
+      handleFilterChange({
+        target: { name: "maxPrice", value: selectedRange.max },
+      } as React.ChangeEvent<HTMLSelectElement>);
+    }
+  };
+
+  // Handle area range selection
+  const handleAreaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedRange = areaRanges.find(
+      (range) => range.label === e.target.value
+    );
+    if (selectedRange) {
+      handleFilterChange({
+        target: { name: "minArea", value: selectedRange.min },
+      } as React.ChangeEvent<HTMLSelectElement>);
+      handleFilterChange({
+        target: { name: "maxArea", value: selectedRange.max },
+      } as React.ChangeEvent<HTMLSelectElement>);
+    }
+  };
+
   return (
     <section className="text-white z-10 relative rounded-xl p-6 mb-6 | shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
       {/* dropdown menu */}
       <div className="flex justify-between">
-        <h2 className="text-3xl mb-10  font-bold text-right flex flex-row-reverse justify-end items-center gap-3">
+        <h2 className="text-3xl mb-10 font-bold text-right flex flex-row-reverse justify-end items-center gap-3">
           فیلتر املاک <TbBuildingEstate />
         </h2>
         <Dropdown />
@@ -30,124 +95,219 @@ export default function Filters({ filters, handleFilterChange }: T) {
       <div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5"
         dir="rtl">
-        {/* حداقل قیمت */}
+        {/* نوع */}
         <div>
-          <label className="block text-sm font-medium  text-right mb-3">
-            حداقل قیمت
-          </label>
-          <input
-            type="text"
-            name="minPrice"
-            value={filters.minPrice}
-            onChange={handleFilterChange}
-            placeholder="مثلاً ۱۰۰٬۰۰۰ تومان"
-            className="block w-full rounded-lg border outline-none border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          />
-        </div>
-
-        {/* حداکثر قیمت */}
-        <div>
-          <label className="block text-sm font-medium  text-right mb-3">
-            حداکثر قیمت
-          </label>
-          <input
-            type="text"
-            name="maxPrice"
-            value={filters.maxPrice}
-            onChange={handleFilterChange}
-            placeholder="مثلاً ۱٬۰۰۰٬۰۰۰ تومان"
-            className="block w-full rounded-lg border outline-none border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          />
-        </div>
-
-        {/* تعداد اتاق خواب */}
-        <div>
-          <label className="block text-sm font-medium  text-right mb-3">
-            تعداد اتاق خواب
+          <label className="block text-sm font-medium text-right mb-3">
+            نوع درخواست
           </label>
           <select
-            name="bedrooms"
-            value={filters.bedrooms}
+            name="type"
+            value={filters.type}
             onChange={handleFilterChange}
-            className="block w-full outline-none rounded-lg border-2 border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500">
-            <option value="">فرقی ندارد</option>
-            <option value="1" className="text-black">
-              ۱+
+            className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400 text-gray-100">
+            <option value="" className="text-gray-100 ">
+              همه
             </option>
-            <option value="2" className="text-black">
-              ۲+
+            <option value="خرید" className="text-gray-100 ">
+              خرید
             </option>
-            <option value="3" className="text-black">
-              ۳+
-            </option>
-            <option value="4" className="text-black">
-              ۴+
+            <option value="اجاره" className="text-gray-100 ">
+              اجاره
             </option>
           </select>
         </div>
 
-        {/* تعداد سرویس بهداشتی */}
+        {/* نوع ملک */}
         <div>
           <label className="block text-sm font-medium text-right mb-3">
-            تعداد سرویس بهداشتی
+            نوع ملک
           </label>
           <select
-            name="bathrooms"
-            value={filters.bathrooms}
+            name="propertyType"
+            value={filters.propertyType}
             onChange={handleFilterChange}
-            className="block w-full rounded-lg outline border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500">
-            <option value="" className="text-black">
-              فرقی ندارد
-            </option>
-            <option value="1" className="text-black">
-              ۱+
-            </option>
-            <option value="2" className="text-black">
-              ۲+
-            </option>
-            <option value="3" className="text-black">
-              ۳+
-            </option>
+            className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  text-gray-100">
+            {propertyTypes.map((type, i) => (
+              <option
+                key={i}
+                value={type === "همه" ? "" : type}
+                className="text-gray-100 ">
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* مساحت */}
+        <div>
+          <label className="block text-sm font-medium text-right mb-3">
+            مساحت
+          </label>
+          <select
+            name="areaRange"
+            value={
+              areaRanges.find(
+                (range) =>
+                  range.min === filters.minArea && range.max === filters.maxArea
+              )?.label || "همه مساحت‌ها"
+            }
+            onChange={handleAreaChange}
+            className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400 text-gray-100">
+            {areaRanges.map((range, i) => (
+              <option key={i} value={range.label} className="text-gray-100 ">
+                {range.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* قیمت */}
+        <div>
+          <label className="block text-sm font-medium text-right mb-3">
+            قیمت
+          </label>
+          <select
+            name="priceRange"
+            value={
+              priceRanges.find(
+                (range) =>
+                  range.min === filters.minPrice &&
+                  range.max === filters.maxPrice
+              )?.label || "همه قیمت‌ها"
+            }
+            onChange={handlePriceChange}
+            className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400 text-gray-100">
+            {priceRanges.map((range, i) => (
+              <option key={i} value={range.label} className="text-gray-100">
+                {range.label}
+              </option>
+            ))}
           </select>
         </div>
 
         {/* شهر */}
         <div>
-          <label className="block text-sm font-medium  text-right mb-3">
+          <label className="block text-sm font-medium text-right mb-3">
             شهر
           </label>
-
           <select
             name="city"
             id="city"
             value={filters.city}
             onChange={handleFilterChange}
-            className="block w-full rounded-lg outline-none border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  text-gray-100">
             {cities.map((city, i) => (
-              <option key={i} value={city} className="text-black">
+              <option key={i} value={city} className="text-gray-100 ">
                 {city}
               </option>
             ))}
           </select>
         </div>
       </div>
+
+      {/* More Options Section */}
+      {showMoreOptions && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-4" dir="rtl">
+          {/* تعداد اتاق خواب */}
+          <div>
+            <label className="block text-sm font-medium text-right mb-3">
+              تعداد اتاق خواب
+            </label>
+            <select
+              name="bedrooms"
+              value={filters.bedrooms}
+              onChange={handleFilterChange}
+              className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  text-gray-100">
+              <option value="" className="text-gray-100 ">
+                فرقی ندارد
+              </option>
+              <option value="1" className="text-gray-100 ">
+                ۱+
+              </option>
+              <option value="2" className="text-gray-100 ">
+                ۲+
+              </option>
+              <option value="3" className="text-gray-100 ">
+                ۳+
+              </option>
+              <option value="4" className="text-gray-100 ">
+                ۴+
+              </option>
+            </select>
+          </div>
+
+          {/* تعداد سرویس بهداشتی */}
+          <div>
+            <label className="block text-sm font-medium text-right mb-3">
+              تعداد سرویس بهداشتی
+            </label>
+            <select
+              name="bathrooms"
+              value={filters.bathrooms}
+              onChange={handleFilterChange}
+              className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  text-gray-100">
+              <option value="" className="text-gray-100 ">
+                فرقی ندارد
+              </option>
+              <option value="1" className="text-gray-100 ">
+                ۱+
+              </option>
+              <option value="2" className="text-gray-100 ">
+                ۲+
+              </option>
+              <option value="3" className="text-gray-100 ">
+                ۳+
+              </option>
+            </select>
+          </div>
+        </div>
+      )}
+      {/* More Options Button */}
+      <div className="mt-4 flex justify-end">
+        <button
+          type="button"
+          onClick={() => setShowMoreOptions(!showMoreOptions)}
+          className="w-full sm:w-auto px-4 py-2 rounded-lg cursor-pointer bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
+          {showMoreOptions ? "بستن گزینه‌های بیشتر" : "گزینه‌های بیشتر"}
+        </button>
+      </div>
       {/* list of badges */}
-      <div className="mt-5 flex-auto gap-3">
+      <div className="mt-5 flex flex-wrap gap-3">
         {(filters.minPrice || filters.maxPrice) && (
           <Blue
-            value={`از ${filters.minPrice || 0} -  تا ${filters.maxPrice || 0}`}
+            value={`از ${
+              filters.minPrice
+                ? parseInt(filters.minPrice).toLocaleString("fa-IR")
+                : 0
+            } - تا ${
+              filters.maxPrice
+                ? parseInt(filters.maxPrice).toLocaleString("fa-IR")
+                : "∞"
+            }`}
           />
         )}
-        {/* room count */}
+        {(filters.minArea || filters.maxArea) && (
+          <Blue
+            value={`مساحت از ${
+              filters.minArea
+                ? parseInt(filters.minArea).toLocaleString("fa-IR")
+                : 0
+            } - تا ${
+              filters.maxArea
+                ? parseInt(filters.maxArea).toLocaleString("fa-IR")
+                : "∞"
+            } متر`}
+          />
+        )}
         {filters.bedrooms && <Purple value={`${filters.bedrooms} اتاق خواب`} />}
-
-        {/* bathroom count */}
         {filters.bathrooms && (
           <Yellow value={`${filters.bathrooms} سرویس بهداشتی`} />
         )}
-
-        {/* city */}
         {filters.city && <Indigo value={`شهر ${filters.city}`} />}
+        {filters.type && <Indigo value={`نوع درخواست ${filters.type}`} />}
+        {filters.propertyType && (
+          <Indigo value={`نوع ملک ${filters.propertyType}`} />
+        )}
       </div>
     </section>
   );
