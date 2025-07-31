@@ -29,7 +29,7 @@ export default function RootLayout({
           {/* header */}
           <Header />
           {/* body */}
-          <div className="container flex flex-col items-center pt-10">
+          <div className="container flex flex-col items-center md:pt-10">
             <div className=" max-w-[1350px] w-full">
               <ErrorBoundary>{children}</ErrorBoundary>
               {/* <Waitlist /> */}

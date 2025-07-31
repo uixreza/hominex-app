@@ -132,6 +132,5 @@ This project is for demonstration and educational purposes.
 
 ## Tasks
 
-1. add multiple choice option for the map
-2. add 404 page
-3. make it responsive
+1. cleanCode ( consultation page )
+2. convert images to webp format

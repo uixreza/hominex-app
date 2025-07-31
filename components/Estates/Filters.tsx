@@ -2,6 +2,7 @@ import React from "react";
 import { TbBuildingEstate } from "react-icons/tb";
 import { Blue, Yellow, Indigo, Purple } from "@/components/UI/Badges";
 import { cities } from "@/public/assets/iranian_cities_fa";
+import Dropdown from "../UI/estates/Dropdown";
 
 type T = {
   filters: {
@@ -18,10 +19,14 @@ type T = {
 
 export default function Filters({ filters, handleFilterChange }: T) {
   return (
-    <section className="text-white rounded-xl p-6 mb-6 | shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
-      <h2 className="text-3xl mb-10  font-bold text-right flex flex-row-reverse justify-end items-center gap-3">
-        فیلتر املاک <TbBuildingEstate />
-      </h2>
+    <section className="text-white z-10 relative rounded-xl p-6 mb-6 | shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
+      {/* dropdown menu */}
+      <div className="flex justify-between">
+        <h2 className="text-3xl mb-10  font-bold text-right flex flex-row-reverse justify-end items-center gap-3">
+          فیلتر املاک <TbBuildingEstate />
+        </h2>
+        <Dropdown />
+      </div>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5"
         dir="rtl">
