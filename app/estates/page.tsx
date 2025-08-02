@@ -30,7 +30,7 @@ export default function Page() {
     () => [
       {
         id: 1,
-        image: "/assets/img/khaneman.png",
+        image: "/assets/img/khaneman.webp",
         price: 45000,
         address: "خیابان ولیعصر، پلاک ۱۲۳",
         city: "تهران",
@@ -47,7 +47,7 @@ export default function Page() {
       },
       {
         id: 1,
-        image: "/assets/img/khaneman.png",
+        image: "/assets/img/khaneman.webp",
         price: 45000,
         address: "خیابان ولیعصر، پلاک ۱۲۳",
         city: "تهران",
@@ -64,7 +64,7 @@ export default function Page() {
       },
       {
         id: 1,
-        image: "/assets/img/khaneman.png",
+        image: "/assets/img/khaneman.webp",
         price: 45000,
         address: "خیابان ولیعصر، پلاک ۱۲۳",
         city: "بجنورد",
@@ -81,7 +81,7 @@ export default function Page() {
       },
       {
         id: 1,
-        image: "/assets/img/khaneman.png",
+        image: "/assets/img/khaneman.webp",
         price: 45000,
         address: "خیابان ولیعصر، پلاک ۱۲۳",
         city: "بجنورد",
@@ -98,7 +98,7 @@ export default function Page() {
       },
       {
         id: 1,
-        image: "/assets/img/khaneman.png",
+        image: "/assets/img/khaneman.webp",
         price: 45000,
         address: "خیابان ولیعصر، پلاک ۱۲۳",
         city: "بجنورد",
@@ -116,7 +116,7 @@ export default function Page() {
 
       {
         id: 1,
-        image: "/assets/img/khaneman.png",
+        image: "/assets/img/khaneman.webp",
         price: 45000,
         address: "خیابان ولیعصر، پلاک ۱۲۳",
         city: "بجنورد",
