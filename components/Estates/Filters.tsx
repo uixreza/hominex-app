@@ -18,9 +18,9 @@ type T = {
     propertyType?: string;
     minArea?: string;
     maxArea?: string;
-    minPrice: string;
-    maxPrice: string;
-    priceRange: string;
+    minPrice?: string;
+    maxPrice?: string;
+    priceRange?: string;
   };
   handleFilterChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

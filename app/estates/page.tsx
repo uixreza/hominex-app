@@ -20,6 +20,9 @@ export interface Property {
   propertyType: string;
   minArea: string;
   maxArea: string;
+  minPrice: string;
+  maxPrice: string;
+  priceRange: string;
 }
 
 export default function Page() {
@@ -40,6 +43,7 @@ export default function Page() {
         maxArea: "2000",
         minPrice: "20000000",
         maxPrice: "300000000",
+        priceRange: "",
       },
       {
         id: 1,
@@ -56,6 +60,7 @@ export default function Page() {
         maxArea: "2000",
         minPrice: "20000000",
         maxPrice: "300000000",
+        priceRange: "",
       },
       {
         id: 1,
@@ -72,6 +77,7 @@ export default function Page() {
         maxArea: "2000",
         minPrice: "20000000",
         maxPrice: "300000000",
+        priceRange: "",
       },
       {
         id: 1,
@@ -88,6 +94,7 @@ export default function Page() {
         maxArea: "2000",
         minPrice: "20000000",
         maxPrice: "300000000",
+        priceRange: "",
       },
       {
         id: 1,
@@ -104,7 +111,9 @@ export default function Page() {
         maxArea: "2000",
         minPrice: "20000000",
         maxPrice: "300000000",
+        priceRange: "",
       },
+
       {
         id: 1,
         image: "/assets/img/khaneman.png",
@@ -120,6 +129,7 @@ export default function Page() {
         maxArea: "2000",
         minPrice: "20000000",
         maxPrice: "300000000",
+        priceRange: "",
       },
     ],
 
