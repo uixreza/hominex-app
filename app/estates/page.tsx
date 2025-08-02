@@ -38,6 +38,8 @@ export default function Page() {
         propertyType: "زمین",
         minArea: "1000",
         maxArea: "2000",
+        minPrice: "20000000",
+        maxPrice: "300000000",
       },
       {
         id: 1,
@@ -52,6 +54,8 @@ export default function Page() {
         propertyType: "زمین",
         minArea: "1000",
         maxArea: "2000",
+        minPrice: "20000000",
+        maxPrice: "300000000",
       },
       {
         id: 1,
@@ -66,6 +70,8 @@ export default function Page() {
         propertyType: "زمین",
         minArea: "1000",
         maxArea: "2000",
+        minPrice: "20000000",
+        maxPrice: "300000000",
       },
       {
         id: 1,
@@ -80,6 +86,8 @@ export default function Page() {
         propertyType: "زمین",
         minArea: "1000",
         maxArea: "2000",
+        minPrice: "20000000",
+        maxPrice: "300000000",
       },
       {
         id: 1,
@@ -94,6 +102,8 @@ export default function Page() {
         propertyType: "زمین",
         minArea: "1000",
         maxArea: "2000",
+        minPrice: "20000000",
+        maxPrice: "300000000",
       },
       {
         id: 1,
@@ -108,6 +118,8 @@ export default function Page() {
         propertyType: "زمین",
         minArea: "1000",
         maxArea: "2000",
+        minPrice: "20000000",
+        maxPrice: "300000000",
       },
     ],
 
@@ -177,7 +189,15 @@ export default function Page() {
         {/* Filter Section */}
         <Suspense fallback={<EstatesSkeleton />}>
           <FilterSection
-            filters={filters}
+            filters={{
+              ...filters,
+              bedrooms:
+                filters.bedrooms === "" ? undefined : Number(filters.bedrooms),
+              bathrooms:
+                filters.bathrooms === ""
+                  ? undefined
+                  : Number(filters.bathrooms),
+            }}
             handleFilterChange={handleFilterChange}
           />
           <PropertiesSection

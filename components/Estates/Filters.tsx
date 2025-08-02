@@ -6,15 +6,20 @@ import Dropdown from "../UI/estates/Dropdown";
 
 type T = {
   filters: {
+    id?: number;
+    image?: string;
+    price?: number;
+    address?: string;
+    city?: string;
+    bedrooms?: number;
+    bathrooms?: number;
+    sqft?: number;
+    type?: string;
+    propertyType?: string;
+    minArea?: string;
+    maxArea?: string;
     minPrice: string;
     maxPrice: string;
-    bedrooms: string;
-    bathrooms: string;
-    city: string;
-    type: string;
-    propertyType: string;
-    minArea: string;
-    maxArea: string;
   };
   handleFilterChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -27,18 +32,18 @@ export default function Filters({ filters, handleFilterChange }: T) {
   // Define price ranges for dropdown
   const priceRanges = [
     { label: "همه قیمت‌ها", min: "", max: "" },
-    { label: "تا ۵۰۰٬۰۰۰٬۰۰۰ تومان", min: "0", max: "500000000" },
+    { label: "تا 500 میلیون", min: "0", max: "500000000" },
     {
-      label: "۵۰۰٬۰۰۰٬۰۰۰ تا ۱٬۰۰۰٬۰۰۰٬۰۰۰ تومان",
+      label: "500 میلیون تا 1 میلیارد",
       min: "500000000",
       max: "1000000000",
     },
     {
-      label: "۱٬۰۰۰٬۰۰۰٬۰۰۰ تا ۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان",
+      label: "1 میلیارد تا 2 میلیارد",
       min: "1000000000",
       max: "2000000000",
     },
-    { label: "بیش از ۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان", min: "2000000000", max: "" },
+    { label: "بیش از 2 میلیارد", min: "2000000000", max: "" },
   ];
 
   // Define area ranges for dropdown
@@ -105,13 +110,13 @@ export default function Filters({ filters, handleFilterChange }: T) {
             value={filters.type}
             onChange={handleFilterChange}
             className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400 text-gray-100">
-            <option value="" className="text-gray-100 ">
+            <option value="" className="text-black ">
               همه
             </option>
-            <option value="خرید" className="text-gray-100 ">
+            <option value="خرید" className="text-black ">
               خرید
             </option>
-            <option value="اجاره" className="text-gray-100 ">
+            <option value="اجاره" className="text-black ">
               اجاره
             </option>
           </select>
@@ -131,7 +136,7 @@ export default function Filters({ filters, handleFilterChange }: T) {
               <option
                 key={i}
                 value={type === "همه" ? "" : type}
-                className="text-gray-100 ">
+                className="text-black ">
                 {type}
               </option>
             ))}
@@ -154,7 +159,7 @@ export default function Filters({ filters, handleFilterChange }: T) {
             onChange={handleAreaChange}
             className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400 text-gray-100">
             {areaRanges.map((range, i) => (
-              <option key={i} value={range.label} className="text-gray-100 ">
+              <option key={i} value={range.label} className="text-black ">
                 {range.label}
               </option>
             ))}
@@ -173,12 +178,29 @@ export default function Filters({ filters, handleFilterChange }: T) {
                 (range) =>
                   range.min === filters.minPrice &&
                   range.max === filters.maxPrice
-              )?.label || "همه قیمت‌ها"
+              )?.label ||
+              filters.priceRange ||
+              "همه قیمت‌ها"
             }
-            onChange={handlePriceChange}
+            onChange={(e) => {
+              const selectedRange = priceRanges.find(
+                (range) => range.label === e.target.value
+              );
+              if (selectedRange) {
+                handleFilterChange({
+                  target: { name: "minPrice", value: selectedRange.min },
+                } as React.ChangeEvent<HTMLSelectElement>);
+                handleFilterChange({
+                  target: { name: "maxPrice", value: selectedRange.max },
+                } as React.ChangeEvent<HTMLSelectElement>);
+                handleFilterChange({
+                  target: { name: "priceRange", value: selectedRange.label },
+                } as React.ChangeEvent<HTMLSelectElement>);
+              }
+            }}
             className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400 text-gray-100">
             {priceRanges.map((range, i) => (
-              <option key={i} value={range.label} className="text-gray-100">
+              <option key={i} value={range.label} className="text-black">
                 {range.label}
               </option>
             ))}
@@ -197,7 +219,7 @@ export default function Filters({ filters, handleFilterChange }: T) {
             onChange={handleFilterChange}
             className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  text-gray-100">
             {cities.map((city, i) => (
-              <option key={i} value={city} className="text-gray-100 ">
+              <option key={i} value={city} className="text-black ">
                 {city}
               </option>
             ))}
@@ -218,19 +240,19 @@ export default function Filters({ filters, handleFilterChange }: T) {
               value={filters.bedrooms}
               onChange={handleFilterChange}
               className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  text-gray-100">
-              <option value="" className="text-gray-100 ">
+              <option value="" className="text-black ">
                 فرقی ندارد
               </option>
-              <option value="1" className="text-gray-100 ">
+              <option value="1" className="text-black ">
                 ۱+
               </option>
-              <option value="2" className="text-gray-100 ">
+              <option value="2" className="text-black ">
                 ۲+
               </option>
-              <option value="3" className="text-gray-100 ">
+              <option value="3" className="text-black ">
                 ۳+
               </option>
-              <option value="4" className="text-gray-100 ">
+              <option value="4" className="text-black ">
                 ۴+
               </option>
             </select>
@@ -245,17 +267,17 @@ export default function Filters({ filters, handleFilterChange }: T) {
               name="bathrooms"
               value={filters.bathrooms}
               onChange={handleFilterChange}
-              className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  text-gray-100">
-              <option value="" className="text-gray-100 ">
+              className="block w-full rounded-lg outline-none border border-gray-600 px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400  ">
+              <option value="" className=" text-black ">
                 فرقی ندارد
               </option>
-              <option value="1" className="text-gray-100 ">
+              <option value="1" className=" text-black ">
                 ۱+
               </option>
-              <option value="2" className="text-gray-100 ">
+              <option value="2" className=" text-black ">
                 ۲+
               </option>
-              <option value="3" className="text-gray-100 ">
+              <option value="3" className=" text-black ">
                 ۳+
               </option>
             </select>
@@ -268,7 +290,7 @@ export default function Filters({ filters, handleFilterChange }: T) {
           type="button"
           onClick={() => setShowMoreOptions(!showMoreOptions)}
           className="w-full sm:w-auto px-4 py-2 rounded-lg cursor-pointer bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
-          {showMoreOptions ? "بستن گزینه‌های بیشتر" : "گزینه‌های بیشتر"}
+          {showMoreOptions ? "گزینه های کمتر" : "گزینه‌های بیشتر"}
         </button>
       </div>
       {/* list of badges */}
