@@ -7,13 +7,13 @@ type T = {
 };
 
 export default function Wrapper({ children }: T) {
-  const [stat, setStat] = useState<boolean | undefined>(undefined);
+  const [stat, setStat] = useState<boolean | undefined>(true);
 
-  useEffect(() => {
-    axios.get("https://validitycheck.sub4u.site/cont").then((res) => {
-      setStat(res.data.stat);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("https://validitycheck.sub4u.site/cont").then((res) => {
+  //     setStat(res.data.stat);
+  //   });
+  // }, []);
 
   return (
     <>

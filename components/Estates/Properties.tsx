@@ -7,6 +7,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { CiMoneyBill } from "react-icons/ci";
 import { TbHomeEco } from "react-icons/tb";
 import { Colorless } from "../UI/Badges";
+import Link from "next/link";
 
 type T = {
   filteredProperties: Property[];
@@ -44,7 +45,7 @@ export default function Properties({ filteredProperties, formatPrice }: T) {
                 <Colorless value={`${property.sqft} مساحت`} />
               </p>
               <div className="flex flex-row gap-3">
-                <Button title={"مشاهده ملک"} />
+                <Button title={"مشاهده ملک"} id={property.id} />
                 <LikeButton id={i} />
               </div>
             </div>

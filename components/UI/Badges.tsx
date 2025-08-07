@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 type Badge = {
   value: string;
 };
@@ -57,6 +59,13 @@ export const Yellow = ({ value }: Badge) => (
     id="badge-dismiss-yellow"
     className="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-yellow-800 bg-yellow-100 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
     {value}
+  </span>
+);
+export const YellowChildren = ({ children }: { children: ReactNode }) => (
+  <span
+    id="badge-dismiss-yellow"
+    className="inline-flex flex-row-reverse items-center px-2 py-1 me-2 text-sm font-medium text-yellow-800 bg-yellow-100 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
+    {children}
   </span>
 );
 
