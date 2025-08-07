@@ -12,6 +12,7 @@ import Wrapper from "@/components/Wrapper";
 export const metadata: Metadata = {
   title: "Hominex | هومینکس",
   description: "خونه رویاییتو با یک تصمیم هوشمند انتخاب کن",
+  themeColor: "#353535",
 };
 
 export default function RootLayout({

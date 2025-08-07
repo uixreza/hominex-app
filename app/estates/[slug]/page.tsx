@@ -3,8 +3,8 @@ import { VscArrowSmallRight } from "react-icons/vsc";
 import Link from "next/link";
 import RealEstateOwnerCard from "@/components/UI/estates/RealEstateOwnerCard";
 import EstateDetails from "@/components/UI/estates/EstateDetails";
-import dynamic from "next/dynamic";
 import NoSSRWrapper from "@/components/UI/estates/NoSSRWrapper";
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -52,7 +52,7 @@ export default async function BlogPostPage({
           images={["/assets/img/khaneman.webp", "/assets/svg/default.svg"]}
         />
       </div>
-      <div className="flex flex-row-reverse w-full">
+      <div className="flex md:flex-row-reverse w-full flex-col items-center">
         <div className="flex flex-col gap-5">
           <RealEstateOwnerCard
             ownerName="aliza"

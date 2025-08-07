@@ -55,18 +55,18 @@ export default function EstateDetails({ estate }: EstateDetailsProps) {
   return (
     <div
       dir="rtl"
-      className=" p-6 rounded-lg  transition-shadow duration-200 w-full max-w-3xl mx-auto">
+      className=" py-6 rounded-lg  transition-shadow duration-200 w-full max-w-full ml-30 mx-auto">
       {/* Action Icons */}
       <div className="flex justify-end gap-4 mb-4">
         <button
           onClick={handleShare}
-          className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
+          className="text-gray-600 cursor-pointer dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
           title="اشتراک‌گذاری">
           <FaShareAlt className="w-5 h-5" />
         </button>
         <button
           onClick={handleBookmark}
-          className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
+          className="text-gray-600 cursor-pointer dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
           title={isBookmarked ? "حذف از نشان‌شده‌ها" : "افزودن به نشان‌شده‌ها"}>
           {isBookmarked ? (
             <FaBookmark className="w-5 h-5" />

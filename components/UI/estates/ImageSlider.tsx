@@ -1,6 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { PiSelectionAllDuotone } from "react-icons/pi";
+import FullScreenViewer from "@/components/UI/estates/FullScreenViewer";
 
 interface ImageSliderProps {
   images: string[];
@@ -8,6 +10,7 @@ interface ImageSliderProps {
 
 export default function ImageSlider({ images }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [viewerPath, setViewerPath] = useState<string>("");
 
   // Navigate to previous slide
   const prevSlide = () => {
@@ -87,11 +90,22 @@ export default function ImageSlider({ images }: ImageSliderProps) {
               className="w-full h-full object-cover"
             />
             {currentIndex === index && (
-              <div className="absolute inset-0 bg-blue-500 bg-opacity-20" />
+              <div className="absolute w-full h-full border-none flex bg-gray-500/50 backdrop-blur-md inset-0 justify-center items-center">
+                <PiSelectionAllDuotone
+                  onClick={() => setViewerPath(image)}
+                  className="w-10 h-10 cursor-pointer text-white "
+                />
+              </div>
             )}
           </button>
         ))}
       </div>
+      {viewerPath !== "" ? (
+        <FullScreenViewer
+          viewerPath={viewerPath}
+          setViewerPath={setViewerPath}
+        />
+      ) : null}
     </div>
   );
 }
