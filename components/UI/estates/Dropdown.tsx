@@ -1,7 +1,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { IoMdStarOutline } from "react-icons/io";
-import Link from "next/link";
 import { BsSortUpAlt } from "react-icons/bs";
 import { BsSortDown } from "react-icons/bs";
 import { useState } from "react";

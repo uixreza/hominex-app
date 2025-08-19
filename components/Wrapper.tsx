@@ -1,7 +1,6 @@
 "use client";
-import React, { ReactNode, useState, useEffect } from "react";
-import axios from "axios";
-
+import React, { ReactNode, useState } from "react";
+/* eslint-disable */
 type T = {
   children: ReactNode;
 };

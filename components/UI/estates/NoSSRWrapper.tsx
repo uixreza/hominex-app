@@ -11,14 +11,13 @@ type Props = {
   latitude: number;
   longitude: number;
   zoom: number;
-  geoJsonUrl: any;
+  geoJsonUrl: string;
   popupContent: string;
 };
 
 export default function NoSSRWrapper({
   latitude,
   longitude,
-  zoom,
   geoJsonUrl,
   popupContent,
 }: Props) {

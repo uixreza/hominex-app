@@ -2,13 +2,14 @@ import Image from "next/image";
 import React from "react";
 import { FaStar, FaStarHalfAlt, FaPhone } from "react-icons/fa";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
-import { FaInstagram } from "react-icons/fa6";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 interface RealEstateOwnerCardProps {
   profilePicture?: string;
   realEstateName: string;
   ownerName: string;
   rating: number; // Rating out of 5 (e.g., 4.5)
   phoneNumber: string;
+  setChat: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function RealEstateOwnerCard({
@@ -17,6 +18,7 @@ export default function RealEstateOwnerCard({
   ownerName,
   rating,
   phoneNumber,
+  setChat,
 }: RealEstateOwnerCardProps) {
   // Calculate full, half, and empty stars
   const fullStars = Math.floor(rating);
@@ -24,10 +26,10 @@ export default function RealEstateOwnerCard({
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   return (
-    <div className="flex gap-3 flex-col items-center w-sm mx-auto">
+    <div className="flex gap-3 flex-col items-center sm:w-sm w-screen  sm:mx-auto">
       <div
         dir="rtl"
-        className="p-6 rounded-lg shadow-md transition-shadow duration-200 w-full max-w-sm mx-auto |backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
+        className="p-6 sm:rounded-lg shadow-md transition-shadow duration-200 w-full max-w-sm mx-auto |backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
         <div className="flex flex-col items-center">
           {/* Profile Picture */}
           <div className="relative">
@@ -97,12 +99,12 @@ export default function RealEstateOwnerCard({
             <FaPhone className="w-4 h-4 ml-2" />
             تماس
           </a>
-          <a
-            href={`tel:${phoneNumber}`}
-            className="flex items-center justify-center w-full py-2 px-4 border-2 border-blue-500 text-blue-500 mt-3 hover:text-white rounded-md hover:bg-blue-500 transition-colors duration-200">
-            <FaInstagram className="w-4 h-4 ml-2" />
-            اینستاگرام
-          </a>
+          <button
+            onClick={() => setChat(true)}
+            className="flex cursor-pointer items-center justify-center w-full py-2 px-4 border-2 border-blue-500 text-blue-500 mt-3 hover:text-white rounded-md hover:bg-blue-500 transition-colors duration-200">
+            <IoChatbubbleEllipsesOutline className="w-4 h-4 ml-2" />
+            ارسال پیام
+          </button>
         </div>
       </div>
       <span className="flex flex-row items-center gap-2 cursor-pointer font-light">

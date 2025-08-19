@@ -87,14 +87,15 @@ export default function EstateDetails({ estate }: EstateDetailsProps) {
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">قیمت هر متر:</span>{" "}
-            {estate.pricePerMeter}
+            {estate.pricePerMeter} تومان
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">تاریخ انتشار:</span>{" "}
             {estate.publishedDate}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">قیمت کل:</span> {estate.overallPrice}
+            <span className="font-medium">قیمت کل:</span> {estate.overallPrice}{" "}
+            تومان
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium ml-2">کد ملک:</span>

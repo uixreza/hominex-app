@@ -1,9 +1,9 @@
 import Image from "next/image";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 type Props = {
   viewerPath: string;
-  setViewerPath: any;
+  setViewerPath: Dispatch<SetStateAction<string>>;
 };
 export default function FullScreenViewer({ viewerPath, setViewerPath }: Props) {
   return (
@@ -15,7 +15,7 @@ export default function FullScreenViewer({ viewerPath, setViewerPath }: Props) {
         width={1000}
         height={1000}
         alt={viewerPath}
-        className="rounded-sm w-[50rem] h-[25rem]"
+        className="rounded-sm w-2/3 h-auto"
       />
     </div>
   );

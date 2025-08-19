@@ -60,19 +60,19 @@ export default function Filters({ filters, handleFilterChange }: T) {
   const propertyTypes = ["همه", "زمین", "اداری", "تجاری", "مسکونی"];
 
   // Handle price range selection
-  const handlePriceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedRange = priceRanges.find(
-      (range) => range.label === e.target.value
-    );
-    if (selectedRange) {
-      handleFilterChange({
-        target: { name: "minPrice", value: selectedRange.min },
-      } as React.ChangeEvent<HTMLSelectElement>);
-      handleFilterChange({
-        target: { name: "maxPrice", value: selectedRange.max },
-      } as React.ChangeEvent<HTMLSelectElement>);
-    }
-  };
+  // const handlePriceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const selectedRange = priceRanges.find(
+  //     (range) => range.label === e.target.value
+  //   );
+  //   if (selectedRange) {
+  //     handleFilterChange({
+  //       target: { name: "minPrice", value: selectedRange.min },
+  //     } as React.ChangeEvent<HTMLSelectElement>);
+  //     handleFilterChange({
+  //       target: { name: "maxPrice", value: selectedRange.max },
+  //     } as React.ChangeEvent<HTMLSelectElement>);
+  //   }
+  // };
 
   // Handle area range selection
   const handleAreaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

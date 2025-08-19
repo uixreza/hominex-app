@@ -1,8 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { PiSelectionAllDuotone } from "react-icons/pi";
 import FullScreenViewer from "@/components/UI/estates/FullScreenViewer";
+import Image from "next/image";
 
 interface ImageSliderProps {
   images: string[];
@@ -34,12 +35,14 @@ export default function ImageSlider({ images }: ImageSliderProps) {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="w-full max-w-4xl mx-auto sm:p-4 my-5 sm:my-0">
       {/* Main Slider */}
       <div className="relative w-full aspect-[16/9] bg-gray-200 rounded-lg overflow-hidden shadow-lg">
         {/* Main Image */}
-        <img
+        <Image
           src={images[currentIndex]}
+          width={1000}
+          height={1000}
           alt={`Slide ${currentIndex + 1}`}
           className="w-full h-full object-cover"
         />
@@ -84,8 +87,10 @@ export default function ImageSlider({ images }: ImageSliderProps) {
             className={`relative aspect-[4/3] rounded-md overflow-hidden border-2 transition-all duration-200 ${
               currentIndex === index ? "border-blue-500" : "border-transparent"
             }`}>
-            <img
+            <Image
               src={image}
+              width={100}
+              height={100}
               alt={`Thumbnail ${index + 1}`}
               className="w-full h-full object-cover"
             />

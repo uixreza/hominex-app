@@ -1,5 +1,5 @@
 "use client";
-
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import {
   MapContainer,
@@ -80,7 +80,7 @@ export default function LightModeMap({
   return (
     <div
       dir="rtl"
-      className="w-full z-0 max-w-[500px] h-[300px] bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden mx-auto">
+      className="sm:w-full z-0 max-w-[500px] h-[300px] bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden sm:mx-auto mx-4">
       <MapContainer
         center={position}
         zoom={zoom}

@@ -5,9 +5,7 @@ import { Property } from "@/app/estates/page";
 import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiMoneyBill } from "react-icons/ci";
-import { TbHomeEco } from "react-icons/tb";
 import { Colorless } from "../UI/Badges";
-import Link from "next/link";
 
 type T = {
   filteredProperties: Property[];
