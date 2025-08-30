@@ -134,25 +134,25 @@ const Page = () => {
 
       setWait(true);
       try {
-        const response = await axios.post(
-          "https://validitycheck.sub4u.site/",
-          entry,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: false, // optional: true if you use cookies
-          }
-        );
-
-        if (response.data && response.data.stat === true) {
-          handleOpen();
-          setTimeout(() => {
-            handleClose();
-          }, 3000);
-        } else {
-          notify();
-        }
+        // const response = await axios.post(
+        //   "https://validitycheck.sub4u.site/",
+        //   entry,
+        //   {
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     withCredentials: false, // optional: true if you use cookies
+        //   }
+        // );
+        console.log(entry);
+        // if (response.data && response.data.stat === true) {
+        //   handleOpen();
+        //   setTimeout(() => {
+        //     handleClose();
+        //   }, 3000);
+        // } else {
+        //   notify();
+        // }
       } catch (error) {
         notify();
       } finally {

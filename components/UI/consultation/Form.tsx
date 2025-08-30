@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { FormEvent, useEffect } from "react";
 import dynamic from "next/dynamic";
 const Map = dynamic(() => import("@/components/UI/consultation/map"), {
   ssr: false,
@@ -11,6 +11,10 @@ import { addCommasToNumber } from "@/utils/digits";
 type Form = {
   type: number;
   vals: any[];
+};
+
+const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 };
 
 export default function Form({ type, vals }: Form) {
@@ -63,7 +67,7 @@ export default function Form({ type, vals }: Form) {
 
   return (
     <div className="max-w-3xl mx-auto py-6">
-      <form className="space-y-6" dir="rtl">
+      <form className="space-y-6" dir="rtl" onSubmit={(e) => handleSubmit(e)}>
         {/* Full Name and Phone Number Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="relative">

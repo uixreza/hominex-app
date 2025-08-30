@@ -63,25 +63,30 @@ const Header = () => {
       <div className="hidden lg:flex">
         <ul className="flex gap-7 mr-[-90px] sm:mr-0 justify-center [&>li]:cursor-pointer [&>li]:relative">
           {routes.map((item: routeItem, i: number) => (
-            <li key={i} className="group flex flex-col items-center">
+            <li key={i} className="relative group flex flex-col items-center">
               <Link
                 href={item.route}
                 className="relative z-10 transition-colors duration-300 group-hover:text-white/70">
                 {item.title}
               </Link>
+              {item.title === "ویژگی خانه من" && (
+                <span
+                  id="badge-dismiss-green"
+                  className="inline-flex absolute top-[-20px] animate-pulse left-[-15px] z-10  items-center px-2 py-1 me-2 text-[10px] font-medium text-green-800 bg-green-100 rounded-full dark:bg-green-900/50 dark:text-green-300">
+                  بزودی
+                </span>
+              )}
             </li>
           ))}
         </ul>
       </div>
-      <Link
-        href="https://hominex.ir/account/dashboard/"
-        className="sm:block hidden">
+      <a href="https://dash.hominow.ir/" className="sm:block hidden">
         <div
           onClick={notify}
           className="cursor-pointer transition-all transition-normal hover:bg-white sm:p-3 rounded-sm hover:text-black">
           <FiUser className="text-2xl" />
         </div>
-      </Link>
+      </a>
     </div>
   );
 };

@@ -19,12 +19,13 @@ export default function Properties({ filteredProperties, formatPrice }: T) {
         filteredProperties.map((property, i) => (
           <div
             key={i}
-            className=" rounded-lg text-white overflow-hidden hover:shadow-lg transition-shadow duration-300 | shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
+            className="rounded-lg text-white overflow-hidden hover:shadow-lg transition-shadow duration-300 | shadow-lg backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
             <Image
-              src={property.image}
+              src={property.image || "/assets/img/not.jpg"}
               alt={property.address}
               width={1000}
               height={1000}
+              unoptimized={true}
               className="w-full h-48 object-cover hover:scale-105 transition-all"
             />
             <div className="p-4">
@@ -32,7 +33,7 @@ export default function Properties({ filteredProperties, formatPrice }: T) {
                 {property.address}{" "}
               </h3>
               <p className="text-gray-300 flex flex-row gap-2 items-center">
-                <CiMoneyBill /> {formatPrice(property.price)}
+                <CiMoneyBill /> {formatPrice(property.price!)}
               </p>
               <p className="text-gray-400 flex flex-row gap-2 items-center">
                 <IoLocationOutline /> {property.city}

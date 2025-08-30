@@ -131,8 +131,7 @@ input[type="radio"] {
 
 /* carousel */
 
-[class^="number-slide"],
-[class*=" number-slide"] {
+[class^="number-slide"] {
   background: grey;
   display: flex;
   align-items: center;

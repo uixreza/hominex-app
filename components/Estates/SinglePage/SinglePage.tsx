@@ -1,45 +1,57 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import ImageSlider from "@/components/UI/estates/ImageSlider";
 import { VscArrowSmallRight } from "react-icons/vsc";
 import Link from "next/link";
 import RealEstateOwnerCard from "@/components/UI/estates/RealEstateOwnerCard";
 import EstateDetails from "@/components/UI/estates/EstateDetails";
-import NoSSRWrapper from "@/components/UI/estates/NoSSRWrapper";
+import { useSelector } from "react-redux";
+import { RootState } from "@/Redux/store";
 import Chatbox from "@/components/UI/estates/Chatbox";
 import { useState } from "react";
+import { url_v1 } from "@/config/urls";
+import { successToast, infoToast } from "@/components/UI/Toasts";
+import { Estate } from "@/app/estates/[slug]/page";
 
-export default function SinglePage() {
+export default function SinglePage({ estate }: { estate: Estate }) {
   const [chat, setChat] = useState<boolean>(false);
-  const estate = {
-    title: "واحد 120 متری واقع در خیام 8",
-    pricePerMeter: "1.800.000",
-    publishedDate: "19 اردی 1403",
-    overallPrice: "890.000.000",
-    estateCode: "3926397",
-    propertyType: "آپارتمان",
-    buildDate: "1398",
-    rooms: 3,
-    bathrooms: 2,
-    floors: 5,
-    apartmentsPerFloor: 2,
-    geographicalDirection: "شمالی",
-    apartmentArea: "120",
-    overallArea: "150",
-    documentType: "سند تک برگ",
-    floorForSale: 3,
-    features: {
-      elevator: true,
-      warehouse: false,
-      parking: true,
-      loan: false,
-      balcony: true,
-    },
-    description:
-      "این واحد در خیام 8 واقع شده و دارای نورگیری عالی، طراحی مدرن، و دسترسی آسان به مراکز خرید و حمل‌ونقل عمومی می‌باشد.",
+  const token = useSelector((state: RootState) => state.auth.token);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // ensures client-side rendering
+  }, []);
+  console.log("here boy:", estate);
+  if (!isClient) return null; // avoid server/client mismatch
+
+  // bookmark button functionality
+  const bookmark = async () => {
+    try {
+      const req = await fetch(url_v1(`/user/favorites/${estate.id}`), {
+        method: "POST", // or POST depending on your API
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Always try to parse JSON
+      const data = await req.json();
+      console.log(token);
+      if (req?.ok) {
+        successToast(data.message);
+      } else {
+        infoToast(data.message);
+      }
+      console.log(data);
+    } catch (err) {
+      console.error("Fetch error:", err);
+      infoToast("خطا در اتصال به سرور.");
+    }
   };
+
   return (
     <div className="flex flex-col w-full">
+      <span>{token}</span>
       <Link
         href={"/estates"}
         className="border border-gray-400 flex flex-row-reverse w-fit p-2 rounded-md shadow-md cursor-pointer hover:ring-1 ring-white transition-all justify-center items-center">
@@ -47,28 +59,34 @@ export default function SinglePage() {
       </Link>
       <div>
         <ImageSlider
-          images={["/assets/img/khaneman.webp", "/assets/svg/default.svg"]}
+          images={
+            estate.images.length > 0
+              ? estate.images
+              : ["/assets/svg/default.svg"]
+          }
         />
       </div>
       <div className="flex md:flex-row-reverse w-full flex-col items-center">
         <div className="flex flex-col gap-5">
           <RealEstateOwnerCard
-            ownerName="aliza"
-            phoneNumber="09931911212"
-            realEstateName="Akhte"
-            rating={3}
-            profilePicture="/assets/svg/default.svg"
+            ownerName={estate.owner.name}
+            phoneNumber={estate.owner.phoneNumber}
+            realEstateName={estate.owner.realEstateName}
+            rating={estate.owner.rating}
+            profilePicture={estate.owner.profilePicture}
             setChat={setChat}
           />
-          <NoSSRWrapper
-            latitude={37.493}
-            longitude={57.32}
+
+          {/* map is here */}
+          {/* <NoSSRWrapper
+            latitude={estate.location.latitude}
+            longitude={estate.location.longitude}
             zoom={10}
             geoJsonUrl={"/assets/mahalle_21kh_M_FeaturesToJSO.geojson"}
-            popupContent="مشاور املاک آخته"
-          />
+            popupContent={estate.owner.realEstateName}
+          /> */}
         </div>
-        <EstateDetails estate={estate} />
+        <EstateDetails estate={estate} bookmark={bookmark} />
       </div>
       <Chatbox chat={chat} setChat={setChat} />
     </div>

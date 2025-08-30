@@ -1,47 +1,20 @@
 "use client";
-import React, { useState, useMemo, Suspense, useEffect } from "react";
-import { cities } from "@/public/assets/iranian_cities_fa";
+
+import React, { useMemo, useState, useEffect, Suspense } from "react";
 import EstatesSkeleton from "@/components/UI/skeleton/EstatesSkeleton";
+
 const FilterSection = React.lazy(() => import("@/components/Estates/Filters"));
 const PropertiesSection = React.lazy(
   () => import("@/components/Estates/PropertiesCard")
 );
+
+import { cities } from "@/public/assets/iranian_cities_fa";
+import { Filters, Property } from "@/app/estates/page";
 import { url_v1 } from "@/config/urls";
 
-export interface Property {
-  id: number;
-  image: string;
-  price: number | null; // Allow null for price
-  address: string;
-  city: string;
-  bedrooms: number;
-  bathrooms: number;
-  sqft: number;
-  type: string;
-  propertyType: string;
-  minArea: string;
-  maxArea: string;
-  minPrice: string;
-  maxPrice: string;
-  priceRange: string;
-  isFeatured: boolean;
-}
-
-export interface Filters {
-  minPrice: string;
-  maxPrice: string;
-  bedrooms: string;
-  bathrooms: string;
-  city: string;
-  propertyType?: string;
-  transactionType?: string;
-  isFeatured?: boolean;
-  sortBy?: string;
-}
-
-export default function Page() {
+const RealStateProperties = () => {
   const [properties, setProperties] = useState<Property[]>([]);
-  const [filters, setFilters] = useState<Filters>(() => ({
+  const [filters, setFilters] = useState<Filters>({
     minPrice: "",
     maxPrice: "",
     bedrooms: "",
@@ -51,22 +24,21 @@ export default function Page() {
     transactionType: "",
     isFeatured: false,
     sortBy: "newest",
-  }));
+  });
 
-  // Function to format number with commas
+  // Format number with commas
   const formatNumberWithCommas = (value: string): string => {
     const cleanedValue = value.replace(/[^0-9]/g, "");
     if (!cleanedValue) return "";
     return parseInt(cleanedValue).toLocaleString("en-EN");
   };
 
-  // Fetch properties from API
+  // Fetch properties whenever filters change
   useEffect(() => {
     const fetchProperties = async () => {
       try {
         const queryParams = new URLSearchParams();
 
-        // Add filters to query parameters
         if (filters.minPrice)
           queryParams.append("min_price", filters.minPrice.replace(/,/g, ""));
         if (filters.maxPrice)
@@ -84,55 +56,36 @@ export default function Page() {
 
         const response = await fetch(
           url_v1(`/properties?${queryParams.toString()}`),
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          { method: "GET", headers: { "Content-Type": "application/json" } }
         );
 
         const result = await response.json();
-        console.log("API response:", result);
         if (result.success) {
-          // Map API response to component's Property interface
-          const mappedProperties: Property[] = result.data.properties
-            .map(
-              // eslint-disable-next-line
-              (prop: any) => {
-                // Handle null or undefined total_price
-                const totalPrice = prop.total_price ?? 0; // Fallback to 0 if null
-                return {
-                  id: prop.id,
-                  image: prop.primary_image_url || "/assets/img/not.jpg", // Fallback for image
-                  price: totalPrice, // Allow null or number
-                  address: prop.title || "بدون عنوان",
-                  city: prop.city || "نامشخص",
-                  bedrooms: prop.rooms_count || 0,
-                  bathrooms: prop.amenities?.includes("حمام") ? 1 : 0,
-                  sqft: prop.building_area || 0,
-                  type: prop.transaction_type_label || "نامشخص",
-                  propertyType: prop.property_type || "نامشخص",
-                  minArea: prop.land_area?.toString() || "0",
-                  maxArea: prop.building_area?.toString() || "0",
-                  minPrice: totalPrice.toString(), // Safe, as totalPrice is now a number
-                  maxPrice: totalPrice.toString(),
-                  priceRange:
-                    prop.formatted_price ||
-                    formatNumberWithCommas(totalPrice.toString()),
-                  isFeatured: prop.is_featured || false,
-                };
-              }
-            )
-            .filter((prop: Property) => prop.id); // Filter out invalid properties
+          const mappedProperties: Property[] = result.data.properties.map(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (prop: any) => ({
+              id: prop.id,
+              image: prop.primary_image_url,
+              price: prop.total_price,
+              address: prop.title,
+              city: prop.city,
+              bedrooms: prop.rooms_count,
+              bathrooms: prop.amenities.includes("حمام") ? 1 : 0,
+              sqft: prop.building_area,
+              type: prop.transaction_type_label,
+              propertyType: prop.property_type,
+              minArea: prop.land_area?.toString() || "",
+              maxArea: prop.building_area?.toString() || "",
+              minPrice: prop.total_price?.toString() || "",
+              maxPrice: prop.total_price?.toString() || "",
+              priceRange: prop.formatted_price,
+              isFeatured: prop.is_featured || false,
+            })
+          );
           setProperties(mappedProperties);
-        } else {
-          console.error("API error:", result.message);
-          setProperties([]);
         }
       } catch (error) {
         console.error("Error fetching properties:", error);
-        setProperties([]);
       }
     };
 
@@ -152,7 +105,7 @@ export default function Page() {
     }
   };
 
-  // Filter properties client-side (optional fallback)
+  // Client-side filtering fallback
   const filteredProperties = useMemo(() => {
     return properties.filter((property) => {
       const minPrice = filters.minPrice
@@ -163,10 +116,8 @@ export default function Page() {
         : null;
 
       return (
-        (!minPrice ||
-          (property.price !== null && property.price >= minPrice)) &&
-        (!maxPrice ||
-          (property.price !== null && property.price <= maxPrice)) &&
+        (!minPrice || property.price! >= minPrice) &&
+        (!maxPrice || property.price! <= maxPrice) &&
         (!filters.bedrooms ||
           property.bedrooms >= parseInt(filters.bedrooms)) &&
         (!filters.bathrooms ||
@@ -182,11 +133,8 @@ export default function Page() {
     });
   }, [properties, filters]);
 
-  // Format price for display
-  const formatPrice = (price: number | null) =>
-    price !== null
-      ? `${new Intl.NumberFormat("fa-FA").format(price)} تومان`
-      : "قیمت نامشخص";
+  const formatPrice = (price: number) =>
+    `${new Intl.NumberFormat("fa-FA").format(price)} تومان`;
 
   return (
     <div className="min-h-screen bg-transparent">
@@ -212,4 +160,6 @@ export default function Page() {
       </main>
     </div>
   );
-}
+};
+
+export default RealStateProperties;

@@ -1,16 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaShareAlt, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { YellowChildren } from "../Badges";
 import { TbQrcode } from "react-icons/tb";
 
 interface EstateDetailsProps {
   estate: {
+    id?: number;
     title: string;
     pricePerMeter: string;
     publishedDate: string;
     overallPrice: string;
     estateCode: string;
+    isFavorited: boolean;
     propertyType: string;
     buildDate: string;
     rooms: number;
@@ -30,16 +32,40 @@ interface EstateDetailsProps {
       balcony: boolean;
     };
     description: string;
+    images: string[];
+    owner: {
+      name: string;
+      phoneNumber: string;
+      realEstateName: string;
+      rating: number;
+      profilePicture: string;
+    };
+    location: {
+      latitude: number;
+      longitude: number;
+      address: string;
+      sector: string;
+    };
   };
+  bookmark: () => void;
 }
 
-export default function EstateDetails({ estate }: EstateDetailsProps) {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+export default function EstateDetails({
+  estate,
+  bookmark,
+}: EstateDetailsProps) {
+  const [isBookmarked, setIsBookmarked] = useState(estate.isFavorited || false);
+
+  // Sync bookmark state with API's is_favorited
+  useEffect(() => {
+    setIsBookmarked(estate.isFavorited || false);
+  }, [estate.isFavorited]);
 
   // Handle sharing (copies current URL to clipboard)
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
+      // Consider replacing alert with a toast notification for better UX
       alert("لینک ملک کپی شد!");
     } catch (err) {
       console.error("Failed to copy link:", err);
@@ -50,12 +76,13 @@ export default function EstateDetails({ estate }: EstateDetailsProps) {
   // Toggle bookmark state
   const handleBookmark = () => {
     setIsBookmarked((prev) => !prev);
-    // Add logic to save bookmark state (e.g., to localStorage or backend)
+    // TODO: Add logic to save bookmark state to backend (e.g., POST to /api/v1/properties/{id}/favorite)
   };
+
   return (
     <div
       dir="rtl"
-      className=" py-6 rounded-lg  transition-shadow duration-200 w-full max-w-full ml-30 mx-auto">
+      className="py-6 rounded-lg transition-shadow duration-200 w-full max-w-full ml-30 mx-auto">
       {/* Action Icons */}
       <div className="flex justify-end gap-4 mb-4">
         <button
@@ -69,9 +96,9 @@ export default function EstateDetails({ estate }: EstateDetailsProps) {
           className="text-gray-600 cursor-pointer dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
           title={isBookmarked ? "حذف از نشان‌شده‌ها" : "افزودن به نشان‌شده‌ها"}>
           {isBookmarked ? (
-            <FaBookmark className="w-5 h-5" />
+            <FaBookmark className="w-5 h-5" onClick={() => bookmark()} />
           ) : (
-            <FaRegBookmark className="w-5 h-5" />
+            <FaRegBookmark className="w-5 h-5" onClick={() => bookmark()} />
           )}
         </button>
       </div>
@@ -83,25 +110,31 @@ export default function EstateDetails({ estate }: EstateDetailsProps) {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">عنوان:</span> {estate.title}
+            <span className="font-medium">عنوان:</span>{" "}
+            {estate.title || "بدون عنوان"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">قیمت هر متر:</span>{" "}
-            {estate.pricePerMeter} تومان
+            {estate.pricePerMeter || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">تاریخ انتشار:</span>{" "}
-            {estate.publishedDate}
+            {estate.publishedDate || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">قیمت کل:</span> {estate.overallPrice}{" "}
-            تومان
+            <span className="font-medium">قیمت کل:</span>{" "}
+            {estate.overallPrice || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium ml-2">کد ملک:</span>
             <YellowChildren>
-              {estate.estateCode} <TbQrcode className="text-gray-100" />
+              {estate.estateCode || "نامشخص"}{" "}
+              <TbQrcode className="text-gray-100" />
             </YellowChildren>
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            <span className="font-medium ml-2">آدرس ملک:</span>
+            {estate.location.address || "نامشخص"}
           </p>
         </div>
       </div>
@@ -113,41 +146,48 @@ export default function EstateDetails({ estate }: EstateDetailsProps) {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">نوع ملک:</span> {estate.propertyType}
+            <span className="font-medium">نوع ملک:</span>{" "}
+            {estate.propertyType || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">سال ساخت:</span> {estate.buildDate}
+            <span className="font-medium">سال ساخت:</span>{" "}
+            {estate.buildDate || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">تعداد اتاق:</span> {estate.rooms}
+            <span className="font-medium">تعداد اتاق:</span>{" "}
+            {estate.rooms || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">تعداد حمام:</span> {estate.bathrooms}
+            <span className="font-medium">تعداد حمام:</span>{" "}
+            {estate.bathrooms || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">تعداد طبقات:</span> {estate.floors}
+            <span className="font-medium">تعداد طبقات:</span>{" "}
+            {estate.floors || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">واحد در هر طبقه:</span>{" "}
-            {estate.apartmentsPerFloor}
+            {estate.apartmentsPerFloor || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">جهت جغرافیایی:</span>{" "}
-            {estate.geographicalDirection}
+            {estate.geographicalDirection || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">مساحت آپارتمان:</span>{" "}
-            {estate.apartmentArea}
+            {estate.apartmentArea || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">مساحت کل:</span> {estate.overallArea}
+            <span className="font-medium">مساحت کل:</span>{" "}
+            {estate.overallArea || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            <span className="font-medium">نوع سند:</span> {estate.documentType}
+            <span className="font-medium">نوع سند:</span>{" "}
+            {estate.documentType || "نامشخص"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">طبقه برای فروش:</span>{" "}
-            {estate.floorForSale}
+            {estate.floorForSale || "نامشخص"}
           </p>
         </div>
       </div>
@@ -160,23 +200,23 @@ export default function EstateDetails({ estate }: EstateDetailsProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">آسانسور:</span>{" "}
-            {estate.features.elevator ? "دارد" : "ندارد"}
+            {estate.features?.elevator ? "دارد" : "ندارد"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">انباری:</span>{" "}
-            {estate.features.warehouse ? "دارد" : "ندارد"}
+            {estate.features?.warehouse ? "دارد" : "ندارد"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">پارکینگ:</span>{" "}
-            {estate.features.parking ? "دارد" : "ندارد"}
+            {estate.features?.parking ? "دارد" : "ندارد"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">وام:</span>{" "}
-            {estate.features.loan ? "دارد" : "ندارد"}
+            {estate.features?.loan ? "دارد" : "ندارد"}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium">بالکن:</span>{" "}
-            {estate.features.balcony ? "دارد" : "ندارد"}
+            {estate.features?.balcony ? "دارد" : "ندارد"}
           </p>
         </div>
       </div>

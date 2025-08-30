@@ -9,13 +9,8 @@ type SM = {
   handleClose: () => void;
 };
 export default function SpringModal({ open, handleClose }: SM) {
-  // const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-
   return (
     <div>
-      {/* <TriggerButton onClick={handleOpen}>Open modal</TriggerButton> */}
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"

@@ -6,6 +6,7 @@ import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
 import { FiLink } from "react-icons/fi";
 import Link from "next/link";
+import Button from "../UI/Button";
 
 const carousel: KeenSliderPlugin = (slider) => {
   const z = 300;
@@ -74,7 +75,7 @@ export default function Mag() {
           تصمیم‌گیری‌های بهتر است. هومینکس مگ جایی است که می‌توانید جدیدترین
           اخبار، تحلیل‌های بازار، راهنمای خرید و آموزش‌های تخصصی را دنبال کنید
         </span>
-        {/* <Button href="https://hominex.ir/blog/" title="مشاهده" /> */}
+        <Button href="https://hominex.ir/blog/" title="مشاهده" />
       </div>
       <div className="flex justify-center items-center">
         <div className="wrapper">
@@ -109,6 +110,7 @@ export default function Mag() {
                           src={img}
                           alt={post.title?.rendered || "post"}
                           fill={false}
+                          unoptimized={true}
                           width={0}
                           height={0}
                           style={{

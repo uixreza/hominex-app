@@ -1,14 +1,14 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  // basePath: "",
-  reactStrictMode: true,
+const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "hominex.ir",
-        port: "",
+        hostname: "api-hominex.ir",
+        pathname: "/storage/properties/**",
+      },
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
         pathname: "/**",
       },
     ],

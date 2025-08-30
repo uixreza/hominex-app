@@ -18,7 +18,13 @@ export default function Market() {
         <Button href="/consultation" title="مشاهده" />
       </div>
       <div className="flex justify-center items-center">
-        <Image src={Pic} alt="market" width={600} height={600} />
+        <Image
+          src={Pic}
+          alt="market"
+          width={600}
+          height={600}
+          unoptimized={true}
+        />
       </div>
     </div>
   );

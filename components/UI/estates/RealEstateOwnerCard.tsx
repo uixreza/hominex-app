@@ -3,6 +3,7 @@ import React from "react";
 import { FaStar, FaStarHalfAlt, FaPhone } from "react-icons/fa";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+
 interface RealEstateOwnerCardProps {
   profilePicture?: string;
   realEstateName: string;
@@ -20,16 +21,24 @@ export default function RealEstateOwnerCard({
   phoneNumber,
   setChat,
 }: RealEstateOwnerCardProps) {
-  // Calculate full, half, and empty stars
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 >= 0.5;
+  // Clamp rating to 0–5 to prevent invalid values
+  const clampedRating = Math.max(0, Math.min(5, rating));
+  const fullStars = Math.floor(clampedRating);
+  const hasHalfStar = clampedRating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
+  // Placeholder for report violation action
+  const handleReportViolation = () => {
+    // TODO: Implement reporting logic (e.g., open modal or send request to backend)
+    console.log("Report violation clicked for", realEstateName);
+    alert("گزارش تخلف ثبت شد!"); // Temporary feedback
+  };
+
   return (
-    <div className="flex gap-3 flex-col items-center sm:w-sm w-screen  sm:mx-auto">
+    <div className="flex gap-3 flex-col items-center sm:w-sm w-screen sm:mx-auto">
       <div
         dir="rtl"
-        className="p-6 sm:rounded-lg shadow-md transition-shadow duration-200 w-full max-w-sm mx-auto |backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60  backdrop:blur-3xl bg-opacity-40 shadow-black/20">
+        className="p-6 sm:rounded-lg shadow-md transition-shadow duration-200 w-full max-w-sm mx-auto |backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-40 shadow-black/20">
         <div className="flex flex-col items-center">
           {/* Profile Picture */}
           <div className="relative">
@@ -37,7 +46,7 @@ export default function RealEstateOwnerCard({
               src={
                 profilePicture || "https://via.placeholder.com/100?text=Profile"
               }
-              alt={`${ownerName}'s profile`}
+              alt={`${ownerName || "مشاور"}'s profile`}
               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-400"
               width={100}
               height={100}
@@ -58,17 +67,17 @@ export default function RealEstateOwnerCard({
                   d="M8 13a1 1 0 0 1-.707-.293l-2-2a1 1 0 1 1 1.414-1.414l1.42 1.42 5.318-3.545a1 1 0 0 1 1.11 1.664l-6 4A1 1 0 0 1 8 13Z"
                 />
               </svg>
-              <span className="sr-only">کاربرد تایید شده</span>
+              <span className="sr-only">کاربر تایید شده</span>
             </span>
           </div>
 
           {/* Real Estate Name */}
           <h2 className="text-xl font-semibold text-white mb-2">
-            {realEstateName}
+            {realEstateName || "نامشخص"}
           </h2>
 
           {/* Owner Name */}
-          <p className="text-gray-400 mb-3">{ownerName}</p>
+          <p className="text-gray-400 mb-3">{ownerName || "نامشخص"}</p>
 
           {/* Star Rating */}
           <div className="flex items-center mb-4">
@@ -88,16 +97,20 @@ export default function RealEstateOwnerCard({
               />
             ))}
             <span className="ml-2 text-sm text-gray-500">
-              ({rating.toFixed(1)})
+              ({clampedRating.toFixed(1)})
             </span>
           </div>
 
           {/* Call Button */}
           <a
-            href={`tel:${phoneNumber}`}
-            className="flex items-center justify-center w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200">
+            href={phoneNumber ? `tel:${phoneNumber}` : "#"}
+            className={`flex items-center justify-center w-full py-2 px-4 rounded-md transition-colors duration-200 ${
+              phoneNumber
+                ? "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-gray-400 text-gray-200 cursor-not-allowed"
+            }`}>
             <FaPhone className="w-4 h-4 ml-2" />
-            تماس
+            {phoneNumber ? "تماس" : "شماره نامشخص"}
           </a>
           <button
             onClick={() => setChat(true)}
@@ -107,7 +120,9 @@ export default function RealEstateOwnerCard({
           </button>
         </div>
       </div>
-      <span className="flex flex-row items-center gap-2 cursor-pointer font-light">
+      <span
+        className="flex flex-row items-center gap-2 cursor-pointer font-light"
+        onClick={handleReportViolation}>
         گزارش تخلف <MdOutlineReportGmailerrorred />
       </span>
     </div>
