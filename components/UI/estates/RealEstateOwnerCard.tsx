@@ -3,26 +3,26 @@ import React from "react";
 import { FaStar, FaStarHalfAlt, FaPhone } from "react-icons/fa";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import Link from "next/link";
 
 interface RealEstateOwnerCardProps {
-  profilePicture?: string;
-  realEstateName: string;
-  ownerName: string;
-  rating: number; // Rating out of 5 (e.g., 4.5)
-  phoneNumber: string;
+  owner: {
+    name: string;
+    consultant_id: number;
+    phoneNumber: string;
+    realEstateName: string;
+    rating: number;
+    profilePicture: string;
+  };
   setChat: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function RealEstateOwnerCard({
-  profilePicture,
-  realEstateName,
-  ownerName,
-  rating,
-  phoneNumber,
+  owner,
   setChat,
 }: RealEstateOwnerCardProps) {
   // Clamp rating to 0–5 to prevent invalid values
-  const clampedRating = Math.max(0, Math.min(5, rating));
+  const clampedRating = Math.max(0, Math.min(5, owner.rating));
   const fullStars = Math.floor(clampedRating);
   const hasHalfStar = clampedRating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -30,7 +30,7 @@ export default function RealEstateOwnerCard({
   // Placeholder for report violation action
   const handleReportViolation = () => {
     // TODO: Implement reporting logic (e.g., open modal or send request to backend)
-    console.log("Report violation clicked for", realEstateName);
+    console.log("Report violation clicked for", owner.realEstateName);
     alert("گزارش تخلف ثبت شد!"); // Temporary feedback
   };
 
@@ -44,9 +44,10 @@ export default function RealEstateOwnerCard({
           <div className="relative">
             <Image
               src={
-                profilePicture || "https://via.placeholder.com/100?text=Profile"
+                owner.profilePicture ||
+                "https://via.placeholder.com/100?text=Profile"
               }
-              alt={`${ownerName || "مشاور"}'s profile`}
+              alt={`${owner.name || "مشاور"}'s profile`}
               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-400"
               width={100}
               height={100}
@@ -72,12 +73,14 @@ export default function RealEstateOwnerCard({
           </div>
 
           {/* Real Estate Name */}
-          <h2 className="text-xl font-semibold text-white mb-2">
-            {realEstateName || "نامشخص"}
-          </h2>
+          <Link
+            href={`/realEstates/${owner.consultant_id}`}
+            className="text-xl font-semibold text-white mb-2">
+            {owner.realEstateName || "نامشخص"}
+          </Link>
 
           {/* Owner Name */}
-          <p className="text-gray-400 mb-3">{ownerName || "نامشخص"}</p>
+          <p className="text-gray-400 mb-3">{owner.name || "نامشخص"}</p>
 
           {/* Star Rating */}
           <div className="flex items-center mb-4">
@@ -103,14 +106,14 @@ export default function RealEstateOwnerCard({
 
           {/* Call Button */}
           <a
-            href={phoneNumber ? `tel:${phoneNumber}` : "#"}
+            href={owner.phoneNumber ? `tel:${owner.phoneNumber}` : "#"}
             className={`flex items-center justify-center w-full py-2 px-4 rounded-md transition-colors duration-200 ${
-              phoneNumber
+              owner.phoneNumber
                 ? "bg-blue-500 text-white hover:bg-blue-600"
                 : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}>
             <FaPhone className="w-4 h-4 ml-2" />
-            {phoneNumber ? "تماس" : "شماره نامشخص"}
+            {owner.phoneNumber ? "تماس" : "شماره نامشخص"}
           </a>
           <button
             onClick={() => setChat(true)}

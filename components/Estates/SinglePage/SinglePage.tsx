@@ -11,17 +11,16 @@ import Chatbox from "@/components/UI/estates/Chatbox";
 import { useState } from "react";
 import { url_v1 } from "@/config/urls";
 import { successToast, infoToast } from "@/components/UI/Toasts";
-import { Estate } from "@/app/estates/[slug]/page";
+import { EstateProps } from "@/app/estates/[slug]/page";
 
-export default function SinglePage({ estate }: { estate: Estate }) {
+export default function SinglePage({ estate }: { estate: EstateProps }) {
   const [chat, setChat] = useState<boolean>(false);
   const token = useSelector((state: RootState) => state.auth.token);
   const [isClient, setIsClient] = useState(false);
-
+  const [marked, setMarked] = useState(false);
   useEffect(() => {
     setIsClient(true); // ensures client-side rendering
   }, []);
-  console.log("here boy:", estate);
   if (!isClient) return null; // avoid server/client mismatch
 
   // bookmark button functionality
@@ -36,10 +35,11 @@ export default function SinglePage({ estate }: { estate: Estate }) {
       });
       // Always try to parse JSON
       const data = await req.json();
-      console.log(token);
       if (req?.ok) {
         successToast(data.message);
+        setMarked(true);
       } else {
+        setMarked(false);
         infoToast(data.message);
       }
       console.log(data);
@@ -51,7 +51,6 @@ export default function SinglePage({ estate }: { estate: Estate }) {
 
   return (
     <div className="flex flex-col w-full">
-      <span>{token}</span>
       <Link
         href={"/estates"}
         className="border border-gray-400 flex flex-row-reverse w-fit p-2 rounded-md shadow-md cursor-pointer hover:ring-1 ring-white transition-all justify-center items-center">
@@ -66,16 +65,9 @@ export default function SinglePage({ estate }: { estate: Estate }) {
           }
         />
       </div>
-      <div className="flex md:flex-row-reverse w-full flex-col items-center">
+      <div className="flex md:flex-row-reverse w-full flex-col items-start">
         <div className="flex flex-col gap-5">
-          <RealEstateOwnerCard
-            ownerName={estate.owner.name}
-            phoneNumber={estate.owner.phoneNumber}
-            realEstateName={estate.owner.realEstateName}
-            rating={estate.owner.rating}
-            profilePicture={estate.owner.profilePicture}
-            setChat={setChat}
-          />
+          <RealEstateOwnerCard owner={estate.owner} setChat={setChat} />
 
           {/* map is here */}
           {/* <NoSSRWrapper
@@ -86,7 +78,7 @@ export default function SinglePage({ estate }: { estate: Estate }) {
             popupContent={estate.owner.realEstateName}
           /> */}
         </div>
-        <EstateDetails estate={estate} bookmark={bookmark} />
+        <EstateDetails estate={estate} bookmark={bookmark} marked={marked} />
       </div>
       <Chatbox chat={chat} setChat={setChat} />
     </div>

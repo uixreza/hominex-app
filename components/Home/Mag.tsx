@@ -41,7 +41,7 @@ export default function Mag() {
   useEffect(() => {
     setLoading(true);
 
-    fetch("https://hominex.ir/wp-json/wp/v2/posts?per_page=5&_embed", {
+    fetch("https://hominow.ir/wp-json/wp/v2/posts?per_page=5&_embed", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export default function Mag() {
     <div className="flex lg:flex-row flex-col lg:[&>div]:w-1/2 [&>div]:w-full lg:justify-between justify-center  lg:gap-4 gap-10 my-5">
       <div className="flex flex-col gap-3">
         <Link
-          href={"https://hominex.ir/blog/"}
+          href={"/mag"}
           className="font-extrabold text-4xl mb-5 flex items-center gap-3 cursor-pointer group">
           <span className="text-[var(--blue)]">هومینکس</span> مگ{" "}
           <FiLink className="text-[20px] group-hover:mr-3 transition-all" />
@@ -75,7 +75,7 @@ export default function Mag() {
           تصمیم‌گیری‌های بهتر است. هومینکس مگ جایی است که می‌توانید جدیدترین
           اخبار، تحلیل‌های بازار، راهنمای خرید و آموزش‌های تخصصی را دنبال کنید
         </span>
-        <Button href="https://hominex.ir/blog/" title="مشاهده" />
+        <Button href="/mag" title="مشاهده" />
       </div>
       <div className="flex justify-center items-center">
         <div className="wrapper">

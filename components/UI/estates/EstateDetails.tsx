@@ -1,66 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaShareAlt, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { YellowChildren } from "../Badges";
 import { TbQrcode } from "react-icons/tb";
-
+import { EstateProps } from "@/app/estates/[slug]/page";
 interface EstateDetailsProps {
-  estate: {
-    id?: number;
-    title: string;
-    pricePerMeter: string;
-    publishedDate: string;
-    overallPrice: string;
-    estateCode: string;
-    isFavorited: boolean;
-    propertyType: string;
-    buildDate: string;
-    rooms: number;
-    bathrooms: number;
-    floors: number;
-    apartmentsPerFloor: number;
-    geographicalDirection: string;
-    apartmentArea: string;
-    overallArea: string;
-    documentType: string;
-    floorForSale: number;
-    features: {
-      elevator: boolean;
-      warehouse: boolean;
-      parking: boolean;
-      loan: boolean;
-      balcony: boolean;
-    };
-    description: string;
-    images: string[];
-    owner: {
-      name: string;
-      phoneNumber: string;
-      realEstateName: string;
-      rating: number;
-      profilePicture: string;
-    };
-    location: {
-      latitude: number;
-      longitude: number;
-      address: string;
-      sector: string;
-    };
-  };
+  estate: EstateProps;
   bookmark: () => void;
+  marked: boolean;
 }
 
 export default function EstateDetails({
   estate,
   bookmark,
+  marked,
 }: EstateDetailsProps) {
-  const [isBookmarked, setIsBookmarked] = useState(estate.isFavorited || false);
-
-  // Sync bookmark state with API's is_favorited
-  useEffect(() => {
-    setIsBookmarked(estate.isFavorited || false);
-  }, [estate.isFavorited]);
-
   // Handle sharing (copies current URL to clipboard)
   const handleShare = async () => {
     try {
@@ -75,7 +29,6 @@ export default function EstateDetails({
 
   // Toggle bookmark state
   const handleBookmark = () => {
-    setIsBookmarked((prev) => !prev);
     // TODO: Add logic to save bookmark state to backend (e.g., POST to /api/v1/properties/{id}/favorite)
   };
 
@@ -94,8 +47,8 @@ export default function EstateDetails({
         <button
           onClick={handleBookmark}
           className="text-gray-600 cursor-pointer dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
-          title={isBookmarked ? "حذف از نشان‌شده‌ها" : "افزودن به نشان‌شده‌ها"}>
-          {isBookmarked ? (
+          title={marked ? "حذف از نشان‌شده‌ها" : "افزودن به نشان‌شده‌ها"}>
+          {marked ? (
             <FaBookmark className="w-5 h-5" onClick={() => bookmark()} />
           ) : (
             <FaRegBookmark className="w-5 h-5" onClick={() => bookmark()} />

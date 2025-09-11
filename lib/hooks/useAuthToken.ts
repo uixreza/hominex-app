@@ -27,17 +27,9 @@ export function useAuthToken(): UseAuthTokenResult {
       };
 
       const sessionToken = getCookie(token_name);
-
-      // ✅ logged in
-      if (sessionToken) {
-        setToken(sessionToken);
-      } else {
-        // ✅ logged out (not an error!)
-        setToken(null);
-      }
+      setToken(sessionToken); // null if not found (logged out)
     } catch (err) {
-      // only unexpected errors go here
-      setError("Error accessing session token");
+      if (err) setError("خطا در دسترسی به توکن جلسه");
     } finally {
       setIsLoading(false);
     }

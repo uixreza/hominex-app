@@ -63,14 +63,14 @@ const DropdownMenu = ({ setToggleMenu }: componentType) => {
             label: "مشاورین املاک",
           },
           {
-            href: "https://hominex.ir/blog/",
+            href: "/mag",
             icon: (
               <GrBlog className="w-7 h-7 opacity-40 transition-opacity duration-200 group-hover:opacity-70" />
             ),
             label: "هومینکس مگ",
           },
           {
-            href: "https://hominex.ir/account/dashboard/",
+            href: "https://dash.hominex.ir",
             icon: (
               <FiUser className="w-7 h-7 opacity-40 transition-opacity duration-200 group-hover:opacity-70" />
             ),

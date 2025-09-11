@@ -19,6 +19,12 @@ const Consult = dynamic(() => import("@/components/Home/Consult"), {
 const Mag = dynamic(() => import("@/components/Home/Mag"), {
   loading: () => null,
 });
+const RealestatesBanner = dynamic(
+  () => import("@/components/Home/RealestatesBanner"),
+  {
+    loading: () => null,
+  }
+);
 const Market = dynamic(() => import("@/components/Home/Market"), {
   loading: () => null,
 });
@@ -85,7 +91,15 @@ export default function Home() {
       </motion.div>
       {/* information section */}
       {/* <Information /> */}
+      {/* real Estates banner */}
 
+      <motion.div
+        ref={questionRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView6 ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}>
+        <RealestatesBanner />
+      </motion.div>
       {/* mag sectdion */}
       <motion.div
         ref={magRef}
@@ -94,6 +108,7 @@ export default function Home() {
         transition={{ duration: 0.6 }}>
         <Mag />
       </motion.div>
+
       {/* question section */}
 
       <motion.div

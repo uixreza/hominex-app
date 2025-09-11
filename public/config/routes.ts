@@ -9,7 +9,7 @@ export const routes = [
   },
   {
     title: "معرفی محله",
-    route: "https://hominex.ir/mahallat/",
+    route: "https://hominow.ir/mahallat/",
   },
   {
     title: "ویژگی خانه من",
@@ -17,6 +17,6 @@ export const routes = [
   },
   {
     title: "هومینکس مگ",
-    route: "https://hominex.ir/blog/",
+    route: "/mag",
   },
 ];

@@ -80,7 +80,7 @@ const Header = () => {
           ))}
         </ul>
       </div>
-      <a href="https://dash.hominow.ir/" className="sm:block hidden">
+      <a href="https://dash.hominex.ir/" className="sm:block hidden">
         <div
           onClick={notify}
           className="cursor-pointer transition-all transition-normal hover:bg-white sm:p-3 rounded-sm hover:text-black">

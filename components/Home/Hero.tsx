@@ -35,11 +35,7 @@ export default function Hero() {
           با داده های واقعی و نگاه علمی برایتان هموار میکنیم.
         </p>
         <div className="pt-5 w-full flex justify-end items-center">
-          <Button
-            href="https://hominex.ir/about/"
-            title="درباره ما"
-            icon={true}
-          />
+          <Button href="/about" title="درباره ما" icon={true} />
         </div>
         {/* <Image
           src={"/assets/svg/pppointed.svg"}

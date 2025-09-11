@@ -90,19 +90,19 @@ export default function Form({ type, vals }: Form) {
             </label>
             <div className="relative">
               <input
-                className="w-full px-4 py-2 pl-12 rounded-lg border border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400 outline-none transition-colors text-gray-100 placeholder-gray-400"
+                className="w-full px-4 py-2 rounded-lg border border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400 outline-none transition-colors text-gray-100 placeholder-gray-400"
                 type="text"
                 name="phone"
                 id="phone"
                 dir="ltr"
-                maxLength={10}
+                maxLength={11}
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
                 placeholder="شماره تماس"
               />
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+              {/* <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                 +98
-              </span>
+              </span> */}
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ export default function Market() {
           گزینه ها وجود دارد تا با اطمینان بیشتری تصمیم بگیرید؛ همچنین با امکان
           ایجاد صفحه اختصاصی برای مشاورین املاک برای ارتباط سریع و راحت تر
         </span>
-        <Button href="/consultation" title="مشاهده" />
+        <Button href="/estates " title="مشاهده" />
       </div>
       <div className="flex justify-center items-center">
         <Image
