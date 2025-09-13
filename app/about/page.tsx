@@ -96,6 +96,15 @@ export default function page() {
     },
     {
       image: "/assets/img/profilePic.webp",
+      title: "آناهیتا جهانگیری",
+      subtitle: "Data Analyst",
+      handle: "@anahita",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)", // green
+      url: "https://linkedin.com/in/mikechen",
+    },
+    {
+      image: "/assets/img/profilePic.webp",
       title: "کوثر ایرجی",
       subtitle: "Front-End Developer",
       handle: "@mikechen",

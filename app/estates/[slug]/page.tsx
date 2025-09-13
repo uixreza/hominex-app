@@ -190,7 +190,6 @@ const BlogPostPage: NextPage<PageProps> = async ({ params }) => {
     }
 
     const result = await response.json();
-    console.log(result);
     const property = result?.data;
 
     if (!result.success || !property) {

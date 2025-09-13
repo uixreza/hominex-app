@@ -30,7 +30,6 @@ export default function RealEstateOwnerCard({
   // Placeholder for report violation action
   const handleReportViolation = () => {
     // TODO: Implement reporting logic (e.g., open modal or send request to backend)
-    console.log("Report violation clicked for", owner.realEstateName);
     alert("گزارش تخلف ثبت شد!"); // Temporary feedback
   };
 
@@ -38,7 +37,7 @@ export default function RealEstateOwnerCard({
     <div className="flex gap-3 flex-col items-center sm:w-sm w-screen sm:mx-auto">
       <div
         dir="rtl"
-        className="p-6 sm:rounded-lg shadow-md transition-shadow duration-200 w-full max-w-sm mx-auto |backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-40 shadow-black/20">
+        className="p-6 sm:rounded-lg shadow-md transition-shadow duration-200 w-full max-w-sm mx-auto | backdrop-blur-md bg-opacity-60 bg-[var(--box)]/60 backdrop:blur-3xl bg-opacity-40 shadow-black/20">
         <div className="flex flex-col items-center">
           {/* Profile Picture */}
           <div className="relative">

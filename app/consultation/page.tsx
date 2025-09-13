@@ -125,7 +125,6 @@ const Page = () => {
           }
         );
         const re = await response.data;
-        console.log(re);
         if (response.data && response.data.success) {
           handleOpen();
           setTimeout(() => handleClose(), 3000);

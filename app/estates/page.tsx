@@ -10,11 +10,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/Redux/store";
-// import { clearItems } from "@/Redux/Slices/compareItems";
+import { clearItems } from "@/Redux/Slices/compareItems";
 import { url_v1 } from "@/config/urls";
 import { GrSelect } from "react-icons/gr";
 import { BiReset } from "react-icons/bi";
-import { clearItems } from "@/Redux/Slices/compareItems";
+import Image from "next/image";
 export interface Property {
   id: number;
   image: string;
@@ -66,8 +66,20 @@ export default function Page() {
     isFeatured: false,
     sortBy: "newest",
   }));
+  const [isMobile, setIsMobile] = useState<boolean>(
+    typeof window !== "undefined" && window.innerWidth < 640
+  );
 
-  // Fetch properties for compare panel (limited to 4 items)
+  // Update isMobile on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Fetch properties for compare panel (limited to 2 for mobile, 4 for desktop)
   useEffect(() => {
     if (!compareItems || compareItems.length === 0) {
       setCompareProperties([]);
@@ -75,8 +87,9 @@ export default function Page() {
     }
     const fetchCompareProperties = async () => {
       try {
-        // Limit to first 4 items
-        const limitedCompareItems = compareItems.slice(0, 4);
+        // Limit to 2 for mobile, 4 for desktop
+        const maxItems = isMobile ? 2 : 4;
+        const limitedCompareItems = compareItems.slice(0, maxItems);
         const results = await Promise.all(
           limitedCompareItems.map(async (id: number) => {
             const res = await fetch(url_v1(`/properties/${id}`));
@@ -109,7 +122,7 @@ export default function Page() {
       }
     };
     fetchCompareProperties();
-  }, [compareItems]);
+  }, [compareItems, isMobile]);
 
   // Function to format number with commas
   const formatNumberWithCommas = (value: string): string => {
@@ -272,21 +285,23 @@ export default function Page() {
               <div
                 onClick={() => setShowComparePanel(true)}
                 className={`gap-2 cursor-pointer transition-colors flex items-center justify-center flex-row p-2 rounded-2xl z-20 fixed bottom-10 left-10 shadow border-2 border-white font-bold ${
-                  compareItems.length >= 4
+                  (isMobile && compareItems.length >= 2) ||
+                  (!isMobile && compareItems.length >= 4)
                     ? "bg-gray-400 text-gray-600 cursor-not-allowed"
                     : "bg-blue-400 hover:bg-blue-600 hover:text-white text-black"
                 }`}>
                 <div className="absolute animate-ping"></div>
                 <GrSelect /> مقایسه املاک
-                {compareItems.length >= 4 && (
+                {(isMobile && compareItems.length >= 2) ||
+                (!isMobile && compareItems.length >= 4) ? (
                   <span className="text-xs text-red-600 ml-2">
-                    حداکثر ۴ ملک قابل مقایسه است
+                    حداکثر {isMobile ? "۲" : "۴"} ملک قابل مقایسه است
                   </span>
-                )}
+                ) : null}
               </div>
               <div
                 onClick={() => dispatch(clearItems())}
-                className="bg-red-600 cursor-pointer group p-2 rounded-2xl z-20 fixed bottom-10 left-44 shadow border-2 border-white font-bold">
+                className="bg-red-600 cursor-pointer group p-2 rounded-2xl z-20 fixed bottom-24 sm:bottom-10 left-10 sm:left-44 shadow border-2 border-white font-bold">
                 <BiReset className="w-6 h-6 group-hover:animate-spin" />
               </div>
             </div>
@@ -312,23 +327,25 @@ export default function Page() {
               </div>
             ) : (
               <>
-                {compareItems.length > 4 && (
+                {(isMobile && compareItems.length > 2) ||
+                (!isMobile && compareItems.length > 4) ? (
                   <div className="text-center text-red-600 mb-4">
-                    فقط ۴ ملک اول نمایش داده می‌شود (حداکثر تعداد مجاز)
+                    فقط {isMobile ? "۲" : "۴"} ملک اول نمایش داده می‌شود (حداکثر
+                    تعداد مجاز)
                   </div>
-                )}
-                {/* Desktop Vertical Table Layout */}
-                <div className="hidden sm:block overflow-x-auto">
+                ) : null}
+                {/* Vertical Table Layout (Desktop and Mobile) */}
+                <div className="overflow-x-auto">
                   <table className="min-w-full table-auto text-center">
                     <thead>
                       <tr className="bg-gray-200">
-                        <th className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800 w-32">
+                        <th className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800 w-24 sm:w-32">
                           ویژگی
                         </th>
                         {compareProperties.map((item) => (
                           <th
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                            className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                             ملک {item.id}
                           </th>
                         ))}
@@ -336,203 +353,122 @@ export default function Page() {
                     </thead>
                     <tbody>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           تصویر
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
                             className="p-3 border-b border-gray-300">
-                            <img
+                            <Image
                               src={item.image}
                               alt={item.address}
-                              className="w-24 h-24 object-cover rounded-md border border-gray-200 mx-auto"
+                              unoptimized={true}
+                              width={500}
+                              height={500}
+                              className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md border border-gray-200 mx-auto"
                             />
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           عنوان
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {item.address}
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           شهر
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {item.city}
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           قیمت
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {formatPrice(item.price)}
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           تعداد اتاق
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {item.bedrooms}
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           تعداد حمام
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {item.bathrooms}
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           متراژ
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {item.sqft}
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           نوع ملک
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {item.propertyType}
                           </td>
                         ))}
                       </tr>
                       <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
-                        <td className="p-3 border-b border-gray-300 text-sm font-medium text-gray-800">
+                        <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
                           نوع معامله
                         </td>
                         {compareProperties.map((item) => (
                           <td
                             key={item.id}
-                            className="p-3 border-b border-gray-300 text-gray-800">
+                            className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
                             {item.type}
                           </td>
                         ))}
                       </tr>
                     </tbody>
                   </table>
-                </div>
-                {/* Mobile Stacked Layout */}
-                <div className="block sm:hidden overflow-y-auto max-h-[70vh]">
-                  <div className="space-y-4">
-                    {compareProperties.map((item) => (
-                      <div
-                        key={item.id}
-                        className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                        <div className="flex flex-col items-center">
-                          <img
-                            src={item.image}
-                            alt={item.address}
-                            className="w-20 h-20 object-cover rounded-md border border-gray-200 mb-2"
-                          />
-                          <div className="w-full space-y-2">
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                عنوان:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {item.address}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                شهر:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {item.city}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                قیمت:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {formatPrice(item.price)}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                تعداد اتاق:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {item.bedrooms}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                تعداد حمام:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {item.bathrooms}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                متراژ:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {item.sqft}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                نوع ملک:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {item.propertyType}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-xs font-medium text-gray-600">
-                                نوع معامله:
-                              </span>
-                              <span className="text-xs text-gray-800">
-                                {item.type}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </>
             )}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "@/components/UI/estates/Button";
 import LikeButton from "@/components/UI/estates/LikeButton";
 import { Property } from "@/app/estates/page";
@@ -30,10 +30,6 @@ export default function Properties({ filteredProperties, formatPrice }: T) {
       dispatch(deleteItem(id));
     }
   };
-
-  useEffect(() => {
-    console.log(compareItems);
-  }, [compareItems]);
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

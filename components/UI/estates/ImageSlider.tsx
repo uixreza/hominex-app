@@ -43,6 +43,7 @@ export default function ImageSlider({ images }: ImageSliderProps) {
           src={images[currentIndex]}
           width={1000}
           height={1000}
+          unoptimized={true}
           alt={`Slide ${currentIndex + 1}`}
           className="w-full h-full object-cover"
         />
@@ -91,6 +92,7 @@ export default function ImageSlider({ images }: ImageSliderProps) {
               src={image}
               width={100}
               height={100}
+              unoptimized={true}
               alt={`Thumbnail ${index + 1}`}
               className="w-full h-full object-cover"
             />

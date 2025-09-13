@@ -1,136 +1,430 @@
-# 🏡 Hominex Landing Page
+        // more functionality
 
-Welcome to the Hominex Landing Page project! This is a modern, responsive real estate consultation platform built with Next.js, React, and Tailwind CSS. It features beautiful glassmorphism UI, custom Persian fonts, and interactive forms for property consultation.
+// redux states
+const compareItems = useSelector((state: RootState) => state.compare.items);
+const dispatch = useDispatch<AppDispatch>();
 
----
+// local states
+const [showComparePanel, setShowComparePanel] = useState(false);
+const [properties, setProperties] = useState<Property[]>([]);
+const [compareProperties, setCompareProperties] = useState<Property[]>([]);
+const [filters, setFilters] = useState<Filters>(() => ({
+minPrice: "",
+maxPrice: "",
+bedrooms: "",
+bathrooms: "",
+city: cities.includes("بجنورد") ? "بجنورد" : cities[0] || "",
+propertyType: "",
+transactionType: "",
+isFeatured: false,
+sortBy: "newest",
+}));
+const [isMobile, setIsMobile] = useState<boolean>(
+typeof window !== "undefined" && window.innerWidth < 640
+);
 
-## 🚀 Features
+// Update isMobile on window resize
+useEffect(() => {
+const handleResize = () => {
+setIsMobile(window.innerWidth < 640);
+};
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
 
-- **Next.js 14** with App Router for fast, SEO-friendly pages
-- **Tailwind CSS** for utility-first, responsive styling
-- **Glassmorphism** design for a modern, elegant look
-- **Custom Persian Font** (Modam) for a unique brand identity
-- **Dynamic Consultation Forms** for different property types
-- **RTL (Right-to-Left)** support for Persian language
-- **Interactive Map** (Leaflet-ready)
-- **Reusable Components** (Header, Button, Dropdown, Forms)
-- **Dark/Light Mode** with smooth gradients
+// Fetch properties for compare panel (limited to 2 for mobile, 4 for desktop)
+useEffect(() => {
+if (!compareItems || compareItems.length === 0) {
+setCompareProperties([]);
+return;
+}
+const fetchCompareProperties = async () => {
+try {
+// Limit to 2 for mobile, 4 for desktop
+const maxItems = isMobile ? 2 : 4;
+const limitedCompareItems = compareItems.slice(0, maxItems);
+const results = await Promise.all(
+limitedCompareItems.map(async (id: number) => {
+const res = await fetch(url_v1(`/properties/${id}`));
+const result = await res.json();
+const prop = result.data;
+return {
+id: prop.id,
+image: prop.primary_image_url || "/assets/img/not.jpg",
+price: prop.total_price ?? 0,
+address: prop.title || "بدون عنوان",
+city: prop.city || "نامشخص",
+bedrooms: prop.rooms_count || 0,
+bathrooms: prop.amenities?.includes("حمام") ? 1 : 0,
+sqft: prop.building_area || 0,
+type: prop.transaction_type_label || "نامشخص",
+propertyType: prop.property_type || "نامشخص",
+minArea: prop.land_area?.toString() || "0",
+maxArea: prop.building_area?.toString() || "0",
+minPrice: (prop.total_price ?? 0).toString(),
+maxPrice: (prop.total_price ?? 0).toString(),
+priceRange: prop.formatted_price || "",
+isFeatured: prop.is_featured || false,
+};
+})
+);
+setCompareProperties(results);
+} catch (error) {
+console.error("Error fetching compare properties:", error);
+setCompareProperties([]);
+}
+};
+fetchCompareProperties();
+}, [compareItems, isMobile]);
 
----
+// Function to format number with commas
+const formatNumberWithCommas = (value: string): string => {
+const cleanedValue = value.replace(/[^0-9]/g, "");
+if (!cleanedValue) return "";
+return parseInt(cleanedValue).toLocaleString("en-EN");
+};
 
-## 📁 Project Structure
+// Fetch properties from API
+useEffect(() => {
+const fetchProperties = async () => {
+try {
+const queryParams = new URLSearchParams();
 
-```
-landing/
-├── app/
-│   ├── globals.css         # Global styles, fonts, and variables
-│   ├── layout.tsx          # Root layout with Header
-│   ├── page.tsx            # Main landing page
-│   └── consultation/
-│       └── page.tsx        # Consultation forms and logic
-├── components/
-│   ├── Header.tsx          # Navigation bar with active state
-│   └── UI/
-│       ├── DropdownContainer.tsx
-│       └── consultation/
-│           ├── Button.tsx
-│           └── Forms.tsx   # All consultation forms
-├── public/
-│   ├── logo.png            # Brand logo
-│   └── assets/font/modam/  # Modam font files
-├── Redux/                  # (Optional) Redux store setup
-├── package.json
-└── ...
-```
+        // Add filters to query parameters
+        if (filters.minPrice)
+          queryParams.append("min_price", filters.minPrice.replace(/,/g, ""));
+        if (filters.maxPrice)
+          queryParams.append("max_price", filters.maxPrice.replace(/,/g, ""));
+        if (filters.bedrooms) queryParams.append("rooms", filters.bedrooms);
+        if (filters.city) queryParams.append("city", filters.city);
+        if (filters.propertyType)
+          queryParams.append("property_type", filters.propertyType);
+        if (filters.transactionType)
+          queryParams.append("transaction_type", filters.transactionType);
+        if (filters.isFeatured) queryParams.append("is_featured", "true");
+        queryParams.append("sort_by", filters.sortBy || "newest");
+        queryParams.append("per_page", "20");
+        queryParams.append("page", "1");
 
----
+        const response = await fetch(
+          url_v1(`/properties?${queryParams.toString()}`),
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-## 🛠️ Getting Started
+        const result = await response.json();
+        if (result.success) {
+          // Map API response to component's Property interface
+          const mappedProperties: Property[] = result.data.properties
+            .map(
+              // eslint-disable-next-line
+              (prop: any) => {
+                // Handle null or undefined total_price
+                const totalPrice = prop.total_price ?? 0; // Fallback to 0 if null
+                return {
+                  id: prop.id,
+                  image: prop.primary_image_url || "/assets/img/not.jpg", // Fallback for image
+                  price: totalPrice, // Allow null or number
+                  address: prop.title || "بدون عنوان",
+                  city: prop.city || "نامشخص",
+                  bedrooms: prop.rooms_count || 0,
+                  bathrooms: prop.amenities?.includes("حمام") ? 1 : 0,
+                  sqft: prop.building_area || 0,
+                  type: prop.transaction_type_label || "نامشخص",
+                  propertyType: prop.property_type || "نامشخص",
+                  minArea: prop.land_area?.toString() || "0",
+                  maxArea: prop.building_area?.toString() || "0",
+                  minPrice: totalPrice.toString(), // Safe, as totalPrice is now a number
+                  maxPrice: totalPrice.toString(),
+                  priceRange:
+                    prop.formatted_price ||
+                    formatNumberWithCommas(totalPrice.toString()),
+                  isFeatured: prop.is_featured || false,
+                };
+              }
+            )
+            .filter((prop: Property) => prop.id); // Filter out invalid properties
+          setProperties(mappedProperties);
+        } else {
+          console.error("API error:", result.message);
+          setProperties([]);
+        }
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+        setProperties([]);
+      }
+    };
 
-1. **Install dependencies:**
+    fetchProperties();
 
-   ```sh
-   npm install
-   # or
-   yarn install
-   ```
+}, [filters]);
 
-2. **Run the development server:**
+// Handle filter changes
+const handleFilterChange = (
+e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
+const { name, value } = e.target;
+if (name === "minPrice" || name === "maxPrice") {
+const formattedValue = formatNumberWithCommas(value);
+setFilters((prev) => ({ ...prev, [name]: formattedValue }));
+} else {
+setFilters((prev) => ({ ...prev, [name]: value }));
+}
+};
 
-   ```sh
-   npm run dev
-   # or
-   yarn dev
-   ```
+// Filter properties client-side (optional fallback)
+const filteredProperties = useMemo(() => {
+return properties.filter((property) => {
+const minPrice = filters.minPrice
+? parseInt(filters.minPrice.replace(/,/g, ""))
+: null;
+const maxPrice = filters.maxPrice
+? parseInt(filters.maxPrice.replace(/,/g, ""))
+: null;
 
-   Open [http://localhost:3000](http://localhost:3000) to view the app.
+      return (
+        (!minPrice ||
+          (property.price !== null && property.price >= minPrice)) &&
+        (!maxPrice ||
+          (property.price !== null && property.price <= maxPrice)) &&
+        (!filters.bedrooms ||
+          property.bedrooms >= parseInt(filters.bedrooms)) &&
+        (!filters.bathrooms ||
+          property.bathrooms >= parseInt(filters.bathrooms)) &&
+        (!filters.city ||
+          property.city.toLowerCase().includes(filters.city.toLowerCase())) &&
+        (!filters.propertyType ||
+          property.propertyType === filters.propertyType) &&
+        (!filters.transactionType ||
+          property.type === filters.transactionType) &&
+        (!filters.isFeatured || property.isFeatured)
+      );
+    });
 
-3. **Build for production:**
-   ```sh
-   npm run build
-   ```
+}, [properties, filters]);
 
----
+// Format price for display
+const formatPrice = (price: number | null) =>
+price !== null
+? `${new Intl.NumberFormat("fa-FA").format(price)} تومان`
+: "قیمت نامشخص";
 
-## 🗺️ Map Integration
+// end
 
-- Uses [Leaflet](https://leafletjs.com/) and [react-leaflet](https://react-leaflet.js.org/) for interactive maps.
-- Install with:
-  ```sh
-  npm install leaflet react-leaflet
-  ```
-- Import CSS in `globals.css`:
-  ```css
-  @import "leaflet/dist/leaflet.css";
-  ```
+<!-- body of the code -->
 
----
+      <Suspense fallback={<EstatesSkeleton />}>
+        <FilterSection
+          filters={{
+            ...filters,
+            bedrooms:
+              filters.bedrooms === "" ? undefined : Number(filters.bedrooms),
+            bathrooms:
+              filters.bathrooms === "" ? undefined : Number(filters.bathrooms),
+          }}
+          handleFilterChange={handleFilterChange}
+        />
+        <PropertiesSection
+          filteredProperties={filteredProperties}
+          formatPrice={formatPrice}
+        />
 
-## ✨ UI/UX Highlights
+        {/* Compare items section */}
+        {compareItems.length >= 2 && (
+          <div>
+            <div
+              onClick={() => setShowComparePanel(true)}
+              className={`gap-2 cursor-pointer transition-colors flex items-center justify-center flex-row p-2 rounded-2xl z-20 fixed bottom-10 left-10 shadow border-2 border-white font-bold ${
+                (isMobile && compareItems.length >= 2) ||
+                (!isMobile && compareItems.length >= 4)
+                  ? "bg-gray-400 text-gray-600 cursor-not-allowed"
+                  : "bg-blue-400 hover:bg-blue-600 hover:text-white text-black"
+              }`}>
+              <div className="absolute animate-ping"></div>
+              <GrSelect /> مقایسه املاک
+              {(isMobile && compareItems.length >= 2) ||
+              (!isMobile && compareItems.length >= 4) ? (
+                <span className="text-xs text-red-600 ml-2">
+                  حداکثر {isMobile ? "۲" : "۴"} ملک قابل مقایسه است
+                </span>
+              ) : null}
+            </div>
+            <div
+              onClick={() => dispatch(clearItems())}
+              className="bg-red-600 cursor-pointer group p-2 rounded-2xl z-20 fixed bottom-24 sm:bottom-10 left-10 sm:left-44 shadow border-2 border-white font-bold">
+              <BiReset className="w-6 h-6 group-hover:animate-spin" />
+            </div>
+          </div>
+        )}
 
-- **Header:** Responsive, glassy, with animated hover and active dot indicator
-- **Buttons:** Glassmorphism, animated, accessible
-- **Forms:** Dynamic, RTL, with validation-ready structure
-- **Colors:** Customizable via CSS variables for easy theming
-- **Font:** Modam (Persian), loaded globally
-
----
-
-## 📦 Dependencies
-
-- [Next.js](https://nextjs.org/)
-- [React](https://react.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [react-icons](https://react-icons.github.io/react-icons/)
-- [Leaflet](https://leafletjs.com/) & [react-leaflet](https://react-leaflet.js.org/)
-
----
-
-## 📝 Customization
-
-- **Add new forms:** Edit `components/UI/consultation/Forms.tsx`
-- **Change theme:** Edit CSS variables in `app/globals.css`
-- **Update navigation:** Edit `components/Header.tsx`
-
----
-
-## 👨‍💻 Contributing
-
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## 📄 License
-
-This project is for demonstration and educational purposes.
-
----
-
-## 🌟 Enjoy building with Hominex!
-
----
-
-## Tasks
-
-1. cleanCode ( consultation page )
-2. convert images to webp format
+        <div
+          className={`fixed ${
+            showComparePanel ? "bottom-0" : "bottom-[-100%]"
+          } left-0 right-0 bg-gray-50 shadow-md p-4 sm:p-6 z-30 rounded-t-lg transition-all`}>
+          <div className="flex justify-between items-center mb-4">
+            <span className="font-bold text-lg text-gray-800">
+              مقایسه املاک انتخاب‌شده
+            </span>
+            <button
+              className="bg-red-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-md hover:bg-red-600 transition text-sm sm:text-base"
+              onClick={() => setShowComparePanel(false)}>
+              بستن
+            </button>
+          </div>
+          {compareProperties.length === 0 ? (
+            <div className="text-center text-gray-600">
+              هیچ ملکی برای مقایسه وجود ندارد
+            </div>
+          ) : (
+            <>
+              {(isMobile && compareItems.length > 2) ||
+              (!isMobile && compareItems.length > 4) ? (
+                <div className="text-center text-red-600 mb-4">
+                  فقط {isMobile ? "۲" : "۴"} ملک اول نمایش داده می‌شود (حداکثر
+                  تعداد مجاز)
+                </div>
+              ) : null}
+              {/* Vertical Table Layout (Desktop and Mobile) */}
+              <div className="overflow-x-auto">
+                <table className="min-w-full table-auto text-center">
+                  <thead>
+                    <tr className="bg-gray-200">
+                      <th className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800 w-24 sm:w-32">
+                        ویژگی
+                      </th>
+                      {compareProperties.map((item) => (
+                        <th
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                          ملک {item.id}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        تصویر
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300">
+                          <Image
+                            src={item.image}
+                            alt={item.address}
+                            unoptimized={true}
+                            width={500}
+                            height={500}
+                            className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md border border-gray-200 mx-auto"
+                          />
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        عنوان
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {item.address}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        شهر
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {item.city}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        قیمت
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {formatPrice(item.price)}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        تعداد اتاق
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {item.bedrooms}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        تعداد حمام
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {item.bathrooms}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        متراژ
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {item.sqft}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        نوع ملک
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {item.propertyType}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition">
+                      <td className="p-3 border-b border-gray-300 text-xs sm:text-sm font-medium text-gray-800">
+                        نوع معامله
+                      </td>
+                      {compareProperties.map((item) => (
+                        <td
+                          key={item.id}
+                          className="p-3 border-b border-gray-300 text-gray-800 text-xs sm:text-sm">
+                          {item.type}
+                        </td>
+                      ))}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+        </div>
+      </Suspense>

@@ -42,7 +42,6 @@ export default function SinglePage({ estate }: { estate: EstateProps }) {
         setMarked(false);
         infoToast(data.message);
       }
-      console.log(data);
     } catch (err) {
       console.error("Fetch error:", err);
       infoToast("خطا در اتصال به سرور.");
@@ -65,8 +64,8 @@ export default function SinglePage({ estate }: { estate: EstateProps }) {
           }
         />
       </div>
-      <div className="flex md:flex-row-reverse w-full flex-col items-start">
-        <div className="flex flex-col gap-5">
+      <div className="flex md:flex-row-reverse justify-center w-full flex-col items-start">
+        <div className="flex w-full flex-col items-center">
           <RealEstateOwnerCard owner={estate.owner} setChat={setChat} />
 
           {/* map is here */}
